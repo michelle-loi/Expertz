@@ -23,6 +23,7 @@ struct CTADesignButton: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding()
+            .font(Theme.inputFont.bold())
             .frame(maxWidth: .infinity)
             .background(Theme.accentColor)
             .foregroundColor(Theme.secondaryColor)
@@ -32,7 +33,7 @@ struct CTADesignButton: ViewModifier {
                 RoundedRectangle(cornerRadius: 100)
                     .stroke(Theme.primaryColor, lineWidth: 2)
             )
-            .padding(Theme.buttonPadding)
+            .padding(.horizontal, Theme.buttonPadding)
 
     }
 }
@@ -42,6 +43,7 @@ struct AlternativeDesignButton: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding()
+            .font(Theme.inputFont.bold())
             .frame(maxWidth: .infinity)
             .background(Theme.secondaryColor)
             .foregroundColor(Theme.primaryColor)
@@ -51,11 +53,24 @@ struct AlternativeDesignButton: ViewModifier {
                 RoundedRectangle(cornerRadius: 100)
                     .stroke(Theme.accentColor, lineWidth: 2)
             )
-            .padding(Theme.buttonPadding)
+            .padding(.horizontal, Theme.buttonPadding)
 
     }
 }
 
+// Modifier for Text Input Field:
+struct FormInputField: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(Theme.accentColor.opacity(0.2))
+            .cornerRadius(Theme.cornerRadius)
+            .font(Theme.inputFont)
+            .foregroundColor(Theme.primaryColor)
+            .padding(.horizontal, Theme.buttonPadding)
+
+    }
+}
 
 // Extending View to make it easier to apply these modifiers
 extension View {
@@ -69,5 +84,8 @@ extension View {
     }
     func customAlternativeDesignButton() -> some View {
         self.modifier(AlternativeDesignButton())
+    }
+    func customFormInputField() -> some View {
+        self.modifier(FormInputField())
     }
 }
