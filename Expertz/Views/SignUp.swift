@@ -14,9 +14,14 @@ struct SignUp: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Sign Up Page:")
-                    .font(.title)
-                    .padding(.bottom, 20)
+                Text("Lets get started!")
+                    .font(Theme.titleFont)
+                    .foregroundStyle(Theme.primaryColor)
+                    .padding(.top, 100)
+                Text("Create an account")
+                    .font(Theme.inputFont)
+                    .foregroundStyle(Theme.primaryColor)
+                    .padding(.bottom, 150)
 
                 Button(action: {
                     navigateToSignUpEmailPage = true
@@ -24,7 +29,6 @@ struct SignUp: View {
                     Text("Sign Up Using Email")
                 }
                 .customCTADesignButton()
-                .padding(.bottom, 10)
 
                 Button(action: {
                     navigateToSignUpGooglePage = true
@@ -33,6 +37,19 @@ struct SignUp: View {
                 }
                 .customAlternativeDesignButton()
 
+                HStack{
+                    Text("Already have an account?")
+                        .font(Theme.inputFont)
+                        .foregroundStyle(Theme.primaryColor)
+                    NavigationLink(destination: SignIn()) {
+                        Text("Sign In")
+                            .underline()
+                            .foregroundStyle(Theme.primaryColor)
+                    }
+                        
+                }
+
+                
                 // Navigation destinations for each button
                 .navigationDestination(isPresented: $navigateToSignUpEmailPage) {
                     SignUpEmail()
@@ -42,6 +59,7 @@ struct SignUp: View {
                 }
             }
             .padding()
+            Spacer()
         }
     }
 }

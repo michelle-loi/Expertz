@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// General Page
 struct Homepage: View {
     var body: some View {
         Text("HomePage")

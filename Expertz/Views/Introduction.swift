@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct Introduction: View {
+    // Navigation Flag to Sign Up Page
     @State private var navigateToSignUpPage = false
 
     var body: some View {
+        // ZStack for background gradient
         ZStack {
             LinearGradient(
                 gradient: Gradient(colors: [.cyan, .green]),
                 startPoint: .top,
                 endPoint: .bottom
             )
+            // ignores safe border edges
             .ignoresSafeArea()
             
             // Earth Background - Positioned above the gradient, behind other elements
@@ -83,6 +86,7 @@ struct Introduction: View {
                     .padding(.horizontal, 200)
                     .padding(.bottom, 30)
 
+                // Navigation Button to Sign Up page
                 Button(action: {
                     navigateToSignUpPage = true
                 }) {
