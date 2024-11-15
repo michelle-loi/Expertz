@@ -9,6 +9,9 @@
 *.xcodeproj/project.xcworkspace/
 *.xcassets
 
+# Ignore only GoogleService-Info.plist
+Expertz/GoogleService-Info.plist
+
 # Derived data
 DerivedData/
 build/
@@ -36,4 +39,3 @@ fastlane/test_output
 *.ipa
 *.app.dSYM
 *.sym
-
