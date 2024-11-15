@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct SignUpEmail: View {
     @State private var nextPage = false
@@ -14,6 +16,7 @@ struct SignUpEmail: View {
     @State private var address: String = ""
     @State private var password: String = ""
     @State private var rePassword: String = ""
+    @State private var errorMessage: String?
     
     var body: some View {
         VStack{
@@ -33,16 +36,22 @@ struct SignUpEmail: View {
             TextField("Address", text: $address)
                 .customFormInputField()
             
-            TextField("Password", text: $password)
+            SecureField("Password", text: $password)
                 .customFormInputField()
             
-            TextField("Re Enter Password", text: $rePassword)
+            SecureField("Re Enter Password", text: $rePassword)
                 .customFormInputField()
+            
+            if let errorMessage = errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding(.bottom, 10)
+            }
             
             Spacer()
             
             Button(action: {
-                nextPage = true
+                signUpUser()
             }) {
                 Text("Next")
             }
@@ -56,10 +65,43 @@ struct SignUpEmail: View {
             .customAlternativeDesignButton()
         }
         .navigationDestination(isPresented: $nextPage) {
-            SignUpEmail()
+            SignIn()
         }
         .navigationDestination(isPresented: $backPage) {
             Introduction()
+        }
+    }
+    
+    private func signUpUser() {
+        guard password == rePassword else {
+            errorMessage = "Passwords do not match"
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: emailAddress, password: password) { authResult, error in
+            if let error = error {
+                print("Error details:", error)
+                errorMessage = "Error: \(error.localizedDescription)"
+            } else if let user = authResult?.user {
+                // Proceed to create a Firestore document for the user
+                createFirestoreProfile(for: user.uid)
+            }
+        }
+    }
+    
+    private func createFirestoreProfile(for uid: String) {
+        let db = Firestore.firestore()
+        db.collection("UserProfiles").document(uid).setData([
+            "username": emailAddress,
+            "email": emailAddress,
+            "physicalAddress": address
+        ]) { error in
+            if let error = error {
+                errorMessage = "Firestore error: \(error.localizedDescription)"
+            } else {
+                // Successfully created user profile, navigate to the next page
+                nextPage = true
+            }
         }
     }
 }
