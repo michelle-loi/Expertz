@@ -37,21 +37,22 @@ struct AccType: View {
                     Text("Expert")
                 }
                 .customAlternativeDesignButton()
-                Button(action: {
-                    clientAccType = true
-                }) {
-                    Text("Both")
-                }
-                .customAlternativeDesignButton()
+                
+                //Button(action: {
+                //    clientAccType = true
+                //}) {
+                //    Text("Both")
+                //}
+                //.customAlternativeDesignButton()
                 
                 Spacer()
                 
-                Button(action: {
-                    navigateToSignUpEmailPage = true
-                }) {
-                    Text("Next")
-                }
-                .customCTADesignButton()
+                //Button(action: {
+                //    navigateToSignUpEmailPage = true
+                //}) {
+                //    Text("Next")
+                //}
+                //.customCTADesignButton()
 
                 Button(action: {
                     navigateToSignUpGooglePage = true
@@ -65,7 +66,10 @@ struct AccType: View {
                     SignUpEmail()
                 }
                 .navigationDestination(isPresented: $navigateToSignUpGooglePage) {
-                    SignUpGoogle()
+                    Introduction()
+                }
+                .navigationDestination(isPresented: $clientAccType) {
+                    SignUp()
                 }
             }
             .padding()

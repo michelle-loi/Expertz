@@ -113,7 +113,8 @@ struct Introduction: View {
             .padding(.top, 50)
         }
         .navigationDestination(isPresented: $navigateToSignUpPage) {
-            SignUp()
+            //SignUp()
+            AccType()
         }
     }
 }
