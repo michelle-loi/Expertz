@@ -115,6 +115,7 @@ struct Introduction: View {
         .navigationDestination(isPresented: $navigateToSignUpPage) {
             SignUp()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

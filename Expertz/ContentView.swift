@@ -6,18 +6,36 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContentView: View {
-    @State var isLoggedIn:Bool = false
-    
+    @State var isLoggedIn: Bool = false
+
     var body: some View {
-        // Check if user is logged in, if not go to Intro page
-        NavigationStack{
+        NavigationStack {
             if isLoggedIn {
-                Homepage()
+                Homepage() // Replace with your home page view
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: AccountPage()) {
+                                Text("Account")
+                            }
+                        }
+                    }
             } else {
-                Introduction()
+                Introduction() // Replace with your introduction view
             }
+        }
+        .onAppear {
+            checkLoginStatus()
+        }
+    }
+
+    private func checkLoginStatus() {
+        if Auth.auth().currentUser != nil {
+            isLoggedIn = true
+        } else {
+            isLoggedIn = false
         }
     }
 }
