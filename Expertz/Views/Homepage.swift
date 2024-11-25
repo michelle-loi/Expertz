@@ -24,6 +24,7 @@ struct Homepage: View {
     @State private var selectedAnnotation: MapBubble? // State to track the selected bubble
     @State private var selectedPickerOption = "Client" // State for the Picker selection
     @State private var navigateToMessages = false // State for manual navigation
+    @State private var navigateToAccount = false
 
     // Example coordinates for Client bubbles
     let clientBubbles = [
@@ -110,7 +111,7 @@ struct Homepage: View {
                                     .cornerRadius(15)
                                     .shadow(radius: 3)
 
-                                Button(action: {}) {
+                                Button(action: { navigateToAccount = true }) {
                                     Image(systemName: "slider.horizontal.3")
                                         .foregroundColor(.white)
                                         .padding()
@@ -168,6 +169,10 @@ struct Homepage: View {
                     .navigationDestination(isPresented: $navigateToMessages) {
                         Messages()
                     }
+                    .navigationDestination(isPresented: $navigateToAccount) {
+                        AccountPage()
+                    }
+                    .navigationBarBackButtonHidden(true)
                 }
             }
         }

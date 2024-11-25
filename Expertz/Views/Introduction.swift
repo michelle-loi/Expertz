@@ -113,9 +113,9 @@ struct Introduction: View {
             .padding(.top, 50)
         }
         .navigationDestination(isPresented: $navigateToSignUpPage) {
-            //SignUp()
-            AccType()
+            SignUp()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
