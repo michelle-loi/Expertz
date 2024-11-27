@@ -39,3 +39,8 @@ fastlane/test_output
 *.ipa
 *.app.dSYM
 *.sym
+# Xcode user-specific files
+*.xcuserdatad/
+*.xcworkspace/
+DerivedData/
+.idea/

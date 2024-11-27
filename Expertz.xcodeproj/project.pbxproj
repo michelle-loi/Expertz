@@ -30,6 +30,10 @@
 		D66E887C2CBD742F00D714F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66E887B2CBD742F00D714F3 /* Theme.swift */; };
 		D66E887E2CBD874300D714F3 /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66E887D2CBD874300D714F3 /* ViewModifier.swift */; };
 		D66E88802CBEEE0E00D714F3 /* SignUpGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66E887F2CBEEE0E00D714F3 /* SignUpGoogle.swift */; };
+		D680E9F12CF6D69E00EBEFCB /* Bubbles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D680E9F02CF6D69900EBEFCB /* Bubbles.swift */; };
+		D680E9F32CF6DA2400EBEFCB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D680E9F22CF6DA1F00EBEFCB /* Settings.swift */; };
+		D680E9F52CF6E7B600EBEFCB /* PostJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D680E9F42CF6E7AD00EBEFCB /* PostJobView.swift */; };
+		D680E9F72CF7060400EBEFCB /* ViewRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D680E9F62CF705FB00EBEFCB /* ViewRequests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +77,10 @@
 		D66E887B2CBD742F00D714F3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D66E887D2CBD874300D714F3 /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
 		D66E887F2CBEEE0E00D714F3 /* SignUpGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpGoogle.swift; sourceTree = "<group>"; };
+		D680E9F02CF6D69900EBEFCB /* Bubbles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubbles.swift; sourceTree = "<group>"; };
+		D680E9F22CF6DA1F00EBEFCB /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D680E9F42CF6E7AD00EBEFCB /* PostJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostJobView.swift; sourceTree = "<group>"; };
+		D680E9F62CF705FB00EBEFCB /* ViewRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRequests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +174,10 @@
 		D66E886A2CBC75A000D714F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D680E9F62CF705FB00EBEFCB /* ViewRequests.swift */,
+				D680E9F42CF6E7AD00EBEFCB /* PostJobView.swift */,
+				D680E9F22CF6DA1F00EBEFCB /* Settings.swift */,
+				D680E9F02CF6D69900EBEFCB /* Bubbles.swift */,
 				D64F9BE62CF4D822008D1167 /* AccountPage.swift */,
 				D64F9BE42CEBBDF7008D1167 /* Messages.swift */,
 				D66E886D2CBC765100D714F3 /* Introduction.swift */,
@@ -324,9 +336,13 @@
 				D64F9BE52CEBBE01008D1167 /* Messages.swift in Sources */,
 				D66E88702CBC769900D714F3 /* Homepage.swift in Sources */,
 				D66E887C2CBD742F00D714F3 /* Theme.swift in Sources */,
+				D680E9F32CF6DA2400EBEFCB /* Settings.swift in Sources */,
+				D680E9F52CF6E7B600EBEFCB /* PostJobView.swift in Sources */,
+				D680E9F12CF6D69E00EBEFCB /* Bubbles.swift in Sources */,
 				D66E88802CBEEE0E00D714F3 /* SignUpGoogle.swift in Sources */,
 				D66E886E2CBC765100D714F3 /* Introduction.swift in Sources */,
 				D66E887E2CBD874300D714F3 /* ViewModifier.swift in Sources */,
+				D680E9F72CF7060400EBEFCB /* ViewRequests.swift in Sources */,
 				D66E887A2CBC77A100D714F3 /* SignUpEmail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
