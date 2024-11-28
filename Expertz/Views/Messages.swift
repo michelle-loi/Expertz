@@ -11,33 +11,31 @@ struct Messages: View {
     @StateObject var chatManager = ChatManager()
     
     var body: some View {
-        VStack {
-            Text("Chats")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-        }
-        .padding(.horizontal)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        
-        VStack(spacing: 10) {
-            ForEach(chatManager.chats) { chat in
-                // Use the ChatBubble view here inside the Messages view
-                ChatBubble(
-                    recipientName: chat.recipientName,
-                    messagePreview: chat.lastMessage,
-                    timestamp: chat.lastMessageTimestamp
-                )
+        NavigationView {
+            VStack(spacing: 10) {
+                ForEach(chatManager.chats) { chat in
+                    // Use the ChatBubble view here inside the Messages view
+                    ChatBubble(
+                        chatId: chat.id,
+                        recipientName: chat.recipientName,
+                        messagePreview: chat.lastMessage,
+                        timestamp: chat.lastMessageTimestamp
+                    )
+                }
+                Spacer()
             }
-            Spacer()
-        }
-        .background(Theme.secondaryColor.ignoresSafeArea())
-        .onAppear {
-            // Fetch chats for the user right now it is a dummy string
-            chatManager.getChats(for: "53Ex9GirPTtrZFv2BzeE") // change the id later
+            .background(Theme.secondaryColor.ignoresSafeArea())
+            .navigationTitle("Chats")
+            .onAppear {
+                // Fetch chats for the user right now it is a dummy string
+                chatManager.getChats(for: "53Ex9GirPTtrZFv2BzeE") // change the id later
+            }
         }
     }
 }
 
 struct ChatBubble: View {
+    var chatId: String
     var recipientName: String
     var messagePreview: String
     var timestamp: Date
@@ -49,35 +47,37 @@ struct ChatBubble: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            
-            HStack {
-                // Recipient's name
-               Text(recipientName)
-                   .font(.headline)
-                   .foregroundColor(Theme.primaryColor)
-               
-               Spacer()
-               
-               // Timestamp
-               Text(formattedTimestamp)
-                    .font(.footnote)
-                   .foregroundColor(.gray) // Timestamp in gray color
-           }
-            
-            // Message preview
-            Text(messagePreview)
-                .font(.subheadline)
-                .foregroundColor(.black)
-                .lineLimit(1) // prevent wrapping truncate with ellipses
-                .truncationMode(.tail)
+        NavigationLink(destination: ChatRoom(chatId: chatId, recipientName: recipientName)) {
+            VStack(alignment: .leading) {
+                
+                HStack {
+                    // Recipient's name
+                   Text(recipientName)
+                       .font(.headline)
+                       .foregroundColor(Theme.primaryColor)
+                   
+                   Spacer()
+                   
+                   // Timestamp
+                   Text(formattedTimestamp)
+                        .font(.footnote)
+                       .foregroundColor(.gray) // Timestamp in gray color
+               }
+                
+                // Message preview
+                Text(messagePreview)
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                    .lineLimit(1) // prevent wrapping truncate with ellipses
+                    .truncationMode(.tail)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Theme.accentColor)
+            .cornerRadius(15)
+            .shadow(radius: 1)
+            .padding(.horizontal)
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Theme.accentColor)
-        .cornerRadius(15)
-        .shadow(radius: 1)
-        .padding(.horizontal)
     }
 }
 

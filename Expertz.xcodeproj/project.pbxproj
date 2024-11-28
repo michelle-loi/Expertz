@@ -38,6 +38,7 @@
 		D81AAD652CF86AD80040FC7A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD642CF86AD80040FC7A /* Message.swift */; };
 		D81AAD682CF86B3B0040FC7A /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD672CF86B3B0040FC7A /* ChatManager.swift */; };
 		D81AAD6A2CF86B4B0040FC7A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD692CF86B4B0040FC7A /* MessageManager.swift */; };
+		D81AAD6C2CF88A610040FC7A /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		D81AAD642CF86AD80040FC7A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D81AAD672CF86B3B0040FC7A /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		D81AAD692CF86B4B0040FC7A /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				D66E887F2CBEEE0E00D714F3 /* SignUpGoogle.swift */,
 				D66E88772CBC777000D714F3 /* SignUpName.swift */,
 				D66E88792CBC77A100D714F3 /* SignUpEmail.swift */,
+				D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				D680E9F32CF6DA2400EBEFCB /* Settings.swift in Sources */,
 				D680E9F52CF6E7B600EBEFCB /* PostJobView.swift in Sources */,
 				D680E9F12CF6D69E00EBEFCB /* Bubbles.swift in Sources */,
+				D81AAD6C2CF88A610040FC7A /* ChatRoom.swift in Sources */,
 				D66E88802CBEEE0E00D714F3 /* SignUpGoogle.swift in Sources */,
 				D66E886E2CBC765100D714F3 /* Introduction.swift in Sources */,
 				D66E887E2CBD874300D714F3 /* ViewModifier.swift in Sources */,
