@@ -8,31 +8,76 @@
 import SwiftUI
 
 struct Messages: View {
+    @StateObject var chatManager = ChatManager()
+    
     var body: some View {
+        VStack {
+            Text("Chats")
+                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+        }
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
         VStack(spacing: 10) {
-            ForEach(0..<5) { index in
-                VStack(alignment: .leading) {
-                    // Sender's name
-                    Text("Sender Name \(index + 1)")
-                        .font(.headline)
-                        .foregroundColor(Theme.primaryColor)
-
-                    // Message preview
-                    Text("This is a preview of the message body...")
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Theme.accentColor)
-                .cornerRadius(15)
-                .shadow(radius: 3)
-                .padding(.horizontal)
+            ForEach(chatManager.chats) { chat in
+                // Use the ChatBubble view here inside the Messages view
+                ChatBubble(
+                    recipientName: chat.recipientName,
+                    messagePreview: chat.lastMessage,
+                    timestamp: chat.lastMessageTimestamp
+                )
             }
             Spacer()
         }
-        .navigationTitle("Messages")
         .background(Theme.secondaryColor.ignoresSafeArea())
+        .onAppear {
+            // Fetch chats for the user right now it is a dummy string
+            chatManager.getChats(for: "53Ex9GirPTtrZFv2BzeE") // change the id later
+        }
+    }
+}
+
+struct ChatBubble: View {
+    var recipientName: String
+    var messagePreview: String
+    var timestamp: Date
+    
+    private var formattedTimestamp: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a" // For example: "12:30 PM"
+        return formatter.string(from: timestamp)
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            HStack {
+                // Recipient's name
+               Text(recipientName)
+                   .font(.headline)
+                   .foregroundColor(Theme.primaryColor)
+               
+               Spacer()
+               
+               // Timestamp
+               Text(formattedTimestamp)
+                    .font(.footnote)
+                   .foregroundColor(.gray) // Timestamp in gray color
+           }
+            
+            // Message preview
+            Text(messagePreview)
+                .font(.subheadline)
+                .foregroundColor(.black)
+                .lineLimit(1) // prevent wrapping truncate with ellipses
+                .truncationMode(.tail)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Theme.accentColor)
+        .cornerRadius(15)
+        .shadow(radius: 1)
+        .padding(.horizontal)
     }
 }
 
