@@ -11,6 +11,7 @@
 		3AF9B8832CF887A1003312C7 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8822CF887A1003312C7 /* FirebaseCore */; };
 		3AF9B8852CF887A1003312C7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8842CF887A1003312C7 /* FirebaseFirestore */; };
 		3AF9B8882CF88B87003312C7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8872CF88B87003312C7 /* GoogleSignIn */; };
+		3AF9B88A2CF88C22003312C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9B8892CF88C22003312C7 /* AppDelegate.swift */; };
 		D64F9BD92CE7ECB7008D1167 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BD82CE7ECB7008D1167 /* FirebaseAuth */; };
 		D64F9BDB2CE7ECB7008D1167 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BDA2CE7ECB7008D1167 /* FirebaseCore */; };
 		D64F9BDD2CE7ECB7008D1167 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BDC2CE7ECB7008D1167 /* FirebaseFirestore */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3AF9B8892CF88C22003312C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D64F9BDE2CE7EFAE008D1167 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D64F9BE42CEBBDF7008D1167 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		D64F9BE62CF4D822008D1167 /* AccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPage.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		D66E883B2CBAEE9A00D714F3 /* Expertz */ = {
 			isa = PBXGroup;
 			children = (
+				3AF9B8892CF88C22003312C7 /* AppDelegate.swift */,
 				D66E883C2CBAEE9A00D714F3 /* ExpertzApp.swift */,
 				D66E883E2CBAEE9A00D714F3 /* ContentView.swift */,
 				D66E887B2CBD742F00D714F3 /* Theme.swift */,
@@ -343,6 +346,7 @@
 			files = (
 				D66E88762CBC770D00D714F3 /* SignUp.swift in Sources */,
 				D66E883F2CBAEE9A00D714F3 /* ContentView.swift in Sources */,
+				3AF9B88A2CF88C22003312C7 /* AppDelegate.swift in Sources */,
 				D64F9BE72CF4D82C008D1167 /* AccountPage.swift in Sources */,
 				D66E88782CBC777000D714F3 /* SignUpName.swift in Sources */,
 				D66E883D2CBAEE9A00D714F3 /* ExpertzApp.swift in Sources */,
