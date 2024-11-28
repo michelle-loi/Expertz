@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct MapBubble: Identifiable {
     let id = UUID()
@@ -42,6 +43,47 @@ struct Homepage: View {
     @State private var navigateToProfile = false
     @State private var navigateToRequests = false
 
+    //List of bubbles to append to
+    var bubbles: [MapBubble] = []
+
+    //Function to convert an address to coordinates
+    func getCoordinate(addressString: String, completionHandler: @escaping (CLLocationCoordinate2D, NSError?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+            if let error = error {
+                completionHandler(kCLLocationCoordinate2DInvalid, error as NSError)
+            } else if let placemark = placemarks?.first, let location = placemark.location {
+                completionHandler(location.coordinate, nil)
+            }
+        }
+    }
+
+    //Function to add a bubble
+    //Usage: addBubble(forAddress: "address", to: &bubbles)
+    func addBubble(forAddress address: String, to bubbles: inout [MapBubble]) {
+        getCoordinate(addressString: address) { coordinate, error in
+            //If there is no error finding the location. We create a bubble
+            if error == nil {
+                let newBubble = MapBubble(
+                    name: //Placeholder,
+                    coordinate: coordinate, //Pass in the coordinate from getCoordinate
+                    type: //Placeholder,
+                    help: //Placeholder,
+                    rating: //Placeholder,
+                    description: //Placeholder,
+                    expertise: //Placeholder,
+                    bio: //Placeholder,
+                    urgent: //Placeholder,
+                    negotiable: //Placeholder,
+                    price: //Placeholder
+                )
+                bubbles.append(newBubble)
+            } else {
+                //Error finding location.
+            }
+        }
+    }
+    
     let clientBubbles = [
         MapBubble(name: "Jessica", coordinate: CLLocationCoordinate2D(latitude: 51.045, longitude: -114.07), type: "Client", help: "Japanese Translation", rating: "3.2", description: "I need help with some document translation to Japanese", expertise: nil, bio: nil, urgent: "Yes", negotiable: "Yes", price: "$500"),
         MapBubble(name: "Jack", coordinate: CLLocationCoordinate2D(latitude: 51.046, longitude: -114.08), type: "Client", help: "Learning Guitar", rating: "4.0", description: "I need help with learning the guitar.", expertise: nil, bio: nil, urgent: "Yes", negotiable: "Yes", price: "$200"),
