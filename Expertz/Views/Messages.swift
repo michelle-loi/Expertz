@@ -40,10 +40,12 @@ struct ChatBubble: View {
     var messagePreview: String
     var timestamp: Date
     
+    
+    /// Computes how much time has occured since the message was sent
     private var formattedTimestamp: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a" // For example: "12:30 PM"
-        return formatter.string(from: timestamp)
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .short
+        return formatter.localizedString(for: timestamp, relativeTo: Date())
     }
     
     var body: some View {
