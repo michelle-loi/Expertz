@@ -13,7 +13,8 @@ import SwiftUI
 struct ChatRoom: View {
     var chatId: String
     var recipientName: String
-    var messageArray = ["Hello", "How are you doing?", "“Acts of goodness are not always wise, and acts of evil are not always foolish, but regardless, we shall always strive to be good.”"]
+    
+    @StateObject var messageManager = MessageManager()
     
     var body: some View {
         VStack {
@@ -23,8 +24,18 @@ struct ChatRoom: View {
                     .padding(.top, 0)
                 
                 ScrollView {
-                    ForEach(messageArray, id: \.self) { text in
-                        MessageBubble(message: Message(id: "12345", text: text, senderId:"53Ex9GirPTtrZFv2BzeE", timestamp: Date()))
+                    if messageManager.messages.isEmpty {
+                        Text("😔")
+                            .font(.system(size: 50))
+                            .padding(.bottom, -10)
+                        Text("No messages yet")
+                            .foregroundColor(.gray)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                    } else {
+                        ForEach(messageManager.messages, id: \.id) { message in
+                            MessageBubble(message: message)
+                        }
                     }
                 }
                 .padding(10)
@@ -34,7 +45,9 @@ struct ChatRoom: View {
             .background(Color(Theme.accentColor))
             // These two lines prevent the back button from adding too much padding
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(false)
+            .onAppear {
+                messageManager.getMessages(for: chatId)
+            }
             
             MessageField()
         }
