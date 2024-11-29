@@ -49,7 +49,8 @@ struct ChatRoom: View {
                 messageManager.getMessages(for: chatId)
             }
             
-            MessageField()
+            MessageField(chatId: chatId)
+                .environmentObject(messageManager)
         }
     }
 }
@@ -133,14 +134,20 @@ struct MessageBubble: View {
 }
 
 struct MessageField: View {
+    var chatId: String
+    
+    @EnvironmentObject var messageManager: MessageManager
     @State private var message = ""
+    
+    // Get the actual logged in users id later
+    var dummyUserID: String = "53Ex9GirPTtrZFv2BzeE"
     
     var body: some View {
         HStack {
             CustomTextField(placeholder: Text("Message"), text: $message)
             
             Button {
-                print("Message sent!")
+                messageManager.sendMessage(text: message, senderId: dummyUserID, chatId: chatId)
                 message = ""
                 
             } label: {

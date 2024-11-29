@@ -57,7 +57,7 @@ class MessageManager: ObservableObject {
                 .document(newMessage.id)
                 .setData(from: newMessage)
             
-            print("Message sent successfully to chat \(chatId)")
+//            print("Message sent successfully to chat \(chatId)")
         } catch {
             print("Error adding message to Firestore: \(error)")
         }
