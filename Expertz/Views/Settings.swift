@@ -13,30 +13,13 @@ struct Settings: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Button(action: {navigateToProfile = true}) {
-                Text("Profile")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Theme.accentColor.opacity(0.8))
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
-            }
-            
-            Button(action: {navigateToRequests = true}) {
-                Text("Requests")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Theme.accentColor.opacity(0.8))
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
-            }
             
             Button(action: {}) {
                 Text("Security and Privacy")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Theme.accentColor.opacity(0.8))
-                    .foregroundColor(.white)
+                    .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
             }
             
@@ -46,7 +29,7 @@ struct Settings: View {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Theme.accentColor.opacity(0.8))
-                    .foregroundColor(.white)
+                    .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
             }
             
@@ -67,12 +50,6 @@ struct Settings: View {
         .padding()
         .navigationTitle("Settings")
         .background(Color.white.ignoresSafeArea())
-        .navigationDestination(isPresented: $navigateToProfile) {
-            AccountPage()
-        }
-        .navigationDestination(isPresented: $navigateToRequests) {
-            ViewRequests()
-        }
     }
 }
 

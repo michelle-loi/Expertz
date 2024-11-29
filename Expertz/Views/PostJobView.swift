@@ -19,20 +19,26 @@ struct PostJobView: View {
     @Environment(\.dismiss) var dismiss // To dismiss the view
 
     let dropdownOptions = ["Yes", "No", "Only"]
+    let dropdownUrgent = ["Yes", "No"]
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("Post Request")
+                    Text("Request/Availability")
                         .font(.largeTitle)
                         .bold()
+                        .foregroundStyle(Theme.primaryColor)
 
                     // Conditionally show the request type picker if the user is an expert
                     if isExpert {
                         Text("Request Type")
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 6)
                             .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
                         Picker("", selection: $requestType) {
                             Text("Client").tag("Client")
                             Text("Expert").tag("Expert")
@@ -43,16 +49,22 @@ struct PostJobView: View {
 
                     // Title Field
                     Text("Title")
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 6)
                         .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Theme.primaryColor)
+                        .cornerRadius(30)
                     TextField("Enter a title for your request", text: $title)
                         .customFormInputField()
 
                     // Description Field
                     if requestType == "Client" || isExpert {
                         Text("Description")
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 6)
                             .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
                         TextField("Provide a brief description", text: $description)
                             .customFormInputField()
                     }
@@ -60,86 +72,117 @@ struct PostJobView: View {
                     // Address Field
                     if requestType == "Client" || isExpert {
                         Text("Address")
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 6)
                             .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
                         TextField("Enter an address", text: $address)
                             .customFormInputField()
                     }
 
                     // Fields for ExpertRequest
+                    
+                    // Price Field
+                    Text("Price")
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 6)
+                        .font(.headline)
+                        .foregroundColor(Theme.primaryColor)
+                        .cornerRadius(30)
+                    TextField("Enter a price", text: $price)
+                        .keyboardType(.decimalPad)
+                        .customFormInputField()
+                    
                     if requestType == "Expert" && isExpert {
                         HStack{
                             Text("In-Person Availability")
+                                .padding(.horizontal, 40)
+                                .padding(.vertical, 6)
                                 .font(.headline)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
                             Picker("", selection: $inPerson) {
                                 ForEach(dropdownOptions, id: \.self) { option in
                                     Text(option).tag(option)
                                 }
                             }
                             .pickerStyle(MenuPickerStyle())
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(10)
+                            .padding(.horizontal, 12)
+                            .background(Theme.accentColor)
+                            .foregroundStyle(Theme.primaryColor)
+                            .cornerRadius(30)
                         }
 
                         HStack{
                             Text("Online Availability")
+                                .padding(.horizontal, 40)
+                                .padding(.vertical, 6)
                                 .font(.headline)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
                             Picker("", selection: $online) {
                                 ForEach(dropdownOptions, id: \.self) { option in
                                     Text(option).tag(option)
                                 }
                             }
                             .pickerStyle(MenuPickerStyle())
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(10)
+                            .padding(.horizontal, 12)
+                            .background(Theme.accentColor)
+                            .foregroundStyle(Theme.primaryColor)
+                            .cornerRadius(30)
                         }
                     }
-
-                    // Price Field
-                    Text("Price")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    TextField("Enter a price", text: $price)
-                        .keyboardType(.decimalPad)
-                        .customFormInputField()
-                    
+                        
                     if (requestType != "Expert"){
-                        // Price Negotiable Toggle
-                        Toggle("Urgent Request", isOn: $isUrgent)
-                            .toggleStyle(SwitchToggleStyle(tint: Theme.primaryColor))
+                        HStack{
+                            Text("Is it urgent?")
+                                .padding(.horizontal, 40)
+                                .padding(.vertical, 6)
+                                .font(.headline)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
+                            Picker("", selection: $inPerson) {
+                                ForEach(dropdownUrgent, id: \.self) { option in
+                                    Text(option).tag(option)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .padding(.horizontal, 12)
+                            .background(Theme.accentColor)
+                            .foregroundStyle(Theme.primaryColor)
+                            .cornerRadius(30)
+                        }
+                        
                     }
-
-                    // Price Negotiable Toggle
-                    Toggle("Is the price negotiable?", isOn: $isNegotiable)
-                        .toggleStyle(SwitchToggleStyle(tint: Theme.primaryColor))
-
                     if showError {
                         Text(errorMessage)
                             .foregroundColor(.red)
                             .multilineTextAlignment(.center)
                     }
-
+                    Spacer()
                     // Post Job Button
                     Button(action: postJob) {
-                        Text("Post Job")
-                            .foregroundColor(.white)
-                            .padding()
+                        Text("Post")
                             .frame(maxWidth: .infinity)
-                            .background(Theme.primaryColor)
-                            .cornerRadius(10)
+                            .font(.headline)
+                            .padding()
+                            .background(Theme.accentColor)
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
                     }
-                    .padding(.horizontal)
 
                     // Cancel Button
                     Button(action: {
                         dismiss()
                     }) {
                         Text("Cancel")
-                            .foregroundColor(.blue)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Theme.accentColor)
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
                     }
                 }
                 .padding()
@@ -149,6 +192,7 @@ struct PostJobView: View {
             .navigationBarBackButtonHidden(true)
             .onAppear(perform: fetchUserProfile) // Fetch the user's profile
         }
+        .navigationBarHidden(true)
     }
 
     private func postJob() {
