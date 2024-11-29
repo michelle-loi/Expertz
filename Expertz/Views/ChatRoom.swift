@@ -23,24 +23,32 @@ struct ChatRoom: View {
                     .background(Color(Theme.accentColor))
                     .padding(.top, 0)
                 
-                ScrollView {
-                    if messageManager.messages.isEmpty {
-                        Text("😔")
-                            .font(.system(size: 50))
-                            .padding(.bottom, -10)
-                        Text("No messages yet")
-                            .foregroundColor(.gray)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                    } else {
-                        ForEach(messageManager.messages, id: \.id) { message in
-                            MessageBubble(message: message)
+                // Allows us to scroll to the last message in view
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        if messageManager.messages.isEmpty {
+                            Text("😔")
+                                .font(.system(size: 50))
+                                .padding(.bottom, -10)
+                            Text("No messages yet")
+                                .foregroundColor(.gray)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                        } else {
+                            ForEach(messageManager.messages, id: \.id) { message in
+                                MessageBubble(message: message)
+                            }
+                        }
+                    }
+                    .padding(10)
+                    .background(.white)
+                    .cornerRadius(30, corners: [.topLeft, .topRight])
+                    .onChange(of: messageManager.lastMessageId) { oldId, newId in
+                        withAnimation {
+                            proxy.scrollTo(newId, anchor: .bottom)
                         }
                     }
                 }
-                .padding(10)
-                .background(.white)
-                .cornerRadius(30, corners: [.topLeft, .topRight])
             }
             .background(Color(Theme.accentColor))
             // These two lines prevent the back button from adding too much padding

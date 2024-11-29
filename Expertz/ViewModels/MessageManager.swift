@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 class MessageManager: ObservableObject {
     @Published private(set) var messages: [Message] = [] // stores the retrieved messages
+    @Published private(set) var lastMessageId = ""
 
     private let db = Firestore.firestore()
     
@@ -37,6 +38,11 @@ class MessageManager: ObservableObject {
                 
                 DispatchQueue.main.async {
                     self.messages = fetchedMessages
+                    
+                    // Get the id of the last message
+                    if let id = self.messages.last?.id {
+                        self.lastMessageId = id
+                    }
                 }
             }
     }
