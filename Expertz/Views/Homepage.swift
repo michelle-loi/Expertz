@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct MapBubble: Identifiable {
     let id = UUID()
@@ -39,8 +40,63 @@ struct Homepage: View {
     @State private var navigateToSettings = false
     @State private var isUrgent = false
     @State private var isNegotiable = false
+    @State private var navigateToProfile = false
+    @State private var navigateToRequests = false
 
+    //List of bubbles to append to
+    var bubbles: [MapBubble] = []
 
+    //Function to convert an address to coordinates
+    func getCoordinate(addressString: String, completionHandler: @escaping (CLLocationCoordinate2D, NSError?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+            if let error = error {
+                completionHandler(kCLLocationCoordinate2DInvalid, error as NSError)
+            } else if let placemark = placemarks?.first, let location = placemark.location {
+                completionHandler(location.coordinate, nil)
+            }
+        }
+    }
+
+    //Function to add a bubble
+    func addBubble(
+        forAddress address: String,
+        name: String,
+        type: String,
+        help: String,
+        rating: String,
+        description: String,
+        expertise: String,
+        bio: String,
+        urgent: String,
+        negotiable: String,
+        price: String,
+        to bubbles: inout [MapBubble]
+    ) {
+        getCoordinate(addressString: address) { coordinate, error in
+            // If there is no error finding the location, create a bubble
+            if let coordinate = coordinate, error == nil {
+                let newBubble = MapBubble(
+                    name: name,
+                    coordinate: coordinate,
+                    type: type,
+                    help: help,
+                    rating: rating,
+                    description: description,
+                    expertise: expertise,
+                    bio: bio,
+                    urgent: urgent,
+                    negotiable: negotiable,
+                    price: price
+                )
+                bubbles.append(newBubble)
+            } else {
+                //Error Finding Location
+            }
+        }
+    }
+
+/*    
     let clientBubbles = [
         MapBubble(name: "Jessica", coordinate: CLLocationCoordinate2D(latitude: 51.045, longitude: -114.07), type: "Client", help: "Japanese Translation", rating: "3.2", description: "I need help with some document translation to Japanese", expertise: nil, bio: nil, urgent: "Yes", negotiable: "Yes", price: "$500"),
         MapBubble(name: "Jack", coordinate: CLLocationCoordinate2D(latitude: 51.046, longitude: -114.08), type: "Client", help: "Learning Guitar", rating: "4.0", description: "I need help with learning the guitar.", expertise: nil, bio: nil, urgent: "Yes", negotiable: "Yes", price: "$200"),
@@ -57,7 +113,7 @@ struct Homepage: View {
         MapBubble(name: "Margaret", coordinate: CLLocationCoordinate2D(latitude: 51.048, longitude: -114.075), type: "Expert", help: nil, rating: "4.9", description: nil, expertise: "French Teacher", bio: "I can teach you the french language.", urgent: nil, negotiable: nil, price: nil),
         MapBubble(name: "Frank", coordinate: CLLocationCoordinate2D(latitude: 51.052, longitude: -114.065), type: "Expert", help: nil, rating: "2.5", description: nil, expertise: "Carpenter", bio: "I can help you with any wood work in your house or personalized wood objects.", urgent: nil, negotiable: nil, price: nil),
     ]
-
+*/
     var body: some View {
         NavigationStack {
             ZStack {
@@ -155,11 +211,12 @@ struct Homepage: View {
                                     .shadow(radius: 3)
 
                                 Button(action: {}) {
+                                    
                                     Image(systemName: "slider.horizontal.3")
                                         .foregroundColor(.white)
                                         .padding()
                                         .background(Theme.accentColor)
-                                        .cornerRadius(15)
+                                    
                                 }
                             }
                             .padding(.horizontal)
@@ -179,25 +236,46 @@ struct Homepage: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Button(action: { navigateToMessages = true }) {
-                            Text("Messages")
-                                .foregroundColor(.white)
-                                .padding()
+                        
+                        Button(action: {navigateToMessages = true }) {
+                            VStack(){
+                                Image(systemName: "bubble.left.and.bubble.right")
+                                    .foregroundColor(Theme.primaryColor)
+                                    .background(Theme.accentColor)
+                                Text("Messages")
+                                .foregroundStyle(Theme.primaryColor)}
                         }
-                        Spacer()
+                        Button(action: {navigateToRequests = true }) {
+                            VStack(){
+                                Image(systemName: "person.crop.circle.badge.exclamationmark")
+                                    .foregroundColor(Theme.primaryColor)
+                                    .background(Theme.accentColor)
+                                Text("Requests")
+                                .foregroundStyle(Theme.primaryColor)}
+                        }
                         Button(action: { showPostJobView.toggle() }) {
                             Circle()
-                                .fill(Theme.accentColor)
-                                .frame(width: 60, height: 60)
+                                .fill(Theme.primaryColor)
+                                .frame(width: 45, height: 45)
                                 .overlay(Image(systemName: "plus")
                                     .font(.system(size: 24))
                                     .foregroundColor(.white))
                         }
-                        Spacer()
-                        Button(action: { navigateToSettings = true }) {
-                            Text("Settings")
-                                .foregroundColor(.white)
-                                .padding()
+                        Button(action: {navigateToSettings = true }) {
+                            VStack(){
+                                Image(systemName: "gear")
+                                    .foregroundColor(Theme.primaryColor)
+                                    .background(Theme.accentColor)
+                                Text("Settings")
+                                .foregroundStyle(Theme.primaryColor)}
+                        }
+                        Button(action: {navigateToProfile = true }) {
+                            VStack(){
+                                Image(systemName: "person")
+                                    .foregroundColor(Theme.primaryColor)
+                                    .background(Theme.accentColor)
+                                Text("Profile")
+                                .foregroundStyle(Theme.primaryColor)}
                         }
                         Spacer()
                     }
@@ -213,6 +291,12 @@ struct Homepage: View {
                     }
                     .navigationDestination(isPresented: $showPostJobView) {
                         PostJobView() // Navigate to the new PostJobView
+                    }
+                    .navigationDestination(isPresented: $navigateToProfile) {
+                        AccountPage()
+                    }
+                    .navigationDestination(isPresented: $navigateToRequests) {
+                        ViewRequests()
                     }
                     .toolbar(.hidden)
                 }
