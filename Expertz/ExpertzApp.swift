@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct ExpertzApp: App {
     // Register AppDelegate for handling lifecycle events
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
+    init() {
+        FirebaseApp.configure()
+        print("FirebaseApp configured in ExpertzApp")
+    }
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {

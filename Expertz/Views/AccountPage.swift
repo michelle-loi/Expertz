@@ -214,6 +214,7 @@ struct AccountPage: View {
                 try await GoogleSignInLogic().logout()
                 
                 // Trigger the state change for logging out
+                try Auth.auth().signOut()
                 isLoggedOut = true // Navigate to ContentView after logout
             } catch let error {
                 showError = true

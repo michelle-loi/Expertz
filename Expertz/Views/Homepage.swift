@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import FirebaseAuth
 
 struct MapBubble: Identifiable {
     let id = UUID()
@@ -26,6 +27,7 @@ struct MapBubble: Identifiable {
 
 // General Page
 struct Homepage: View {
+    @Environment(\.dismiss) var dismiss
     @State private var showPostJobView: Bool = false
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 51.0447, longitude: -114.0719),
@@ -42,6 +44,7 @@ struct Homepage: View {
     @State private var isNegotiable = false
     @State private var navigateToProfile = false
     @State private var navigateToRequests = false
+    @State private var navigateToIntroduction = false
 
     //List of bubbles to append to
     var bubbles: [MapBubble] = []
@@ -57,7 +60,7 @@ struct Homepage: View {
             }
         }
     }
-
+/*
     //Function to add a bubble
     func addBubble(
         forAddress address: String,
@@ -96,7 +99,7 @@ struct Homepage: View {
         }
     }
 
-/*    
+*/
     let clientBubbles = [
         MapBubble(name: "Jessica", coordinate: CLLocationCoordinate2D(latitude: 51.045, longitude: -114.07), type: "Client", help: "Japanese Translation", rating: "3.2", description: "I need help with some document translation to Japanese", expertise: nil, bio: nil, urgent: "Yes", negotiable: "Yes", price: "$500"),
         MapBubble(name: "Jack", coordinate: CLLocationCoordinate2D(latitude: 51.046, longitude: -114.08), type: "Client", help: "Learning Guitar", rating: "4.0", description: "I need help with learning the guitar.", expertise: nil, bio: nil, urgent: "Yes", negotiable: "Yes", price: "$200"),
@@ -113,7 +116,7 @@ struct Homepage: View {
         MapBubble(name: "Margaret", coordinate: CLLocationCoordinate2D(latitude: 51.048, longitude: -114.075), type: "Expert", help: nil, rating: "4.9", description: nil, expertise: "French Teacher", bio: "I can teach you the french language.", urgent: nil, negotiable: nil, price: nil),
         MapBubble(name: "Frank", coordinate: CLLocationCoordinate2D(latitude: 51.052, longitude: -114.065), type: "Expert", help: nil, rating: "2.5", description: nil, expertise: "Carpenter", bio: "I can help you with any wood work in your house or personalized wood objects.", urgent: nil, negotiable: nil, price: nil),
     ]
-*/
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -503,6 +506,23 @@ struct Homepage: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            print("HomePage - onAppear called")
+            checkLoginStatus()
+        }
+        .navigationDestination(isPresented: $navigateToIntroduction) {
+            Introduction()
+        }
+    }
+    private func checkLoginStatus() {
+        print("checkLoginStatus called")
+        if Auth.auth().currentUser == nil {
+            print("user nil")
+            navigateToIntroduction = true
+//            dismiss()  // Redirect to ContentView if not logged in
+        } else {
+            print("user logged in")
         }
     }
 }

@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct Introduction: View {
     // Navigation Flag to Sign Up Page
     @State private var navigateToSignUpPage = false
+    @State private var navigateToHomepage = false
 
     var body: some View {
         // ZStack for background gradient
@@ -111,6 +113,15 @@ struct Introduction: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.top, 50)
+        }
+        .onAppear {
+            if Auth.auth().currentUser != nil{
+                print("User is logged in")
+                navigateToHomepage = true
+            }
+        }
+        .navigationDestination(isPresented: $navigateToHomepage) {
+            Homepage()
         }
         .navigationDestination(isPresented: $navigateToSignUpPage) {
             SignUp()
