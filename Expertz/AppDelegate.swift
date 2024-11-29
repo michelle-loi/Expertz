@@ -3,13 +3,14 @@
 //  Expertz
 //
 //  Created by Ryan Loi on 2024-11-28.
-//
+// Credit: https://www.youtube.com/watch?v=vZEUAIHrsg8&t=482s
 
 
 import Firebase
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+import GoogleSignIn
 import UIKit
 
 
@@ -27,5 +28,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
-    // Add other AppDelegate methods as needed
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+           return GIDSignIn.sharedInstance.handle(url)
+       }
 }
