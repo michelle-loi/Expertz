@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
+import GoogleSignIn
 
 struct AccountPage: View {
     @State private var userEmail: String = ""
@@ -134,12 +135,12 @@ struct AccountPage: View {
                                     .background(Theme.accentColor)
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
-
+                                
                             }
                             
-                         
+                            
                         }
-                       
+                        
                     } else {
                         Text("Unable to retrieve account details.")
                             .font(.title2)
@@ -207,16 +208,20 @@ struct AccountPage: View {
     }
     
     private func logOut() {
-        do {
-            try Auth.auth().signOut()
-            isLoggedOut = true // Trigger navigation to ContentView
-        } catch let error {
-            showError = true
-            errorMessage = "Failed to log out: \(error.localizedDescription)"
+        Task {
+            do {
+                // Call the GoogleSignInLogic's logout method
+                try await GoogleSignInLogic().logout()
+                
+                // Trigger the state change for logging out
+                isLoggedOut = true // Navigate to ContentView after logout
+            } catch let error {
+                showError = true
+                errorMessage = "Failed to log out: \(error.localizedDescription)"
+            }
         }
     }
 }
-
 #Preview {
     AccountPage()
 }
