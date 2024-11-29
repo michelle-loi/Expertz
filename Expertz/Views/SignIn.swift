@@ -5,15 +5,29 @@
 //  Created by Alan Huynh on 2024-10-13.
 //
 
+
+
 import SwiftUI
+import Firebase
 import FirebaseAuth
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct SignIn: View {
     @State private var username_email: String = ""
     @State private var password: String = ""
     @State private var navigateToSignInPage = false
-    @State private var navigateToSignInGoogle = false
+    @State private var navigateToSignUpGooglePage = false
     @State private var errorMessage: String?
+    
+    // For Google Sign-In
+    @State private var googleSignInLogic = GoogleSignInLogic()
+    
+    // Store the sign-in data when using Google for sign-up
+    @State private var userID = ""
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var email = ""
     
     var body: some View {
         VStack {
@@ -55,7 +69,7 @@ struct SignIn: View {
                 .padding(10)
             
             Button(action: {
-                navigateToSignInGoogle = true
+                signInWithGoogle()
             }) {
                 Text("Sign in with Google")
             }
@@ -74,18 +88,52 @@ struct SignIn: View {
             }
             
             Spacer()
-            .navigationDestination(isPresented: $navigateToSignInPage) {
-                Homepage()
+                .navigationDestination(isPresented: $navigateToSignInPage) {
+                    Homepage()
+                }
+                .navigationDestination(isPresented: $navigateToSignUpGooglePage) {
+                    SignUpGoogle(userID: userID, firstName: firstName, lastName: lastName, email: email)
+                }
+        }
+    }
+    
+    // Google Sign-In Method
+    private func signInWithGoogle() {
+        googleSignInLogic.signInWithGoogle { success in
+            if success, let currentUser = Auth.auth().currentUser {
+                // After signing in with Google, retrieve user's details
+                let userID = currentUser.uid
+                let firstName = currentUser.displayName?.components(separatedBy: " ").first ?? "First Name"
+                let lastName = currentUser.displayName?.components(separatedBy: " ").last ?? "Last Name"
+                let email = currentUser.email ?? "Email not available"
+                
+                // Store the user data for navigation
+                self.userID = userID
+                self.firstName = firstName
+                self.lastName = lastName
+                self.email = email
+                
+                // Check if the user exists in the DB
+                checkIfUserExists(userID: userID) { exists in
+                    if exists {
+                        // User exists, navigate to the homepage
+                        navigateToSignInPage = true
+                    } else {
+                        // User does not exist, navigate to the Google sign-up page
+                        navigateToSignUpGooglePage = true
+                    }
+                }
             }
         }
     }
     
+    
+    // Email/Password Authentication Method
     private func authenticateUser() {
         Auth.auth().signIn(withEmail: username_email, password: password) { authResult, error in
             if let error = error {
                 errorMessage = "Error: \(error.localizedDescription)"
             } else {
-                // Clear error message if login is successful
                 errorMessage = nil
                 navigateToSignInPage = true
             }
