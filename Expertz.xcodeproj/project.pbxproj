@@ -39,6 +39,7 @@
 		D81AAD682CF86B3B0040FC7A /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD672CF86B3B0040FC7A /* ChatManager.swift */; };
 		D81AAD6A2CF86B4B0040FC7A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD692CF86B4B0040FC7A /* MessageManager.swift */; };
 		D81AAD6C2CF88A610040FC7A /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */; };
+		D84873512CF9534A00AED225 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84873502CF9534A00AED225 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		D81AAD672CF86B3B0040FC7A /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		D81AAD692CF86B4B0040FC7A /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		D84873502CF9534A00AED225 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				D66E88402CBAEE9B00D714F3 /* Assets.xcassets */,
 				D66E88422CBAEE9B00D714F3 /* Preview Content */,
 				D64F9BDE2CE7EFAE008D1167 /* GoogleService-Info.plist */,
+				D84873502CF9534A00AED225 /* Extensions.swift */,
 			);
 			path = Expertz;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				D66E886E2CBC765100D714F3 /* Introduction.swift in Sources */,
 				D66E887E2CBD874300D714F3 /* ViewModifier.swift in Sources */,
 				D81AAD652CF86AD80040FC7A /* Message.swift in Sources */,
+				D84873512CF9534A00AED225 /* Extensions.swift in Sources */,
 				D81AAD682CF86B3B0040FC7A /* ChatManager.swift in Sources */,
 				D680E9F72CF7060400EBEFCB /* ViewRequests.swift in Sources */,
 				D66E887A2CBC77A100D714F3 /* SignUpEmail.swift in Sources */,

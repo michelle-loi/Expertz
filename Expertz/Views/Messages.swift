@@ -4,6 +4,10 @@
 //
 //  Created by Ameriza on 2024-11-18.
 //
+//  Modified by Michelle
+//  Code is based off of this tutorial and modified:
+//  https://www.youtube.com/watch?v=Zz9XQy8PRpQ&t=1412s
+//
 
 import SwiftUI
 
