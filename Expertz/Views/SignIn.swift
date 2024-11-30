@@ -80,7 +80,7 @@ struct SignIn: View {
                     .font(Theme.inputFont)
                     .foregroundStyle(Theme.primaryColor)
                 
-                NavigationLink(destination: AccType()){
+                NavigationLink(destination: SignUp()){
                     Text("Sign Up")
                         .underline()
                         .foregroundStyle(Theme.primaryColor)
