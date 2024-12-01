@@ -56,14 +56,24 @@ class MessageManager: ObservableObject {
         do {
             let newMessage = Message(id: "\(UUID())", text: text, senderId: senderId, timestamp: Date())
 
+            // Get the chat document for the given ID
+            let chatDocRef = db.collection("chats").document(chatId)
+            
             // Add message to the correct chat based on the chatId
-            try db.collection("chats")
-                .document(chatId)
+            try chatDocRef
                 .collection("messages")
                 .document(newMessage.id)
                 .setData(from: newMessage)
             
-//            print("Message sent successfully to chat \(chatId)")
+            // Update the chat document's lastMessage and lastMessageTimestamp fields
+           chatDocRef.updateData([
+               "lastMessage": text,
+               "lastMessageTimestamp": newMessage.timestamp
+           ]) { error in
+               if let error = error {
+                   print("Error updating chat document: \(error)")
+               }
+           }
         } catch {
             print("Error adding message to Firestore: \(error)")
         }

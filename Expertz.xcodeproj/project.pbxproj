@@ -53,6 +53,7 @@
 		D81AAD6A2CF86B4B0040FC7A /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD692CF86B4B0040FC7A /* MessageManager.swift */; };
 		D81AAD6C2CF88A610040FC7A /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */; };
 		D84873512CF9534A00AED225 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84873502CF9534A00AED225 /* Extensions.swift */; };
+		D89B23982CFC503A001C2E13 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B23972CFC503A001C2E13 /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		D81AAD692CF86B4B0040FC7A /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		D84873502CF9534A00AED225 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D89B23972CFC503A001C2E13 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 			children = (
 				D81AAD672CF86B3B0040FC7A /* ChatManager.swift */,
 				D81AAD692CF86B4B0040FC7A /* MessageManager.swift */,
+				D89B23972CFC503A001C2E13 /* UserManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				D64F9BE72CF4D82C008D1167 /* AccountPage.swift in Sources */,
 				D66E883D2CBAEE9A00D714F3 /* ExpertzApp.swift in Sources */,
 				D66E88742CBC76EB00D714F3 /* SignIn.swift in Sources */,
+				D89B23982CFC503A001C2E13 /* UserManager.swift in Sources */,
 				D64F9BE52CEBBE01008D1167 /* Messages.swift in Sources */,
 				D66E88702CBC769900D714F3 /* Homepage.swift in Sources */,
 				D6CFC50D2CFA9C5A001BAB78 /* ClientAnnotation.swift in Sources */,

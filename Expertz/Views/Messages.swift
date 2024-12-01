@@ -10,9 +10,11 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct Messages: View {
-    @StateObject var chatManager = ChatManager()
+    @StateObject private var chatManager = ChatManager()
+    @StateObject private var userManager = UserManager()
     
     var body: some View {
         NavigationView {
@@ -32,7 +34,7 @@ struct Messages: View {
             .navigationTitle("Chats")
             .onAppear {
                 // Fetch chats for the user right now it is a dummy string
-                chatManager.getChats(for: "53Ex9GirPTtrZFv2BzeE") // change the id later
+                chatManager.getChats(for: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")
             }
         }
     }

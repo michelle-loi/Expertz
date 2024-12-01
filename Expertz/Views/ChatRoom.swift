@@ -4,17 +4,19 @@
 //
 //  Created by Michelle Loi on 2024-11-28.
 //
-//  Code is based off of this tutorial and modified: 
+//  Code is based off of this tutorial and modified:
 //  https://www.youtube.com/watch?v=Zz9XQy8PRpQ&t=1412s
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ChatRoom: View {
     var chatId: String
     var recipientName: String
     
-    @StateObject var messageManager = MessageManager()
+    @StateObject private var messageManager = MessageManager()
+    @StateObject private var userManager = UserManager()
     
     var body: some View {
         VStack {
@@ -35,8 +37,10 @@ struct ChatRoom: View {
                                 .padding()
                                 .frame(maxWidth: .infinity)
                         } else {
+                            // The string is for the test user that way when there
+                            // is no user it will still populate
                             ForEach(messageManager.messages, id: \.id) { message in
-                                MessageBubble(message: message)
+                                MessageBubble(message: message, currentUserId: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")
                             }
                         }
                     }
@@ -57,7 +61,7 @@ struct ChatRoom: View {
                 messageManager.getMessages(for: chatId)
             }
             
-            MessageField(chatId: chatId)
+            MessageField(chatId: chatId, currentUserId: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")
                 .environmentObject(messageManager)
         }
     }
@@ -95,9 +99,10 @@ struct TitleRow: View {
 
 struct MessageBubble: View {
     var message: Message
+    var currentUserId: String
     
     // Get the actual logged in users id later
-    var dummyUserID: String = "53Ex9GirPTtrZFv2BzeE"
+    // var dummyUserID: String = "53Ex9GirPTtrZFv2BzeE"
     
     // Controls tapping of the message bubble to show the time
     @State private var showTime = false
@@ -115,14 +120,14 @@ struct MessageBubble: View {
     
     var body: some View {
         // Trailing puts it to the right for the sender and leading to the left
-        VStack(alignment: message.senderId == dummyUserID ? .trailing : .leading) {
+        VStack(alignment: message.senderId == currentUserId ? .trailing : .leading) {
             HStack {
                 Text(message.text)
                     .padding()
-                    .background(message.senderId == dummyUserID ? Color(Theme.accentColor) : Color(.systemGray5))
+                    .background(message.senderId == currentUserId ? Color(Theme.accentColor) : Color(.systemGray5))
                     .cornerRadius(30)
             }
-            .frame(maxWidth: 300, alignment: message.senderId == dummyUserID ? .trailing : .leading)
+            .frame(maxWidth: 300, alignment: message.senderId == currentUserId ? .trailing : .leading)
             .onTapGesture {
                 showTime.toggle()
             }
@@ -131,33 +136,34 @@ struct MessageBubble: View {
                 Text(formattedTimestamp(date: message.timestamp))
                     .font(.caption2)
                     .foregroundColor(.gray)
-                    .padding(message.senderId == dummyUserID ? .trailing : .leading, 20)
+                    .padding(message.senderId == currentUserId ? .trailing : .leading, 20)
             }
             
         }
-        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: message.senderId == dummyUserID ? .trailing : .leading)
-        .padding(message.senderId == dummyUserID ? .trailing : .leading)
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: message.senderId == currentUserId ? .trailing : .leading)
+        .padding(message.senderId == currentUserId ? .trailing : .leading)
         .padding(.horizontal, 10)
     }
 }
 
 struct MessageField: View {
     var chatId: String
+    var currentUserId: String
     
     @EnvironmentObject var messageManager: MessageManager
     @State private var message = ""
     
     // Get the actual logged in users id later
-    var dummyUserID: String = "53Ex9GirPTtrZFv2BzeE"
+    // var dummyUserID: String = "53Ex9GirPTtrZFv2BzeE"
     
     var body: some View {
         HStack {
             CustomTextField(placeholder: Text("Message"), text: $message)
             
             Button {
-                messageManager.sendMessage(text: message, senderId: dummyUserID, chatId: chatId)
+                messageManager.sendMessage(text: message, senderId: currentUserId, chatId: chatId)
                 message = ""
-                
+                // print("Current User: \(currentUserId)")
             } label: {
                 Image(systemName: "paperplane.fill")
                     .foregroundColor(.white)
