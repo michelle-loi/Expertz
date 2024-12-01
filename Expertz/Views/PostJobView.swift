@@ -12,8 +12,8 @@ struct PostJobView: View {
     @State private var online: String = "Yes" // Dropdown default
     @State private var expertise: [String] = [] // Pulled from user profile
     @State private var price: String = ""
-    @State private var isNegotiable: Bool = false
-    @State private var isUrgent: Bool = false
+    @State private var isNegotiable: String = "Yes"
+    @State private var isUrgent: String = "No"
     @State private var showError: Bool = false
     @State private var errorMessage: String = ""
     @Environment(\.dismiss) var dismiss // To dismiss the view
@@ -57,18 +57,6 @@ struct PostJobView: View {
                     TextField("Enter a title for your request", text: $title)
                         .customFormInputField()
 
-                    // Description Field
-                    if requestType == "Client" || isExpert {
-                        Text("Description")
-                            .padding(.horizontal, 40)
-                            .padding(.vertical, 6)
-                            .font(.headline)
-                            .foregroundColor(Theme.primaryColor)
-                            .cornerRadius(30)
-                        TextField("Provide a brief description", text: $description)
-                            .customFormInputField()
-                    }
-
                     // Address Field
                     if requestType == "Client" || isExpert {
                         Text("Address")
@@ -80,8 +68,18 @@ struct PostJobView: View {
                         TextField("Enter an address", text: $address)
                             .customFormInputField()
                     }
-
-                    // Fields for ExpertRequest
+                    
+                    // Description Field
+                    if requestType == "Client" || isExpert {
+                        Text("Description")
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 6)
+                            .font(.headline)
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                        TextField("Provide a brief description", text: $description)
+                            .customFormInputField()
+                    }
                     
                     // Price Field
                     Text("Price")
@@ -94,46 +92,64 @@ struct PostJobView: View {
                         .keyboardType(.decimalPad)
                         .customFormInputField()
                     
-                    if requestType == "Expert" && isExpert {
-                        HStack{
-                            Text("In-Person Availability")
-                                .padding(.horizontal, 40)
-                                .padding(.vertical, 6)
-                                .font(.headline)
-                                .foregroundColor(Theme.primaryColor)
-                                .cornerRadius(30)
-                            Picker("", selection: $inPerson) {
-                                ForEach(dropdownOptions, id: \.self) { option in
-                                    Text(option).tag(option)
-                                }
-                            }
-                            .pickerStyle(MenuPickerStyle())
-                            .padding(.horizontal, 12)
-                            .background(Theme.accentColor)
-                            .foregroundStyle(Theme.primaryColor)
+                    HStack{
+                        Text("Price Negotiable?")
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 6)
+                            .font(.headline)
+                            .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
-                        }
-
-                        HStack{
-                            Text("Online Availability")
-                                .padding(.horizontal, 40)
-                                .padding(.vertical, 6)
-                                .font(.headline)
-                                .foregroundColor(Theme.primaryColor)
-                                .cornerRadius(30)
-                            Picker("", selection: $online) {
-                                ForEach(dropdownOptions, id: \.self) { option in
-                                    Text(option).tag(option)
-                                }
+                        Picker("", selection: $isNegotiable) {
+                            ForEach(dropdownUrgent, id: \.self) { option in
+                                Text(option).tag(option)
                             }
-                            .pickerStyle(MenuPickerStyle())
-                            .padding(.horizontal, 12)
-                            .background(Theme.accentColor)
-                            .foregroundStyle(Theme.primaryColor)
-                            .cornerRadius(30)
                         }
+                        .pickerStyle(MenuPickerStyle())
+                        .padding(.horizontal, 12)
+                        .background(Theme.accentColor)
+                        .foregroundStyle(Theme.primaryColor)
+                        .cornerRadius(30)
                     }
-                        
+                    
+                    // In-person
+                    HStack{
+                        Text("In-Person Availability")
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 6)
+                            .font(.headline)
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                        Picker("", selection: $inPerson) {
+                            ForEach(dropdownOptions, id: \.self) { option in
+                                Text(option).tag(option)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .padding(.horizontal, 12)
+                        .background(Theme.accentColor)
+                        .foregroundStyle(Theme.primaryColor)
+                        .cornerRadius(30)
+                    }
+                    
+                    // Online
+                    HStack{
+                        Text("Online Availability")
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 6)
+                            .font(.headline)
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                        Picker("", selection: $online) {
+                            ForEach(dropdownOptions, id: \.self) { option in
+                                Text(option).tag(option)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .padding(.horizontal, 12)
+                        .background(Theme.accentColor)
+                        .foregroundStyle(Theme.primaryColor)
+                        .cornerRadius(30)
+                    }
                     if (requestType != "Expert"){
                         HStack{
                             Text("Is it urgent?")
@@ -142,7 +158,7 @@ struct PostJobView: View {
                                 .font(.headline)
                                 .foregroundColor(Theme.primaryColor)
                                 .cornerRadius(30)
-                            Picker("", selection: $inPerson) {
+                            Picker("", selection: $isUrgent) {
                                 ForEach(dropdownUrgent, id: \.self) { option in
                                     Text(option).tag(option)
                                 }
@@ -153,7 +169,6 @@ struct PostJobView: View {
                             .foregroundStyle(Theme.primaryColor)
                             .cornerRadius(30)
                         }
-                        
                     }
                     if showError {
                         Text(errorMessage)
@@ -202,44 +217,64 @@ struct PostJobView: View {
             return
         }
 
-        // Validate inputs
-        guard !title.isEmpty, !price.isEmpty else {
-            showError = true
-            errorMessage = "Please fill out the required fields."
-            return
-        }
-
         let db = Firestore.firestore()
-        let jobData: [String: Any]
+        let userDocRef = db.collection("UserProfiles").document(currentUser.uid)
 
-        if requestType == "Client" || !isExpert {
-            jobData = [
-                "UserID": currentUser.uid,
-                "Username": currentUser.email ?? "Unknown",
-                "Title": title,
-                "Description": description,
-                "Address": address,
-                "Price": Double(price) ?? 0.0,
-                "IsUrgent": isUrgent,
-                "PriceNegotiable": isNegotiable,
-                "Timestamp": Timestamp()
-            ]
-            db.collection("ClientRequest").addDocument(data: jobData) { handleFirestoreResult($0) }
-        } else {
-            jobData = [
-                "UserID": currentUser.uid,
-                "Username": currentUser.email ?? "Unknown",
-                "Title": title,
-                "Description": description,
-                "Address": address,
-                "InPerson": inPerson,
-                "Online": online,
-                "Expertise": expertise, // This is now a list
-                "Price": Double(price) ?? 0.0,
-                "PriceNegotiable": isNegotiable,
-                "Timestamp": Timestamp()
-            ]
-            db.collection("ExpertRequest").addDocument(data: jobData) { handleFirestoreResult($0) }
+        // Fetch the user's firstName and lastName
+        userDocRef.getDocument { document, error in
+            if let document = document, document.exists {
+                guard let data = document.data(),
+                      let firstName = data["firstName"] as? String,
+                      let lastName = data["lastName"] as? String else {
+                    showError = true
+                    errorMessage = "Failed to fetch user profile."
+                    return
+                }
+
+                // Concatenate the full name
+                let name = firstName + " " + lastName
+
+                // Validate inputs
+                guard !title.isEmpty, !address.isEmpty, !description.isEmpty, !price.isEmpty else {
+                    showError = true
+                    errorMessage = "Please fill out the required fields."
+                    return
+                }
+
+                // Create the job data
+                let jobData: [String: Any] = [
+                    "UserID": currentUser.uid,
+                    "Username": currentUser.email ?? "Unknown",
+                    "TimeStamp": Timestamp(),
+                    "Name": name,
+                    "Title": title,
+                    "Address": address,
+                    "Description": description,
+                    "Price": Double(price) ?? 0.0,
+                    "PriceNegotiable": isNegotiable,
+                    "InPerson": inPerson,
+                    "Online": online,
+                    "Urgency": requestType == "Expert" ? "No" : isUrgent,
+                    "RequestType": requestType,
+                    "Expertise": requestType == "Expert" ? expertise : []
+                ]
+
+                // Determine the collection to use
+                let collectionName = requestType == "Expert" ? "ExpertRequest" : "ClientRequest"
+
+                // Add the job data to Firestore
+                db.collection(collectionName).addDocument(data: jobData) { error in
+                    if let error = error {
+                        showError = true
+                        errorMessage = "Failed to post job: \(error.localizedDescription)"
+                    } else {
+                        dismiss() // Close the view on success
+                    }
+                }
+            } else {
+                showError = true
+                errorMessage = "Failed to fetch user profile: \(error?.localizedDescription ?? "Unknown error")"
+            }
         }
     }
 

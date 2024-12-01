@@ -65,6 +65,9 @@ struct ClientAnnotation: View {
                     }
                     Spacer()
                 }
+                .onAppear {
+                    print("Urgency: \(annotation.urgent ?? "No value")")
+                }
                 HStack {
                     Text("Price: ")
                     Text("\(annotation.price ?? "No price available.")")
