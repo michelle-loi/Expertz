@@ -20,11 +20,12 @@ struct ExpertAnnotation: View {
                         .fill(Color.gray)
                         .frame(width: 50, height: 50)
 
+                    // Naming Section:
                     VStack(alignment: .leading) {
                         Text("\(annotation.name),")
                             .font(.headline)
                             .foregroundColor(Theme.primaryColor)
-                        Text("An Expert in:")
+                        Text("Expertise:")
                             .font(.headline)
                             .foregroundColor(Theme.primaryColor)
                         Text("\(annotation.expertise ?? "N/A")")
@@ -32,6 +33,8 @@ struct ExpertAnnotation: View {
                             .foregroundColor(Theme.accentColor)
                     }
                     Spacer()
+                    
+                    // Rating
                     HStack(spacing: 5) {
                         Text("\(annotation.rating)")
                             .font(.headline)
@@ -41,6 +44,8 @@ struct ExpertAnnotation: View {
                             .frame(width: 20, height: 20)
                     }
                 }
+                
+                // Bio Section
                 Text("\(annotation.bio ?? "Bio not available")")
                     .font(.body)
                     .foregroundColor(Theme.primaryColor)
@@ -56,6 +61,74 @@ struct ExpertAnnotation: View {
                             .cornerRadius(30)
                     }
                 }
+                VStack(alignment: .leading, spacing: 10){
+                    Text("Description")
+                        .font(.headline)
+                        .foregroundColor(Theme.primaryColor)
+                    
+                    Text("\(annotation.description ?? "No description available.")")
+                        .font(.body)
+                        .foregroundColor(Theme.primaryColor)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                HStack(){
+                    Text("Rate: ")
+                        .font(.headline)
+                        .foregroundColor(Theme.primaryColor)
+                    
+                    Text("\(annotation.price ?? "No price available.")")
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Theme.accentColor.opacity(0.2))
+                        .foregroundColor(Theme.primaryColor)
+                        .cornerRadius(30)
+                    Spacer()
+                }
+                
+                HStack(){
+                    Text("Location: ")
+                        .font(.headline)
+                        .foregroundColor(Theme.primaryColor)
+                    
+                    if annotation.inPerson == "Yes" {
+                        Text("InPerson")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+
+                    if annotation.inPerson == "Only" {
+                        Text("InPerson - Only")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+                    
+                    if annotation.online == "Yes" {
+                        Text("Online")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+                    if annotation.online == "Only" {
+                        Text("Online - Only")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+                    Spacer()
+                }
+                
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Reviews:")
                         .font(.headline)
@@ -82,7 +155,7 @@ struct ExpertAnnotation: View {
                     .background(Theme.accentColor.opacity(0.2))
                     .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
-                Button(action: {
+                Button(action: { // Michelle add logic here:
                     selectedAnnotation = nil
                 }) {
                     Text("Send a request")

@@ -65,9 +65,6 @@ struct ClientAnnotation: View {
                     }
                     Spacer()
                 }
-                .onAppear {
-                    print("Urgency: \(annotation.urgent ?? "No value")")
-                }
                 HStack {
                     Text("Price: ")
                     Text("\(annotation.price ?? "No price available.")")
@@ -87,12 +84,50 @@ struct ClientAnnotation: View {
                     }
                     Spacer()
                 }
+                HStack {
+                    Text("Location: ")
+                    if annotation.inPerson == "Yes" {
+                        Text("InPerson")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+
+                    if annotation.inPerson == "Only" {
+                        Text("InPerson - Only")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+                    
+                    if annotation.online == "Yes" {
+                        Text("Online")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+                    if annotation.online == "Only" {
+                        Text("Online - Only")
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                    }
+                    Spacer()
+                }
                 TextField("How much are you charging for this work?", text: .constant(""))
                     .padding()
                     .background(Theme.accentColor.opacity(0.2))
                     .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
-                Button(action: {
+                Button(action: { // Michelle: add in logic here to trigger messaging
                     selectedAnnotation = nil
                 }) {
                     Text("Notify the client")

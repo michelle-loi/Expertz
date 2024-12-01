@@ -21,6 +21,8 @@ struct MapBubble: Identifiable {
     let expertise: String?
     let bio: String?
     let urgent: String?
+    let inPerson: String?
+    let online: String?
     let negotiable: String?
     let price: String?
 }
