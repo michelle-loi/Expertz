@@ -64,6 +64,7 @@ struct CustomMapView: View {
                     if let coordinate = coordinate, error == nil {
                         // Create MapBubble instance
                         let name = data["Name"] as? String ?? "Unknown"
+                        let id = data["UserID"] as? String ?? ""
                         let title = data["Title"] as? String ?? ""
                         let description = data["Description"] as? String ?? ""
                         let price = data["Price"] as? Double ?? 0.0
@@ -75,6 +76,7 @@ struct CustomMapView: View {
 
                         let mapBubble = MapBubble(
                             name: name,
+                            id: id,
                             coordinate: coordinate,
                             type: "Client",
                             help: title,
@@ -118,6 +120,7 @@ struct CustomMapView: View {
                     if let coordinate = coordinate, error == nil {
                         // Create MapBubble instance
                         let name = data["Name"] as? String ?? "Unknown"
+                        let id = data["UserID"] as? String ?? ""
                         let title = data["Title"] as? String ?? ""
                         let description = data["Description"] as? String ?? ""
                         let price = data["Price"] as? Double ?? 0.0
@@ -130,6 +133,7 @@ struct CustomMapView: View {
 
                         let mapBubble = MapBubble(
                             name: name,
+                            id: id,
                             coordinate: coordinate,
                             type: "Expert",
                             help: title,

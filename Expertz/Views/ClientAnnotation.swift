@@ -129,6 +129,7 @@ struct ClientAnnotation: View {
                     .cornerRadius(30)
                 Button(action: { // Michelle: add in logic here to trigger messaging
                     selectedAnnotation = nil
+                    print("\(annotation.id)")
                 }) {
                     Text("Notify the client")
                         .foregroundColor(.white)

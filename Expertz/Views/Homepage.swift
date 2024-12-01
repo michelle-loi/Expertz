@@ -11,8 +11,8 @@ import CoreLocation
 import FirebaseAuth
 
 struct MapBubble: Identifiable {
-    let id = UUID()
     let name: String
+    let id: String
     let coordinate: CLLocationCoordinate2D
     let type: String
     let help: String?
