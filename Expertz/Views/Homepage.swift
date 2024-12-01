@@ -72,6 +72,7 @@ struct Homepage: View {
                     selectedPickerOption: selectedPickerOption,
                     selectedAnnotation: $selectedAnnotation
                 )
+                .ignoresSafeArea()
                 
                 // Search Bar VStack
                 VStack {

@@ -45,22 +45,22 @@ struct ExpertAnnotation: View {
                     }
                 }
                 
-                // Bio Section
-                Text("\(annotation.bio ?? "Bio not available")")
-                    .font(.body)
-                    .foregroundColor(Theme.primaryColor)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                HStack(spacing: 10) {
-                    ForEach(["Realism", "3D Design", "Unity"], id: \.self) { tag in
-                        Text(tag)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
-                            .cornerRadius(30)
-                    }
-                }
+//                // Bio Section
+//                Text("\(annotation.bio ?? "Bio not available")")
+//                    .font(.body)
+//                    .foregroundColor(Theme.primaryColor)
+//                    .multilineTextAlignment(.leading)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                HStack(spacing: 10) {
+//                    ForEach(["Realism", "3D Design", "Unity"], id: \.self) { tag in
+//                        Text(tag)
+//                            .padding(.horizontal, 12)
+//                            .padding(.vertical, 6)
+//                            .background(Theme.accentColor.opacity(0.2))
+//                            .foregroundColor(Theme.primaryColor)
+//                            .cornerRadius(30)
+//                    }
+//                }
                 VStack(alignment: .leading, spacing: 10){
                     Text("Description")
                         .font(.headline)
@@ -87,8 +87,30 @@ struct ExpertAnnotation: View {
                     Spacer()
                 }
                 
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Reviews")
+                        .font(.headline)
+                        .foregroundColor(Theme.primaryColor)
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 15) {
+                            ForEach(0..<5) { index in
+                                VStack(alignment: .leading) {
+                                    Text("Lorem ipsum dolor sit amet.")
+                                        .font(.body)
+                                        .foregroundColor(Theme.primaryColor)
+                                }
+                                .padding()
+                                .frame(width: 200)
+                                .background(Theme.accentColor.opacity(0.2))
+                                .cornerRadius(30)
+                            }
+                        }
+                    }
+                }
+                
                 HStack(){
-                    Text("Location: ")
+                    Text("Availability: ")
                         .font(.headline)
                         .foregroundColor(Theme.primaryColor)
                     
@@ -129,27 +151,6 @@ struct ExpertAnnotation: View {
                     Spacer()
                 }
                 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Reviews:")
-                        .font(.headline)
-                        .foregroundColor(Theme.primaryColor)
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 15) {
-                            ForEach(0..<5) { index in
-                                VStack(alignment: .leading) {
-                                    Text("Lorem ipsum dolor sit amet.")
-                                        .font(.body)
-                                        .foregroundColor(Theme.primaryColor)
-                                }
-                                .padding()
-                                .frame(width: 200)
-                                .background(Theme.accentColor.opacity(0.2))
-                                .cornerRadius(30)
-                            }
-                        }
-                    }
-                }
                 TextField("Give a brief description", text: .constant(""))
                     .padding()
                     .background(Theme.accentColor.opacity(0.2))

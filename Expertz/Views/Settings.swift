@@ -18,7 +18,7 @@ struct Settings: View {
                 Text("Security and Privacy")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Theme.accentColor.opacity(0.8))
+                    .background(Theme.accentColor)
                     .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
             }
@@ -28,7 +28,7 @@ struct Settings: View {
                 Text("Help")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Theme.accentColor.opacity(0.8))
+                    .background(Theme.accentColor)
                     .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
             }
@@ -49,7 +49,11 @@ struct Settings: View {
         }
         .padding()
         .navigationTitle("Settings")
-        .background(Color.white.ignoresSafeArea())
+        .background(LinearGradient(
+            gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+            startPoint: .top,
+            endPoint: .bottom
+        ))
     }
 }
 
