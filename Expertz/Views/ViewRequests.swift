@@ -17,6 +17,8 @@ struct ViewRequests: View {
     @State private var showError: Bool = false
     @State private var errorMessage: String = ""
     @State private var isLoading: Bool = true
+    @State private var selectedRequest: Request? = nil
+    @State private var showDeleteConfirmation: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -33,39 +35,39 @@ struct ViewRequests: View {
                     .padding()
                 }
 
-//                if isLoading {
-//                    ProgressView("Loading requests...")
-//                        .padding()
-//                } else
                 if showError {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .padding()
                 } else {
                     ScrollView {
-                        if selectedRequestType == "Client" || !isExpert {
-                            // Display Client Requests
-                            ForEach(clientRequests) { request in
-                                RequestCard(request: request)
-                            }
-                        } else {
-                            // Display Expert Requests
-                            ForEach(expertRequests) { request in
-                                RequestCard(request: request)
-                            }
+                        ForEach(selectedRequestType == "Client" ? clientRequests : expertRequests) { request in
+                            RequestCard(request: request)
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        selectedRequest = request
+                                        showDeleteConfirmation = true
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                         }
                     }
                 }
             }
             .navigationTitle("Your Requests")
-            .navigationBarTitleDisplayMode(.inline)
-            .background(LinearGradient(
-                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            // ignores safe border edges
-            .ignoresSafeArea())
+            .alert(isPresented: $showDeleteConfirmation) {
+                Alert(
+                    title: Text("Confirm Deletion"),
+                    message: Text("Are you sure you want to delete this request?"),
+                    primaryButton: .destructive(Text("Delete")) {
+                        if let request = selectedRequest {
+                            deleteRequest(request: request)
+                        }
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
             .onAppear(perform: fetchRequests)
             .onChange(of: selectedRequestType) {
                 fetchRequests()
@@ -151,6 +153,26 @@ struct ViewRequests: View {
                             print("Error fetching documents: \(error.localizedDescription)")
                         }
                     }
+            }
+        }
+    }
+    private func deleteRequest(request: Request) {
+        guard let id = request.id else { return }
+
+        let db = Firestore.firestore()
+        let collectionName = request.requestType == "Client" ? "ClientRequest" : "ExpertRequest"
+
+        db.collection(collectionName).document(id).delete { error in
+            if let error = error {
+                showError = true
+                errorMessage = "Failed to delete request: \(error.localizedDescription)"
+            } else {
+                // Remove the request locally
+                if request.requestType == "Client" {
+                    clientRequests.removeAll { $0.id == request.id }
+                } else {
+                    expertRequests.removeAll { $0.id == request.id }
+                }
             }
         }
     }
