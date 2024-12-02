@@ -48,7 +48,7 @@ struct AccountPage: View {
                                     .cornerRadius(30)
                                 TextField("No Email Available", text: $userEmail)
                                     .padding()
-                                    .background(Theme.accentColor.opacity(0.2))
+                                    .background(Theme.accentColor.opacity(0.5))
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 Text("Address")
@@ -89,7 +89,7 @@ struct AccountPage: View {
                                 Text("Email")
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
-                                    .background(Theme.accentColor.opacity(0.2))
+                                    .background(Theme.accentColor.opacity(0.5))
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 Text("\(userEmail)")
@@ -178,6 +178,11 @@ struct AccountPage: View {
                     Spacer()
                 }
                 .padding()
+                .background(LinearGradient(
+                    gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                ))
                 .onAppear {
                     fetchUserDetails()
                 }

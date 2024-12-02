@@ -67,11 +67,18 @@ struct ViewRequests: View {
                     },
                     secondaryButton: .cancel()
                 )
+
             }
+            .background(LinearGradient(
+                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+                startPoint: .top,
+                endPoint: .bottom
+            ))
             .onAppear(perform: fetchRequests)
             .onChange(of: selectedRequestType) {
                 fetchRequests()
             }
+            
         }
     }
 
