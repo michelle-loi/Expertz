@@ -10,6 +10,15 @@ import SwiftUI
 struct ExpertAnnotation: View {
     let annotation: MapBubble
     @Binding var selectedAnnotation: MapBubble?
+    
+    @Binding var navigateToChatroom: Bool
+    @Binding var outerChatId: String
+    @Binding var outerRecipientName: String
+    
+    @StateObject private var userManager = UserManager()
+    @StateObject private var chatManager = ChatManager()
+    
+    @State private var expertRequest: String = ""
 
     var body: some View {
         VStack {
@@ -150,13 +159,25 @@ struct ExpertAnnotation: View {
                         }
                     }
                 }
-                TextField("Give a brief description", text: .constant(""))
+                TextField("Give a brief description", text: $expertRequest)
                     .padding()
                     .background(Theme.accentColor.opacity(0.2))
                     .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
-                Button(action: { // Michelle add logic here:
+                Button(action: {
                     selectedAnnotation = nil
+                    print("\(annotation.id)")
+                    print("Expert Request: \(expertRequest)")
+                    chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: expertRequest) { chatId in
+                        if let chatId = chatId {
+                            DispatchQueue.main.async {
+                                print("\(chatId)")
+                                navigateToChatroom = true
+                                outerChatId = chatId
+                                outerRecipientName = annotation.name
+                            }
+                        }
+                    }
                 }) {
                     Text("Send a request")
                         .foregroundColor(.white)

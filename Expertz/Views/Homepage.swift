@@ -40,6 +40,9 @@ struct Homepage: View {
     @State private var selectedPickerOption = "Client"
 
     @State private var navigateToMessages = false
+    @State private var navigateToChatroom = false // Debugging
+    @State private var outerChatId = ""
+    @State private var outerRecipientName = ""
     @State private var showPostPopup = false
     @State private var navigateToSettings = false
     @State private var isUrgent = false
@@ -110,8 +113,8 @@ struct Homepage: View {
                 }
                 
                 // Annotation Detail View
-                AnnotationDetail(selectedAnnotation: $selectedAnnotation)
-                
+                //AnnotationDetail(selectedAnnotation: $selectedAnnotation)
+                AnnotationDetail(selectedAnnotation: $selectedAnnotation, navigateToChatroom: $navigateToChatroom, outerChatId: $outerChatId, outerRecipientName: $outerRecipientName)
             }
         }
         .onAppear {
@@ -120,6 +123,9 @@ struct Homepage: View {
         }
         .navigationDestination(isPresented: $navigateToIntroduction) {
             Introduction()
+        }
+        .navigationDestination(isPresented: $navigateToChatroom) {
+            ChatRoom(chatId: outerChatId, recipientName: outerRecipientName)
         }
     }
     private func checkLoginStatus() {

@@ -11,6 +11,9 @@ import SwiftUI
 
 struct AnnotationDetail: View {
     @Binding var selectedAnnotation: MapBubble?
+    @Binding var navigateToChatroom: Bool
+    @Binding var outerChatId: String
+    @Binding var outerRecipientName: String
 
     var body: some View {
         if let annotation = selectedAnnotation {
@@ -23,10 +26,10 @@ struct AnnotationDetail: View {
                     }
                     .zIndex(0)
                 if annotation.type == "Expert" {
-                    ExpertAnnotation(annotation: annotation, selectedAnnotation: $selectedAnnotation)
+                    ExpertAnnotation(annotation: annotation, selectedAnnotation: $selectedAnnotation, navigateToChatroom: $navigateToChatroom, outerChatId: $outerChatId, outerRecipientName: $outerRecipientName)
                         .zIndex(1)
                 } else if annotation.type == "Client" {
-                    ClientAnnotation(annotation: annotation, selectedAnnotation: $selectedAnnotation)
+                    ClientAnnotation(annotation: annotation, selectedAnnotation: $selectedAnnotation, navigateToChatroom: $navigateToChatroom, outerChatId: $outerChatId, outerRecipientName: $outerRecipientName)
                         .zIndex(1)
                 }
             }

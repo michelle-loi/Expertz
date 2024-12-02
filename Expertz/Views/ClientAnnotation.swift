@@ -10,6 +10,16 @@ import SwiftUI
 struct ClientAnnotation: View {
     let annotation: MapBubble
     @Binding var selectedAnnotation: MapBubble?
+    @Binding var navigateToChatroom: Bool
+    @Binding var outerChatId: String
+    @Binding var outerRecipientName: String
+
+    
+    @StateObject private var userManager = UserManager()
+    @StateObject private var chatManager = ChatManager()
+    
+    @State private var clientRequest: String = ""
+    @State private var chatExists: Bool = false
 
     var body: some View {
         VStack {
@@ -122,14 +132,25 @@ struct ClientAnnotation: View {
                     }
                     Spacer()
                 }
-                TextField("How much are you charging for this work?", text: .constant(""))
+                TextField("How much are you charging for this work?", text: $clientRequest)
                     .padding()
                     .background(Theme.accentColor.opacity(0.2))
                     .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
-                Button(action: { // Michelle: add in logic here to trigger messaging
+                
+                Button(action: {
                     selectedAnnotation = nil
                     print("\(annotation.id)")
+                    print("Client Request: \(clientRequest)")
+                    chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: clientRequest) { chatId in
+                        if let chatId = chatId {
+                            DispatchQueue.main.async {
+                                navigateToChatroom = true
+                                outerChatId = chatId
+                                outerRecipientName = annotation.name
+                            }
+                        }
+                    }
                 }) {
                     Text("Notify the client")
                         .foregroundColor(.white)

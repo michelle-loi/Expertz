@@ -154,6 +154,32 @@ class ChatManager: ObservableObject {
 //    }
     
     
+    func checkChatExists(senderId: String, recipientId: String, completion: @escaping (Bool) -> Void) {
+        // Create the chat id, the chat id puts the id that is smaller first
+        // This prevents having two chats with the same people in different order
+        // A_B and B_A for example
+        let chatId = senderId < recipientId ? "\(senderId)_\(recipientId)" : "\(recipientId)_\(senderId)"
+        let chatDoc = db.collection("chats").document(chatId)
+        
+        print("\(chatId)")
+        
+        chatDoc.getDocument { (document, error) in
+            if let error = error {
+                completion(false)
+                return
+            }
+            
+            print("check document existent")
+            guard let document = document, document.exists else {
+                completion(false)
+                return
+            }
+
+            print("document existence")
+            completion(true)
+        }
+    }
+    
     /// Tries to create a new chat, but if one already exists for the two participants then it will not create a new chat
     /// - Parameters:
     ///   - senderId: The id of the sender
