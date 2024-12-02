@@ -10,6 +10,7 @@ import SwiftUI
 struct ClientAnnotation: View {
     let annotation: MapBubble
     @Binding var selectedAnnotation: MapBubble?
+    
     @Binding var navigateToChatroom: Bool
     @Binding var outerChatId: String
     @Binding var outerRecipientName: String
@@ -19,7 +20,8 @@ struct ClientAnnotation: View {
     @StateObject private var chatManager = ChatManager()
     
     @State private var clientRequest: String = ""
-    @State private var chatExists: Bool = false
+    
+    @State private var chatExists: Bool? = nil
 
     var body: some View {
         VStack {
@@ -132,34 +134,53 @@ struct ClientAnnotation: View {
                     }
                     Spacer()
                 }
-                TextField("How much are you charging for this work?", text: $clientRequest)
-                    .padding()
-                    .background(Theme.accentColor.opacity(0.2))
-                    .foregroundColor(Theme.primaryColor)
-                    .cornerRadius(30)
                 
-                Button(action: {
-                    if !clientRequest.isEmpty {
-                        selectedAnnotation = nil
-                        print("\(annotation.id)")
-                        print("Client Request: \(clientRequest)")
-                        chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: clientRequest) { chatId in
-                            if let chatId = chatId {
-                                DispatchQueue.main.async {
-                                    navigateToChatroom = true
-                                    outerChatId = chatId
-                                    outerRecipientName = annotation.name
+                if let chatExists = chatExists {
+                    if (chatExists) {
+                        let chatId = userManager.currentUserId ?? "" < annotation.id ? "\(userManager.currentUserId ?? "")_\(annotation.id)" : "\(annotation.id)_\(userManager.currentUserId ?? "")"
+                        Button(action: {
+                            navigateToChatroom = true
+                            outerChatId = chatId
+                            outerRecipientName = annotation.name
+                        }) {
+                            Text("Go to chat!")
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Theme.accentColor)
+                                .cornerRadius(30)
+                        }
+                    } else {
+                        TextField("How much are you charging for this work?", text: $clientRequest)
+                            .padding()
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                        
+                        Button(action: {
+                            if !clientRequest.isEmpty {
+                                selectedAnnotation = nil
+                                print("\(annotation.id)")
+                                print("Client Request: \(clientRequest)")
+                                chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: clientRequest) { chatId in
+                                    if let chatId = chatId {
+                                        DispatchQueue.main.async {
+                                            navigateToChatroom = true
+                                            outerChatId = chatId
+                                            outerRecipientName = annotation.name
+                                        }
+                                    }
                                 }
                             }
+                        }) {
+                            Text("Notify the client")
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Theme.accentColor)
+                                .cornerRadius(30)
                         }
                     }
-                }) {
-                    Text("Notify the client")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Theme.accentColor)
-                        .cornerRadius(30)
                 }
             }
             .padding()
@@ -168,6 +189,15 @@ struct ClientAnnotation: View {
             .shadow(radius: 10)
             .padding(.horizontal, 20)
             Spacer(minLength: 5)
+        }
+        .onAppear {
+            // Call the checkChatExists function when the view appears
+            chatManager.checkChatExists(senderId: userManager.currentUserId ?? "", recipientId: annotation.id) { exists in
+                // Update the state after the asynchronous check is done
+                DispatchQueue.main.async {
+                    chatExists = exists
+                }
+            }
         }
     }
 }

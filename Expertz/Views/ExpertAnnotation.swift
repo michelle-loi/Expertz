@@ -19,6 +19,8 @@ struct ExpertAnnotation: View {
     @StateObject private var chatManager = ChatManager()
     
     @State private var expertRequest: String = ""
+    
+    @State private var chatExists: Bool? = nil
 
     var body: some View {
         VStack {
@@ -160,34 +162,52 @@ struct ExpertAnnotation: View {
                     Spacer()
                 }
                 
-                TextField("Give a brief description", text: $expertRequest)
-                    .padding()
-                    .background(Theme.accentColor.opacity(0.2))
-                    .foregroundColor(Theme.primaryColor)
-                    .cornerRadius(30)
-                Button(action: {
-                    if !expertRequest.isEmpty {
-                        selectedAnnotation = nil
-                        print("\(annotation.id)")
-                        print("Expert Request: \(expertRequest)")
-                        chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: expertRequest) { chatId in
-                            if let chatId = chatId {
-                                DispatchQueue.main.async {
-                                    print("\(chatId)")
-                                    navigateToChatroom = true
-                                    outerChatId = chatId
-                                    outerRecipientName = annotation.name
+                if let chatExists = chatExists {
+                    if (chatExists) {
+                        let chatId = userManager.currentUserId ?? "" < annotation.id ? "\(userManager.currentUserId ?? "")_\(annotation.id)" : "\(annotation.id)_\(userManager.currentUserId ?? "")"
+                        Button(action: {
+                            navigateToChatroom = true
+                            outerChatId = chatId
+                            outerRecipientName = annotation.name
+                        }) {
+                            Text("Go to chat!")
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Theme.accentColor)
+                                .cornerRadius(30)
+                        }
+                    } else {
+                        TextField("Give a brief description", text: $expertRequest)
+                            .padding()
+                            .background(Theme.accentColor.opacity(0.2))
+                            .foregroundColor(Theme.primaryColor)
+                            .cornerRadius(30)
+                        Button(action: {
+                            if !expertRequest.isEmpty {
+                                selectedAnnotation = nil
+                                print("\(annotation.id)")
+                                print("Expert Request: \(expertRequest)")
+                                chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: expertRequest) { chatId in
+                                    if let chatId = chatId {
+                                        DispatchQueue.main.async {
+                                            print("\(chatId)")
+                                            navigateToChatroom = true
+                                            outerChatId = chatId
+                                            outerRecipientName = annotation.name
+                                        }
+                                    }
                                 }
                             }
+                        }) {
+                            Text("Send a request")
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Theme.accentColor)
+                                .cornerRadius(30)
                         }
                     }
-                }) {
-                    Text("Send a request")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Theme.accentColor)
-                        .cornerRadius(30)
                 }
             }
             .padding()
@@ -196,6 +216,15 @@ struct ExpertAnnotation: View {
             .shadow(radius: 50)
             .padding(.horizontal, 20)
             Spacer(minLength: 5)
+        }
+        .onAppear {
+            // Call the checkChatExists function when the view appears
+            chatManager.checkChatExists(senderId: userManager.currentUserId ?? "", recipientId: annotation.id) { exists in
+                // Update the state after the asynchronous check is done
+                DispatchQueue.main.async {
+                    chatExists = exists
+                }
+            }
         }
     }
 }

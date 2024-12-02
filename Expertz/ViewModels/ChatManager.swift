@@ -152,8 +152,13 @@ class ChatManager: ObservableObject {
 //            completion(chatId)
 //        }
 //    }
+
     
-    
+    /// Returns if a chat exists or not
+    /// - Parameters:
+    ///   - senderId: The id of the sender
+    ///   - recipientId: The id of the recipient
+    ///   - completion: Closure to run
     func checkChatExists(senderId: String, recipientId: String, completion: @escaping (Bool) -> Void) {
         // Create the chat id, the chat id puts the id that is smaller first
         // This prevents having two chats with the same people in different order
