@@ -161,8 +161,10 @@ struct MessageField: View {
             CustomTextField(placeholder: Text("Message"), text: $message)
             
             Button {
-                messageManager.sendMessage(text: message, senderId: currentUserId, chatId: chatId)
-                message = ""
+                if !message.isEmpty {
+                    messageManager.sendMessage(text: message, senderId: currentUserId, chatId: chatId)
+                    message = ""
+                }
                 // print("Current User: \(currentUserId)")
             } label: {
                 Image(systemName: "paperplane.fill")

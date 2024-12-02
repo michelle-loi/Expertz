@@ -166,16 +166,18 @@ struct ExpertAnnotation: View {
                     .foregroundColor(Theme.primaryColor)
                     .cornerRadius(30)
                 Button(action: {
-                    selectedAnnotation = nil
-                    print("\(annotation.id)")
-                    print("Expert Request: \(expertRequest)")
-                    chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: expertRequest) { chatId in
-                        if let chatId = chatId {
-                            DispatchQueue.main.async {
-                                print("\(chatId)")
-                                navigateToChatroom = true
-                                outerChatId = chatId
-                                outerRecipientName = annotation.name
+                    if !expertRequest.isEmpty {
+                        selectedAnnotation = nil
+                        print("\(annotation.id)")
+                        print("Expert Request: \(expertRequest)")
+                        chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: expertRequest) { chatId in
+                            if let chatId = chatId {
+                                DispatchQueue.main.async {
+                                    print("\(chatId)")
+                                    navigateToChatroom = true
+                                    outerChatId = chatId
+                                    outerRecipientName = annotation.name
+                                }
                             }
                         }
                     }

@@ -139,15 +139,17 @@ struct ClientAnnotation: View {
                     .cornerRadius(30)
                 
                 Button(action: {
-                    selectedAnnotation = nil
-                    print("\(annotation.id)")
-                    print("Client Request: \(clientRequest)")
-                    chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: clientRequest) { chatId in
-                        if let chatId = chatId {
-                            DispatchQueue.main.async {
-                                navigateToChatroom = true
-                                outerChatId = chatId
-                                outerRecipientName = annotation.name
+                    if !clientRequest.isEmpty {
+                        selectedAnnotation = nil
+                        print("\(annotation.id)")
+                        print("Client Request: \(clientRequest)")
+                        chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: clientRequest) { chatId in
+                            if let chatId = chatId {
+                                DispatchQueue.main.async {
+                                    navigateToChatroom = true
+                                    outerChatId = chatId
+                                    outerRecipientName = annotation.name
+                                }
                             }
                         }
                     }
