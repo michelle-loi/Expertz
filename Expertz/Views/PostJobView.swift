@@ -55,7 +55,12 @@ struct PostJobView: View {
                         .foregroundColor(Theme.primaryColor)
                         .cornerRadius(30)
                     TextField("Enter a title for your request", text: $title)
-                        .customFormInputField()
+                        .padding()
+                        .background(Theme.accentColor)
+                        .cornerRadius(Theme.cornerRadius)
+                        .font(Theme.inputFont)
+                        .foregroundColor(.black)
+                        .padding(.horizontal, Theme.buttonPadding)
 
                     // Address Field
                     if requestType == "Client" || isExpert {
@@ -66,7 +71,12 @@ struct PostJobView: View {
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
                         TextField("Enter an address", text: $address)
-                            .customFormInputField()
+                            .padding()
+                            .background(Theme.accentColor)
+                            .cornerRadius(Theme.cornerRadius)
+                            .font(Theme.inputFont)
+                            .foregroundColor(.black)
+                            .padding(.horizontal, Theme.buttonPadding)
                     }
                     
                     // Description Field
@@ -78,7 +88,12 @@ struct PostJobView: View {
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
                         TextField("Provide a brief description", text: $description)
-                            .customFormInputField()
+                            .padding()
+                            .background(Theme.accentColor)
+                            .cornerRadius(Theme.cornerRadius)
+                            .font(Theme.inputFont)
+                            .foregroundColor(.black)
+                            .padding(.horizontal, Theme.buttonPadding)
                     }
                     
                     // Price Field
@@ -90,7 +105,12 @@ struct PostJobView: View {
                         .cornerRadius(30)
                     TextField("Enter a price", text: $price)
                         .keyboardType(.decimalPad)
-                        .customFormInputField()
+                        .padding()
+                        .background(Theme.accentColor)
+                        .cornerRadius(Theme.cornerRadius)
+                        .font(Theme.inputFont)
+                        .foregroundColor(.black)
+                        .padding(.horizontal, Theme.buttonPadding)
                     
                     HStack{
                         Text("Price Negotiable?")
@@ -99,6 +119,9 @@ struct PostJobView: View {
                             .font(.headline)
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
+                        
+                        Spacer()
+                        
                         Picker("", selection: $isNegotiable) {
                             ForEach(dropdownUrgent, id: \.self) { option in
                                 Text(option).tag(option)
@@ -109,6 +132,7 @@ struct PostJobView: View {
                         .background(Theme.accentColor)
                         .foregroundStyle(Theme.primaryColor)
                         .cornerRadius(30)
+                        
                     }
                     
                     // In-person
@@ -119,6 +143,9 @@ struct PostJobView: View {
                             .font(.headline)
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
+                        
+                        Spacer()
+                        
                         Picker("", selection: $inPerson) {
                             ForEach(dropdownOptions, id: \.self) { option in
                                 Text(option).tag(option)
@@ -139,6 +166,9 @@ struct PostJobView: View {
                             .font(.headline)
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
+                        
+                        Spacer()
+                        
                         Picker("", selection: $online) {
                             ForEach(dropdownOptions, id: \.self) { option in
                                 Text(option).tag(option)
@@ -158,6 +188,9 @@ struct PostJobView: View {
                                 .font(.headline)
                                 .foregroundColor(Theme.primaryColor)
                                 .cornerRadius(30)
+                            
+                            Spacer()
+                            
                             Picker("", selection: $isUrgent) {
                                 ForEach(dropdownUrgent, id: \.self) { option in
                                     Text(option).tag(option)
@@ -205,6 +238,11 @@ struct PostJobView: View {
             .navigationTitle("Post Job")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
+            .background(LinearGradient(
+                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+                startPoint: .top,
+                endPoint: .bottom
+            ))
             .onAppear(perform: fetchUserProfile) // Fetch the user's profile
         }
         .navigationBarHidden(true)

@@ -43,6 +43,10 @@ struct CustomMapView: View {
 
     // Function to fetch data for both Client and Expert requests
     func fetchData() {
+        // Clear existing bubbles
+        clientBubbles.removeAll()
+        expertBubbles.removeAll()
+        
         fetchClientRequests()
         fetchExpertRequests()
     }

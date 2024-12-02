@@ -29,13 +29,15 @@ struct ViewRequests: View {
                         Text("Expert Requests").tag("Expert")
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    .foregroundStyle(Theme.primaryColor)
                     .padding()
                 }
 
-                if isLoading {
-                    ProgressView("Loading requests...")
-                        .padding()
-                } else if showError {
+//                if isLoading {
+//                    ProgressView("Loading requests...")
+//                        .padding()
+//                } else
+                if showError {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .padding()
@@ -57,6 +59,13 @@ struct ViewRequests: View {
             }
             .navigationTitle("Your Requests")
             .navigationBarTitleDisplayMode(.inline)
+            .background(LinearGradient(
+                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            // ignores safe border edges
+            .ignoresSafeArea())
             .onAppear(perform: fetchRequests)
             .onChange(of: selectedRequestType) {
                 fetchRequests()
@@ -157,61 +166,107 @@ struct RequestCard: View {
             
             // Request Title
             Text("\(request.title)")
-                .font(.headline)
+                .frame(maxWidth: .infinity)
+                .foregroundColor(Theme.primaryColor)
+                .cornerRadius(25)
+                .font(.system(size: 20, weight: .bold))
             
             // Request Timestamp
             Text("\(request.timestamp)")
-                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Theme.accentColor)
+                .foregroundColor(Theme.primaryColor)
+                .cornerRadius(25)
+                .font(.system(size: 15, weight: .bold))
             
             // Request Address
             if let address = request.address {
                 Text("Address: \(address)")
-                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Theme.accentColor)
+                    .foregroundColor(Theme.primaryColor)
+                    .cornerRadius(25)
+                    .font(.system(size: 15, weight: .bold))
             }
             
             // Request Description
             Text("Description: \(request.description)")
-                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Theme.accentColor)
+                .foregroundColor(Theme.primaryColor)
+                .cornerRadius(25)
+                .font(.system(size: 15, weight: .bold))
             
             // Request Price
             Text("Price: $\(request.price, specifier: "%.2f")")
-                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Theme.accentColor)
+                .foregroundColor(Theme.primaryColor)
+                .cornerRadius(25)
+                .font(.system(size: 15, weight: .bold))
             
             // Request Urgency
             if let urgency = request.urgency {
-//                Text("Urgent: \(urgency ? "Yes" : "No")")
                 Text("Urgent: \(urgency)")
-                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Theme.accentColor)
+                    .foregroundColor(Theme.primaryColor)
+                    .cornerRadius(25)
+                    .font(.system(size: 15, weight: .bold))
             }
             
             // Request Price Negotiable?
             if let isNegotiable = request.isNegotiable {
-//                Text("Negotiable: \(isNegotiable ? "Yes" : "No")")
                 Text("Negotiable: \(isNegotiable)")
-                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Theme.accentColor)
+                    .foregroundColor(Theme.primaryColor)
+                    .cornerRadius(25)
+                    .font(.system(size: 15, weight: .bold))
             }
             
             // Request In-person
             if let inPerson = request.inPerson {
                 Text("In-Person: \(inPerson)")
-                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Theme.accentColor)
+                    .foregroundColor(Theme.primaryColor)
+                    .cornerRadius(25)
+                    .font(.system(size: 15, weight: .bold))
             }
             
             // Request Online
             if let online = request.online {
                 Text("Online: \(online)")
-                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Theme.accentColor)
+                    .foregroundColor(Theme.primaryColor)
+                    .cornerRadius(25)
+                    .font(.system(size: 15, weight: .bold))
             }
             
             // Request Expertises
             if let expertise = request.expertise, !expertise.isEmpty {
                 Text("Expertise: \(expertise.joined(separator: ", "))") // Display as a comma-separated string
-                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Theme.accentColor)
+                    .foregroundColor(Theme.primaryColor)
+                    .cornerRadius(25)
+                    .font(.system(size: 15, weight: .bold))
             }
         }
         .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(10)
+        .background(Theme.primaryColor.opacity(0.5))
+        .cornerRadius(25)
         .padding(.horizontal)
     }
 }
@@ -237,20 +292,13 @@ struct Request: Identifiable {
     init?(data: [String: Any]) {
         guard
 //            let username = data["Username"] as? String,
-//            let online = data["Online"] as? String,
-//            let address = data["Address"] as? String,
             let userID = data["UserID"] as? String,
-//            let urgency = data["Urgency"] as? String,
 //            let requestType = data["RequestType"] as? String,
             let description = data["Description"] as? String,
-//            let id = data["id"] as? String,
             let title = data["Title"] as? String,
-//            let isNegotiable = data["PriceNegotiable"] as? String,
-//            let expertise = data["Expertise"] as? [String],
             let rawTimestamp = data["TimeStamp"] as? Timestamp,
 //            let name = data["Name"] as? String,
             let price = data["Price"] as? Double
-//            let inPerson = data["InPerson"] as? String
         else {
             print("Missing required fields: \(data)") // Log missing fields
             return nil
