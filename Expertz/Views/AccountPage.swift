@@ -178,11 +178,12 @@ struct AccountPage: View {
                     Spacer()
                 }
                 .padding()
-                .background(LinearGradient(
-                    gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                ))
+                .background(Theme.accentColor.opacity(0.2))
+//                .background(LinearGradient(
+//                    gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+//                    startPoint: .top,
+//                    endPoint: .bottom
+//                ))
                 .onAppear {
                     fetchUserDetails()
                 }

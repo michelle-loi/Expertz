@@ -31,11 +31,12 @@ struct Messages: View {
                 Spacer()
             }
             .navigationTitle("Chats")
-            .background(LinearGradient(
-                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-                startPoint: .top,
-                endPoint: .bottom
-            ))
+            .background(Theme.accentColor.opacity(0.2))
+//            .background(LinearGradient(
+//                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+//                startPoint: .top,
+//                endPoint: .bottom
+//            ))
             .onAppear {
                 // Fetch chats for the user right now it is a dummy string
                 chatManager.getChats(for: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")

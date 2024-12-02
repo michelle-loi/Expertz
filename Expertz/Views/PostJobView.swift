@@ -238,11 +238,12 @@ struct PostJobView: View {
             .navigationTitle("Post Job")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
-            .background(LinearGradient(
-                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-                startPoint: .top,
-                endPoint: .bottom
-            ))
+            .background(Theme.accentColor.opacity(0.2))
+//            .background(LinearGradient(
+//                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+//                startPoint: .top,
+//                endPoint: .bottom
+//            ))
             .onAppear(perform: fetchUserProfile) // Fetch the user's profile
         }
         .navigationBarHidden(true)

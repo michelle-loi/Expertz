@@ -49,11 +49,12 @@ struct Settings: View {
         }
         .padding()
         .navigationTitle("Settings")
-        .background(LinearGradient(
-            gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-            startPoint: .top,
-            endPoint: .bottom
-        ))
+        .background(Theme.accentColor.opacity(0.2))
+//        .background(LinearGradient(
+//            gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
+//            startPoint: .top,
+//            endPoint: .bottom
+//        ))
     }
 }
 
