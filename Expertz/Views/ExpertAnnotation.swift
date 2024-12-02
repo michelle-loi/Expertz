@@ -160,7 +160,7 @@ struct ExpertAnnotation: View {
                     Spacer()
                 }
                 
-                TextField("Give a brief description", text: .constant(""))
+                TextField("Give a brief description", text: $expertRequest)
                     .padding()
                     .background(Theme.accentColor.opacity(0.2))
                     .foregroundColor(Theme.primaryColor)
