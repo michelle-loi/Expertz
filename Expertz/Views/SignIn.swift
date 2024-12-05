@@ -4,8 +4,11 @@
 //
 //  Created by Alan Huynh on 2024-10-13.
 //
-
-
+//  - Functionality: User Sign in page
+//  - Currently, users can sign in via email w/ firebase Auth
+//  - and with Google Sign in
+//  - Future Implementations: Allow alternative methods of signing in
+//
 
 import SwiftUI
 import Firebase
@@ -20,7 +23,7 @@ struct SignIn: View {
     @State private var navigateToSignUpGooglePage = false
     @State private var errorMessage: String?
     
-    // For Google Sign-In
+    // For Google Sign-In, this calls the utility google sign in logic
     @State private var googleSignInLogic = GoogleSignInLogic()
     
     // Store the sign-in data when using Google for sign-up
@@ -99,7 +102,9 @@ struct SignIn: View {
     
     // Google Sign-In Method
     private func signInWithGoogle() {
+        // use google sign in logic to sign in with google
         googleSignInLogic.signInWithGoogle { success in
+            // if successfully signed in get the current user from firebase
             if success, let currentUser = Auth.auth().currentUser {
                 // After signing in with Google, retrieve user's details
                 let userID = currentUser.uid

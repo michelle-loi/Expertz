@@ -4,6 +4,10 @@
 //
 //  Created by Alan Huynh on 2024-11-27.
 //
+//  - Functionality: View page used to allow users to view
+//  -   and delete the client or expert request they have made
+//  - Future Implementation: Allow user to edit request from this page
+//
 
 import SwiftUI
 import FirebaseAuth
@@ -83,6 +87,7 @@ struct ViewRequests: View {
         }
     }
 
+    // Function to fetch user request information from DB
     private func fetchRequests() {
         guard let currentUser = Auth.auth().currentUser else {
             showError = true
@@ -164,6 +169,8 @@ struct ViewRequests: View {
             }
         }
     }
+    
+    // Function to allow user to delete their request
     private func deleteRequest(request: Request) {
         guard let id = request.id else { return }
 
@@ -186,6 +193,7 @@ struct ViewRequests: View {
     }
 }
 
+// Request Template:
 // MARK: - RequestCard View
 struct RequestCard: View {
     let request: Request
@@ -301,6 +309,7 @@ struct RequestCard: View {
     }
 }
 
+// Request Variable Init:
 // MARK: - Request Struct
 struct Request: Identifiable {
     let name: String?

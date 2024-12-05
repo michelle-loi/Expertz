@@ -4,6 +4,12 @@
 //
 //  Created by Alan Huynh on 2024-11-25.
 //
+//  - Functionality: Account page for user to view and edit
+//      their account information.
+//  - Currently, data is pulled but cannot be edited and updated to DB
+//  - Future Implementation: Allow user to edit account information and
+//      be able to add a user account image
+//
 
 import SwiftUI
 import FirebaseAuth
@@ -19,8 +25,8 @@ struct AccountPage: View {
     @State private var userGender: String = ""
     @State private var showError: Bool = false
     @State private var errorMessage: String = ""
-    @State private var isLoggedOut: Bool = false // Track logout state
-    @Environment(\.dismiss) var dismiss // To dismiss the view after logout
+    @State private var isLoggedOut: Bool = false        // Track logout state
+    @Environment(\.dismiss) var dismiss                 // To dismiss the view after logout
     @State private var text: String = "Sample Text"
     @State private var isEditing: Bool = false
     var body: some View {
@@ -219,9 +225,9 @@ struct AccountPage: View {
                 // Call the GoogleSignInLogic's logout method
                 try await GoogleSignInLogic().logout()
                 
-                // Trigger the state change for logging out
+                // Firebase User Logout
                 try Auth.auth().signOut()
-                isLoggedOut = true // Navigate to ContentView after logout
+                isLoggedOut = true
             } catch let error {
                 showError = true
                 errorMessage = "Failed to log out: \(error.localizedDescription)"

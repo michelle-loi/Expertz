@@ -3,6 +3,10 @@
 //  Expertz
 //
 //  Created by Alan Huynh on 2024-11-29.
+// 
+//  - Nested View Component for Homepage View
+//  - Pulling parameters from Homepage to store for further nested view pages
+//  - View used to distinguish and toggle between Client and Expert Map Bubbles
 //
 
 import SwiftUI

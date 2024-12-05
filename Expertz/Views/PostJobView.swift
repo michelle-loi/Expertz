@@ -1,25 +1,34 @@
+//
+//  PostJobView.swift
+//  Expertz
+//
+//  Created by Alan Huynh on 2024-11-27.
+//
+//  - Functionality: View page used to allow users to create Client or Expert Request
+//
+
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
 struct PostJobView: View {
-    @State private var isExpert: Bool = false // Determines if the user is an expert
-    @State private var requestType: String = "Client" // Default to Client
-    @State private var title: String = ""
-    @State private var description: String = ""
-    @State private var address: String = ""
-    @State private var inPerson: String = "Yes" // Dropdown default
-    @State private var online: String = "Yes" // Dropdown default
-    @State private var expertise: [String] = [] // Pulled from user profile
-    @State private var price: String = ""
-    @State private var isNegotiable: String = "Yes"
-    @State private var isUrgent: String = "No"
-    @State private var showError: Bool = false
-    @State private var errorMessage: String = ""
-    @Environment(\.dismiss) var dismiss // To dismiss the view
+    @State private var isExpert: Bool = false           // Determines if the user is an expert
+    @State private var requestType: String = "Client"   // Default to Client Request
+    @State private var title: String = ""               // Request Title
+    @State private var description: String = ""         // Request Description
+    @State private var address: String = ""             // Request Address
+    @State private var inPerson: String = "Yes"         // Dropdown default
+    @State private var online: String = "Yes"           // Dropdown default
+    @State private var expertise: [String] = []         // Pulled from user profile
+    @State private var price: String = ""               // Price
+    @State private var isNegotiable: String = "Yes"     // Negotiable
+    @State private var isUrgent: String = "No"          // Urgency
+    @State private var showError: Bool = false          // Error Flag
+    @State private var errorMessage: String = ""        // Error string
+    @Environment(\.dismiss) var dismiss                 // To dismiss the view
 
-    let dropdownOptions = ["Yes", "No", "Only"]
-    let dropdownUrgent = ["Yes", "No"]
+    let dropdownOptions = ["Yes", "No", "Only"]         // List
+    let dropdownUrgent = ["Yes", "No"]                  // List
 
     var body: some View {
         NavigationStack {
@@ -249,6 +258,7 @@ struct PostJobView: View {
         .navigationBarHidden(true)
     }
 
+    // Function to post request job to the DB
     private func postJob() {
         guard let currentUser = Auth.auth().currentUser else {
             showError = true
@@ -326,6 +336,7 @@ struct PostJobView: View {
         }
     }
 
+    // Function to pull user information from UserProfile Collection (table) DB
     private func fetchUserProfile() {
         guard let currentUser = Auth.auth().currentUser else { return }
 

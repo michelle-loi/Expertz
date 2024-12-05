@@ -4,6 +4,12 @@
 //
 //  Created by Alan Huynh on 2024-10-13.
 //
+//  - Functionality: APPLICATION MAIN PAGE
+//      - Primary orgin for most nested view pages created
+//      - logic from nested view pages stem from here
+//      - General page for users
+//      - intital page when app opens if logged in
+//      - If user is logged in, navigation should be centered here
 
 import SwiftUI
 import MapKit
@@ -114,7 +120,6 @@ struct Homepage: View {
                 }
                 
                 // Annotation Detail View
-                //AnnotationDetail(selectedAnnotation: $selectedAnnotation)
                 AnnotationDetail(selectedAnnotation: $selectedAnnotation, navigateToChatroom: $navigateToChatroom, outerChatId: $outerChatId, outerRecipientName: $outerRecipientName)
             }
         }
@@ -134,7 +139,6 @@ struct Homepage: View {
         if Auth.auth().currentUser == nil {
             print("user nil")
             navigateToIntroduction = true
-//            dismiss()  // Redirect to ContentView if not logged in
         } else {
             print("user logged in")
         }

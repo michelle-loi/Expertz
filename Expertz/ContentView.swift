@@ -12,26 +12,24 @@ struct ContentView: View {
     @State var isLoggedIn: Bool = false
 
     var body: some View {
+        
+        // Nav Stack to direct user
         NavigationStack {
-            if isLoggedIn {
-                Homepage() // Replace with your home page view
-//                    .toolbar {
-//                        ToolbarItem(placement: .navigationBarTrailing) {
-//                            NavigationLink(destination: AccountPage()) {
-//                                Text("Account")
-//                            }
-//                        }
-//                    }
+            if isLoggedIn { // If user is logged in, direct to Homepage
+                Homepage()
             } else {
-                Introduction() // Replace with your introduction view
+                Introduction() // If user is not logged in, direct to Intro page
             }
         }
+        
+        // On appear to check User Status
         .onAppear {
-            print("Content View - onAppear Called")
+            print("Content View - onAppear Called") // Debug Statement
             checkLoginStatus()
         }
     }
 
+    // Function to check if a user is logged in
     private func checkLoginStatus() {
         print("check login status called")
         print("Auth.auth().currentUser: \(String(describing: Auth.auth().currentUser))")

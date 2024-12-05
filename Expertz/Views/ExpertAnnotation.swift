@@ -3,6 +3,12 @@
 //  Expertz
 //
 //  Created by Alan Huynh on 2024-11-29.
+//  Edited  by Michelle
+//
+//  - Nested View Component for AnnotationDetails View
+//  - Pulling parameters from AnnotationDetails to populate view body
+//  - Expert Annotation of Client Bubbles on Map
+//  - Logic to trigger dynamnic chat between two users based on client request
 //
 
 import SwiftUI
@@ -10,7 +16,6 @@ import SwiftUI
 struct ExpertAnnotation: View {
     let annotation: MapBubble
     @Binding var selectedAnnotation: MapBubble?
-    
     @Binding var navigateToChatroom: Bool
     @Binding var outerChatId: String
     @Binding var outerRecipientName: String
@@ -19,7 +24,6 @@ struct ExpertAnnotation: View {
     @StateObject private var chatManager = ChatManager()
     
     @State private var expertRequest: String = ""
-    
     @State private var chatExists: Bool? = nil
 
     var body: some View {
@@ -31,7 +35,7 @@ struct ExpertAnnotation: View {
                         .fill(Color.gray)
                         .frame(width: 50, height: 50)
 
-                    // Naming Section:
+                    // Expert Name, Expertise, and Rating Section:
                     VStack(alignment: .leading) {
                         Text("\(annotation.name),")
                             .font(.headline)
@@ -55,8 +59,8 @@ struct ExpertAnnotation: View {
                             .frame(width: 20, height: 20)
                     }
                 }
-                
-//                // Bio Section
+
+//                // Bio Section - To be implement later on
 //                Text("\(annotation.bio ?? "Bio not available")")
 //                    .font(.body)
 //                    .foregroundColor(Theme.primaryColor)
@@ -72,6 +76,8 @@ struct ExpertAnnotation: View {
 //                            .cornerRadius(30)
 //                    }
 //                }
+                
+                // Description Section
                 VStack(alignment: .leading, spacing: 10){
                     Text("Description")
                         .font(.headline)
@@ -84,6 +90,7 @@ struct ExpertAnnotation: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
+                // Pricing Section
                 HStack(){
                     Text("Rate: ")
                         .font(.headline)
@@ -98,6 +105,7 @@ struct ExpertAnnotation: View {
                     Spacer()
                 }
                 
+                // Review Section - To be implemented (Currently hardcoded
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Reviews")
                         .font(.headline)
@@ -120,6 +128,7 @@ struct ExpertAnnotation: View {
                     }
                 }
                 
+                // Availability Section
                 HStack(){
                     Text("Availability: ")
                         .font(.headline)
@@ -162,6 +171,7 @@ struct ExpertAnnotation: View {
                     Spacer()
                 }
                 
+                // Chat Logic
                 if let chatExists = chatExists {
                     if (chatExists) {
                         let chatId = userManager.currentUserId ?? "" < annotation.id ? "\(userManager.currentUserId ?? "")_\(annotation.id)" : "\(annotation.id)_\(userManager.currentUserId ?? "")"

@@ -4,6 +4,8 @@
 //
 //  Created by Alan Huynh on 2024-10-13.
 //
+//  - Functionality: Inital Intro page for new users and logged out users
+//
 
 import SwiftUI
 import FirebaseAuth
@@ -107,7 +109,8 @@ struct Introduction: View {
                         .cornerRadius(100)
                         .overlay(
                             RoundedRectangle(cornerRadius: 100)
-                                .stroke(Theme.primaryColor, lineWidth: 2)                         )
+                                .stroke(Theme.primaryColor, lineWidth: 2)
+                        )
                 }
                 .padding(.horizontal, 175)
             }

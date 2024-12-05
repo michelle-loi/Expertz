@@ -4,6 +4,10 @@
 //
 //  Created by Alan Huynh on 2024-10-13.
 //
+//  - Functionality: User Sign Up Page Navigation fork
+//  - Allows users to sign up and create an account with either email or Google
+//  - Future Implementation: allow creation of accounts by other methods
+//
 
 import SwiftUI
 import Firebase
@@ -15,7 +19,7 @@ struct SignUp: View {
     @State private var navigateToSignUpEmailPage = false
     @State private var navigateToExistingAccountPage = false
     @State private var navigateToSignUpGooglePage = false
-    @State private var GSIL = GoogleSignInLogic()
+    @State private var GSIL = GoogleSignInLogic() // this utilizes the utility google sign in logic
     
     // Store the sign-in data when using Google for sign-up
     @State private var userID = ""
@@ -44,20 +48,24 @@ struct SignUp: View {
                 .customCTADesignButton()
                 
                 Button(action: {
+                    // uses the sign in with google function from GSIL that we imported above from the utilities
                     GSIL.signInWithGoogle { success in
                         if success, let currentUser = Auth.auth().currentUser {
+                            // if successfully signed in we will assign user id, first name, last name and email address to variables that
+                            // we will use later for user's account details.
                             let userID = currentUser.uid
                             let firstName = currentUser.displayName?.components(separatedBy: " ").first ?? "First Name"
                             let lastName = currentUser.displayName?.components(separatedBy: " ").last ?? "Last Name"
                             let email = currentUser.email ?? "Email not available"
                             
-                            // Save data for navigation
+                            // Save data for navigation to google sign up page
                             self.userID = userID
                             self.firstName = firstName
                             self.lastName = lastName
                             self.email = email
                             
-                            // Check if the user already exists in Firestore
+                            // Check if the user already exists in Firestore, if they don't exist then navigate to google sign up page
+                            // if they do exist then just log in, no need to sign up.
                             checkIfUserExists(userID: userID) { exists in
                                 if exists {
                                     navigateToExistingAccountPage = true
@@ -87,6 +95,7 @@ struct SignUp: View {
                 .navigationDestination(isPresented: $navigateToSignUpEmailPage) {
                     SignUpEmail()
                 }
+                // this navigates to the sign up with google page
                 .navigationDestination(isPresented: $navigateToSignUpGooglePage) {
                     SignUpGoogle(userID: userID, firstName: firstName, lastName: lastName, email: email)
                 }

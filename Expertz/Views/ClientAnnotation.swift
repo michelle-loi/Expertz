@@ -3,6 +3,12 @@
 //  Expertz
 //
 //  Created by Alan Huynh on 2024-11-29.
+//  Edited  by Michelle
+//
+//  - Nested View Component for AnnotationDetails View
+//  - Pulling parameters from AnnotationDetails to populate view body
+//  - Client Annotation of Client Bubbles on Map
+//  - Logic to trigger dynamnic chat between two users based on client request
 //
 
 import SwiftUI
@@ -10,7 +16,6 @@ import SwiftUI
 struct ClientAnnotation: View {
     let annotation: MapBubble
     @Binding var selectedAnnotation: MapBubble?
-    
     @Binding var navigateToChatroom: Bool
     @Binding var outerChatId: String
     @Binding var outerRecipientName: String
@@ -20,13 +25,14 @@ struct ClientAnnotation: View {
     @StateObject private var chatManager = ChatManager()
     
     @State private var clientRequest: String = ""
-    
     @State private var chatExists: Bool? = nil
 
     var body: some View {
         VStack {
             Spacer()
             VStack(spacing: 10) {
+                
+                // Client Name and Rating Section
                 HStack(spacing: 10) {
                     Circle()
                         .fill(Color.gray)
@@ -53,11 +59,15 @@ struct ClientAnnotation: View {
                             .frame(width: 20, height: 20)
                     }
                 }
+                
+                // Client Request Description
                 Text("\(annotation.description ?? "No description available.")")
                     .font(.body)
                     .foregroundColor(Theme.primaryColor)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                
+                // Client Request Urgency
                 HStack {
                     Text("Urgency: ")
                     if annotation.urgent == "No" {
@@ -77,6 +87,8 @@ struct ClientAnnotation: View {
                     }
                     Spacer()
                 }
+                
+                // Client Request Price and Negotiable fields
                 HStack {
                     Text("Price: ")
                     Text("\(annotation.price ?? "No price available.")")
@@ -96,6 +108,8 @@ struct ClientAnnotation: View {
                     }
                     Spacer()
                 }
+                
+                // Client request Location Information
                 HStack {
                     Text("Location: ")
                     if annotation.inPerson == "Yes" {
@@ -135,6 +149,7 @@ struct ClientAnnotation: View {
                     Spacer()
                 }
                 
+                // Chat Logic
                 if let chatExists = chatExists {
                     if (chatExists) {
                         let chatId = userManager.currentUserId ?? "" < annotation.id ? "\(userManager.currentUserId ?? "")_\(annotation.id)" : "\(annotation.id)_\(userManager.currentUserId ?? "")"

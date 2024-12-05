@@ -4,6 +4,12 @@
 //
 //  Created by Alan Huynh on 2024-11-29.
 //
+//  - Nested View Component for Homepage View
+//  - Pulling parameters from Homepage to 
+//  - View used convert address string from DB to coordinates
+//  - View also used to distinguish between client and expert request
+//  - to create clickable coordinate bubbles on Map
+//
 
 import SwiftUI
 import MapKit
@@ -84,12 +90,12 @@ struct CustomMapView: View {
                             coordinate: coordinate,
                             type: "Client",
                             help: title,
-                            rating: "0.0", // Initialize to 0 or fetch from your ratings system
+                            rating: "0.0", // Initialize to 0 until implement: fetch from your ratings system
                             description: description,
                             expertise: nil, // Expertise is hidden for Client requests
-                            bio: nil, // Not applicable
-                            urgent: urgent, //added field
-                            inPerson: inPerson, // added field
+                            bio: nil, // Not applicable for client requests
+                            urgent: urgent,
+                            inPerson: inPerson,
                             online: online,
                             negotiable: negotiable,
                             price: "$\(priceString)/hr"
@@ -141,10 +147,10 @@ struct CustomMapView: View {
                             coordinate: coordinate,
                             type: "Expert",
                             help: title,
-                            rating: "0.0", // Initialize to 0 or fetch from your ratings system
+                            rating: "0.0", // Initialize to 0 until implement: fetch from your ratings system
                             description: description,
                             expertise: expertiseString,
-                            bio: nil, // If you have a bio field, you can fetch it here
+                            bio: nil, // nil until implemented later
                             urgent: nil, // Urgency is hidden for Expert requests
                             inPerson: inPerson,
                             online: online,

@@ -4,6 +4,11 @@
 //
 //  Created by Alan Huynh on 2024-10-13.
 //
+//  - Functionality: Allows the user to create an account by email
+//  - Information is then stored on the firebase DB for recall
+//  - Future Implementations: Countries and expertise categories should not be hardcoded
+//  - API or alternative logic needs to be implemented prior to deployment
+//
 
 import SwiftUI
 import FirebaseAuth
@@ -157,6 +162,7 @@ struct SignUpEmail: View {
         }
     }
     
+    // Function to check password and create user account
     private func signUpUser() {
         guard password == rePassword else {
             errorMessage = "Passwords do not match"
@@ -174,6 +180,7 @@ struct SignUpEmail: View {
         }
     }
     
+    // Function to populate account information
     private func createFirestoreProfile(for uid: String) {
         let db = Firestore.firestore()
         db.collection("UserProfiles").document(uid).setData([

@@ -156,6 +156,7 @@ struct SignUpGoogle: View {
         }
     }
     
+    // saves the user's created profile to firebase firestore
     private func saveUserProfile() {
         // Check for valid selections (not the default placeholder values)
         guard selectedGender != "Select Gender", selectedCountry != "Select a Country" else {
@@ -163,6 +164,7 @@ struct SignUpGoogle: View {
             return
         }
         
+        // this will save the user's created account to our firebase db under the UserProfiles collection
         let db = Firestore.firestore()
         db.collection("UserProfiles").document(userID).setData([
             "userID": userID,
@@ -179,7 +181,7 @@ struct SignUpGoogle: View {
             if let error = error {
                 errorMessage = "Firestore error: \(error.localizedDescription)"
             } else {
-                nextPage = true // Navigate to the next screen
+                nextPage = true // Navigate to the next screen after sign up.
             }
         }
     }

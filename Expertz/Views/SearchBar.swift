@@ -4,6 +4,9 @@
 //
 //  Created by Alan Huynh on 2024-11-29.
 //
+//  - Nested View Component for Homepage View
+//  - Search Bar View Component, currently hardcoded
+//
 
 import SwiftUI
 
