@@ -16,6 +16,12 @@
 		3AF9B8852CF887A1003312C7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8842CF887A1003312C7 /* FirebaseFirestore */; };
 		3AF9B8882CF88B87003312C7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8872CF88B87003312C7 /* GoogleSignIn */; };
 		3AF9B88A2CF88C22003312C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9B8892CF88C22003312C7 /* AppDelegate.swift */; };
+		4D8D4BEE2D65868B0066BFAF /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BED2D6586850066BFAF /* SignUpData.swift */; };
+		4D8D4BF02D6587170066BFAF /* SignUpNameGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BEF2D6587100066BFAF /* SignUpNameGender.swift */; };
+		4D8D4BF22D65874A0066BFAF /* SignUpCountryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */; };
+		4D8D4BF42D6587770066BFAF /* SignUpExpertise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF32D6587710066BFAF /* SignUpExpertise.swift */; };
+		4D8D4BF62D6588660066BFAF /* GoogleSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */; };
+		4D8D4BF82D658DE80066BFAF /* GlassBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF72D658DE20066BFAF /* GlassBackground.swift */; };
 		D64F9BD92CE7ECB7008D1167 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BD82CE7ECB7008D1167 /* FirebaseAuth */; };
 		D64F9BDB2CE7ECB7008D1167 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BDA2CE7ECB7008D1167 /* FirebaseCore */; };
 		D64F9BDD2CE7ECB7008D1167 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BDC2CE7ECB7008D1167 /* FirebaseFirestore */; };
@@ -79,6 +85,12 @@
 		3A3D45552CF93D6E0041F38F /* GoogleSignInLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInLogic.swift; sourceTree = "<group>"; };
 		3A3D45582CF99A090041F38F /* DBUserSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUserSearch.swift; sourceTree = "<group>"; };
 		3AF9B8892CF88C22003312C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4D8D4BED2D6586850066BFAF /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
+		4D8D4BEF2D6587100066BFAF /* SignUpNameGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNameGender.swift; sourceTree = "<group>"; };
+		4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCountryAddress.swift; sourceTree = "<group>"; };
+		4D8D4BF32D6587710066BFAF /* SignUpExpertise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExpertise.swift; sourceTree = "<group>"; };
+		4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignUp.swift; sourceTree = "<group>"; };
+		4D8D4BF72D658DE20066BFAF /* GlassBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassBackground.swift; sourceTree = "<group>"; };
 		D64F9BDE2CE7EFAE008D1167 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D64F9BE42CEBBDF7008D1167 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		D64F9BE62CF4D822008D1167 /* AccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPage.swift; sourceTree = "<group>"; };
@@ -249,6 +261,12 @@
 		D66E886A2CBC75A000D714F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4D8D4BF72D658DE20066BFAF /* GlassBackground.swift */,
+				4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */,
+				4D8D4BF32D6587710066BFAF /* SignUpExpertise.swift */,
+				4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */,
+				4D8D4BEF2D6587100066BFAF /* SignUpNameGender.swift */,
+				4D8D4BED2D6586850066BFAF /* SignUpData.swift */,
 				D6CFC50C2CFA9C52001BAB78 /* ClientAnnotation.swift */,
 				D6CFC50A2CFA9C29001BAB78 /* ExpertAnnotation.swift */,
 				D6CFC5082CFA557B001BAB78 /* AnnotationDetails.swift */,
@@ -439,6 +457,7 @@
 				3AF9B88A2CF88C22003312C7 /* AppDelegate.swift in Sources */,
 				D81AAD632CF86ACD0040FC7A /* Chat.swift in Sources */,
 				D6CFC50B2CFA9C38001BAB78 /* ExpertAnnotation.swift in Sources */,
+				4D8D4BF62D6588660066BFAF /* GoogleSignUp.swift in Sources */,
 				D64F9BE72CF4D82C008D1167 /* AccountPage.swift in Sources */,
 				D66E883D2CBAEE9A00D714F3 /* ExpertzApp.swift in Sources */,
 				D66E88742CBC76EB00D714F3 /* SignIn.swift in Sources */,
@@ -446,6 +465,8 @@
 				D64F9BE52CEBBE01008D1167 /* Messages.swift in Sources */,
 				D66E88702CBC769900D714F3 /* Homepage.swift in Sources */,
 				D6CFC50D2CFA9C5A001BAB78 /* ClientAnnotation.swift in Sources */,
+				4D8D4BEE2D65868B0066BFAF /* SignUpData.swift in Sources */,
+				4D8D4BF82D658DE80066BFAF /* GlassBackground.swift in Sources */,
 				D66E887C2CBD742F00D714F3 /* Theme.swift in Sources */,
 				D6CFC5032CFA43F0001BAB78 /* BottomNavigationBar.swift in Sources */,
 				D680E9F32CF6DA2400EBEFCB /* Settings.swift in Sources */,
@@ -453,6 +474,8 @@
 				3A3D45562CF93D6E0041F38F /* GoogleSignInLogic.swift in Sources */,
 				D680E9F12CF6D69E00EBEFCB /* Bubbles.swift in Sources */,
 				3A3D45592CF99A090041F38F /* DBUserSearch.swift in Sources */,
+				4D8D4BF22D65874A0066BFAF /* SignUpCountryAddress.swift in Sources */,
+				4D8D4BF42D6587770066BFAF /* SignUpExpertise.swift in Sources */,
 				D81AAD6C2CF88A610040FC7A /* ChatRoom.swift in Sources */,
 				D66E88802CBEEE0E00D714F3 /* SignUpGoogle.swift in Sources */,
 				D66E886E2CBC765100D714F3 /* Introduction.swift in Sources */,
@@ -462,6 +485,7 @@
 				D6CFC5072CFA5058001BAB78 /* CustomMap.swift in Sources */,
 				D81AAD652CF86AD80040FC7A /* Message.swift in Sources */,
 				D84873512CF9534A00AED225 /* Extensions.swift in Sources */,
+				4D8D4BF02D6587170066BFAF /* SignUpNameGender.swift in Sources */,
 				D81AAD682CF86B3B0040FC7A /* ChatManager.swift in Sources */,
 				D680E9F72CF7060400EBEFCB /* ViewRequests.swift in Sources */,
 				D66E887A2CBC77A100D714F3 /* SignUpEmail.swift in Sources */,

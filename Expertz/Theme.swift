@@ -7,18 +7,23 @@
 
 import SwiftUI
 
-// Similar to CSS, Theme View is Global Styling for the whole app.
-// Format template: static let [variable name] = [content]
-// To use styling in other files: Theme.[variable]
-
 struct Theme {
-    // Primary Color through app
-    static let primaryColor = Color(red: 0/255, green: 91/255, blue: 30/255)
+    // A deep teal for primary UI elements
+    static let primaryColor = Color(red: 0/255, green: 120/255, blue: 130/255)
+    
+    // Often used for backgrounds or secondary text
     static let secondaryColor = Color.white
-    static let accentColor = Color(red: 5/255, green: 198/255, blue: 154/255)
+    
+    // A brighter aqua accent for highlights or buttons
+    static let accentColor = Color(red: 0/255, green: 180/255, blue: 170/255)
+    
+    // Spacing and corner styles
     static let buttonPadding: CGFloat = 40.0
     static let cornerRadius: CGFloat = 100.0
+    
+    // Font styles
     static let titleFont = Font.largeTitle
-    static let titleFontColour = Color(red: 0/255, green: 91/255, blue: 30/255)
+    // A slightly darker teal for prominent text, or you can match primaryColor
+    static let titleFontColour = Color(red: 0/255, green: 63/255, blue: 67/255)
     static let inputFont: Font = .system(size: 16)
 }
