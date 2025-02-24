@@ -18,28 +18,38 @@ struct Messages: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 10) {
-                ForEach(chatManager.chats) { chat in
-                    // Use the ChatBubble view here inside the Messages view
-                    ChatBubble(
-                        chatId: chat.id,
-                        recipientName: chat.recipientName,
-                        messagePreview: chat.lastMessage,
-                        timestamp: chat.lastMessageTimestamp
+            ZStack(alignment: .top){
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.00, green: 0.90, blue: 0.90),
+                                Color(red: 0.00, green: 0.90, blue: 0.90)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .opacity(0.3)
                     )
+                    .ignoresSafeArea()
+                VStack(spacing: 10) {
+                    ForEach(chatManager.chats) { chat in
+                        // Use the ChatBubble view here inside the Messages view
+                        ChatBubble(
+                            chatId: chat.id,
+                            recipientName: chat.recipientName,
+                            messagePreview: chat.lastMessage,
+                            timestamp: chat.lastMessageTimestamp
+                        )
+                    }
+                    Spacer()
                 }
-                Spacer()
-            }
-            .navigationTitle("Chats")
-            .background(Theme.accentColor.opacity(0.2))
-//            .background(LinearGradient(
-//                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-//                startPoint: .top,
-//                endPoint: .bottom
-//            ))
-            .onAppear {
-                // Fetch chats for the user right now it is a dummy string
-                chatManager.getChats(for: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")
+                .navigationTitle("Chats")
+                .onAppear {
+                    // Fetch chats for the user right now it is a dummy string
+                    chatManager.getChats(for: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")
+                }
             }
         }
     }

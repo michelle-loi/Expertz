@@ -32,13 +32,13 @@ struct CustomMapView: View {
                     selectedAnnotation = bubble
                 }) {
                     Circle()
-                        .fill(selectedPickerOption == "Client" ? Theme.accentColor : Theme.accentColor) // Different colors for Client/Expert
+                        .fill(selectedPickerOption == "Client" ? Theme.primaryColor : Theme.primaryColor) // Different colors for Client/Expert
                         .frame(width: 30, height: 30)
                         .overlay(
                             Circle()
                                 .stroke(Color.white, lineWidth: 2)
                             )
-                        .shadow(radius: 3)
+                        .shadow(radius: 5)
                 }
             }
         }

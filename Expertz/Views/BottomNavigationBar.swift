@@ -66,6 +66,7 @@ struct BottomNavigationBar: View {
         .frame(height: 70)
         .background(.ultraThinMaterial)
         .cornerRadius(30)
+        .shadow(radius: 5)
         .overlay(
             RoundedRectangle(cornerRadius: 100)
                 .stroke(Theme.primaryColor, lineWidth: 2)

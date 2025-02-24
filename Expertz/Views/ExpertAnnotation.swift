@@ -99,8 +99,8 @@ struct ExpertAnnotation: View {
                     Text("\(annotation.price ?? "No price available.")")
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(Theme.accentColor.opacity(0.2))
-                        .foregroundColor(Theme.primaryColor)
+                        .background(Theme.primaryColor)
+                        .foregroundColor(Theme.secondaryColor)
                         .cornerRadius(30)
                     Spacer()
                 }
@@ -117,11 +117,11 @@ struct ExpertAnnotation: View {
                                 VStack(alignment: .leading) {
                                     Text("Lorem ipsum dolor sit amet.")
                                         .font(.body)
-                                        .foregroundColor(Theme.primaryColor)
+                                        .foregroundColor(Theme.secondaryColor)
                                 }
                                 .padding()
                                 .frame(width: 200)
-                                .background(Theme.accentColor.opacity(0.2))
+                                .background(Theme.primaryColor)
                                 .cornerRadius(30)
                             }
                         }
@@ -138,8 +138,8 @@ struct ExpertAnnotation: View {
                         Text("InPerson")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
 
@@ -147,8 +147,8 @@ struct ExpertAnnotation: View {
                         Text("InPerson - Only")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     
@@ -156,16 +156,16 @@ struct ExpertAnnotation: View {
                         Text("Online")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     if annotation.online == "Only" {
                         Text("Online - Only")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     Spacer()
@@ -190,9 +190,15 @@ struct ExpertAnnotation: View {
                     } else {
                         TextField("Give a brief description", text: $expertRequest)
                             .padding()
-                            .background(Theme.accentColor.opacity(0.2))
+                            .font(Theme.inputFont.bold())
+                            .frame(maxWidth: .infinity)
+                            .background(.ultraThinMaterial)
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Theme.primaryColor, lineWidth: 2)
+                            )
                         Button(action: {
                             if !expertRequest.isEmpty {
                                 selectedAnnotation = nil
@@ -211,19 +217,26 @@ struct ExpertAnnotation: View {
                             }
                         }) {
                             Text("Send a request")
-                                .foregroundColor(.white)
+                                .font(Theme.inputFont.bold())
                                 .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Theme.accentColor)
+                                .padding()     .background(Theme.primaryColor)
+                                .foregroundColor(Theme.secondaryColor)
                                 .cornerRadius(30)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Theme.primaryColor, lineWidth: 2)
+                                )
                         }
                     }
                 }
             }
             .padding()
-            .background(Color.white)
+            .background(.ultraThinMaterial)
             .cornerRadius(30)
-            .shadow(radius: 50)
+            .overlay(
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(Theme.primaryColor, lineWidth: 2)
+            )
             .padding(.horizontal, 20)
             Spacer(minLength: 5)
         }

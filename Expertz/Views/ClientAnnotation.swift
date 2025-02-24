@@ -74,15 +74,15 @@ struct ClientAnnotation: View {
                         Text("No")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     } else if annotation.urgent == "Yes" {
                         Text("Yes")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     Spacer()
@@ -94,16 +94,16 @@ struct ClientAnnotation: View {
                     Text("\(annotation.price ?? "No price available.")")
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(Theme.accentColor.opacity(0.2))
-                        .foregroundColor(Theme.primaryColor)
+                        .background(Theme.primaryColor)
+                        .foregroundColor(Theme.secondaryColor)
                         .cornerRadius(30)
 
                     if annotation.negotiable == "Yes" {
                         Text("Negotiable")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     Spacer()
@@ -116,8 +116,8 @@ struct ClientAnnotation: View {
                         Text("InPerson")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
 
@@ -125,8 +125,8 @@ struct ClientAnnotation: View {
                         Text("InPerson - Only")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     
@@ -134,16 +134,16 @@ struct ClientAnnotation: View {
                         Text("Online")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     if annotation.online == "Only" {
                         Text("Online - Only")
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Theme.accentColor.opacity(0.2))
-                            .foregroundColor(Theme.primaryColor)
+                            .background(Theme.primaryColor)
+                            .foregroundColor(Theme.secondaryColor)
                             .cornerRadius(30)
                     }
                     Spacer()
@@ -168,9 +168,15 @@ struct ClientAnnotation: View {
                     } else {
                         TextField("How much are you charging for this work?", text: $clientRequest)
                             .padding()
-                            .background(Theme.accentColor.opacity(0.2))
+                            .font(Theme.inputFont.bold())
+                            .frame(maxWidth: .infinity)
+                            .background(.ultraThinMaterial)
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Theme.primaryColor, lineWidth: 2)
+                            )
                         
                         Button(action: {
                             if !clientRequest.isEmpty {
@@ -189,19 +195,26 @@ struct ClientAnnotation: View {
                             }
                         }) {
                             Text("Notify the client")
-                                .foregroundColor(.white)
+                                .font(Theme.inputFont.bold())
                                 .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Theme.accentColor)
+                                .padding()     .background(Theme.primaryColor)
+                                .foregroundColor(Theme.secondaryColor)
                                 .cornerRadius(30)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Theme.primaryColor, lineWidth: 2)
+                                )
                         }
                     }
                 }
             }
             .padding()
-            .background(Color.white)
+            .background(.ultraThinMaterial)
             .cornerRadius(30)
-            .shadow(radius: 10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(Theme.primaryColor, lineWidth: 2)
+            )
             .padding(.horizontal, 20)
             Spacer(minLength: 5)
         }

@@ -23,7 +23,7 @@ struct AnnotationDetail: View {
         if let annotation = selectedAnnotation {
             ZStack {
                 Rectangle()
-                    .fill(Color.black.opacity(0.6))
+                    .fill(Color.black.opacity(0.001))
                     .ignoresSafeArea()
                     .onTapGesture {
                         selectedAnnotation = nil

@@ -26,38 +26,53 @@ struct ViewRequests: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
-
-                // Conditionally show the segmented control if the user is an expert
-                if isExpert {
-                    Picker("Request Type", selection: $selectedRequestType) {
-                        Text("Client Requests").tag("Client")
-                        Text("Expert Requests").tag("Expert")
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .foregroundStyle(Theme.primaryColor)
-                    .padding()
-                }
-
-                if showError {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                } else {
-                    ScrollView {
-                        ForEach(selectedRequestType == "Client" ? clientRequests : expertRequests) { request in
-                            RequestCard(request: request)
-                                .contextMenu {
-                                    Button(role: .destructive) {
-                                        selectedRequest = request
-                                        showDeleteConfirmation = true
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                }
+            ZStack(alignment: .top){
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.00, green: 0.90, blue: 0.90),
+                                Color(red: 0.00, green: 0.90, blue: 0.90)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .opacity(0.3)
+                    )
+                    .ignoresSafeArea()
+                VStack {
+                    
+                    // Conditionally show the segmented control if the user is an expert
+                    if isExpert {
+                        Picker("Request Type", selection: $selectedRequestType) {
+                            Text("Client Requests").tag("Client")
+                            Text("Expert Requests").tag("Expert")
                         }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .foregroundStyle(Theme.primaryColor)
+                        .padding()
                     }
-                }
+                    
+                    if showError {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    } else {
+                        ScrollView {
+                            ForEach(selectedRequestType == "Client" ? clientRequests : expertRequests) { request in
+                                RequestCard(request: request)
+                                    .contextMenu {
+                                        Button(role: .destructive) {
+                                            selectedRequest = request
+                                            showDeleteConfirmation = true
+                                        } label: {
+                                            Label("Delete", systemImage: "trash")
+                                        }
+                                    }
+                            }
+                        }
+                    }}
             }
             .navigationTitle("Your Requests")
             .alert(isPresented: $showDeleteConfirmation) {
@@ -73,12 +88,6 @@ struct ViewRequests: View {
                 )
 
             }
-            .background(Theme.accentColor.opacity(0.2))
-//            .background(LinearGradient(
-//                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-//                startPoint: .top,
-//                endPoint: .bottom
-//            ))
             .onAppear(perform: fetchRequests)
             .onChange(of: selectedRequestType) {
                 fetchRequests()
@@ -213,8 +222,8 @@ struct RequestCard: View {
             Text("\(request.timestamp)")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .background(Theme.accentColor)
-                .foregroundColor(Theme.primaryColor)
+                .background(Theme.primaryColor)
+                .foregroundColor(Theme.secondaryColor)
                 .cornerRadius(25)
                 .font(.system(size: 15, weight: .bold))
             
@@ -223,8 +232,8 @@ struct RequestCard: View {
                 Text("Address: \(address)")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
+                    .background(Theme.primaryColor)
+                    .foregroundColor(Theme.secondaryColor)
                     .cornerRadius(25)
                     .font(.system(size: 15, weight: .bold))
             }
@@ -233,8 +242,8 @@ struct RequestCard: View {
             Text("Description: \(request.description)")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .background(Theme.accentColor)
-                .foregroundColor(Theme.primaryColor)
+                .background(Theme.primaryColor)
+                .foregroundColor(Theme.secondaryColor)
                 .cornerRadius(25)
                 .font(.system(size: 15, weight: .bold))
             
@@ -242,8 +251,8 @@ struct RequestCard: View {
             Text("Price: $\(request.price, specifier: "%.2f")")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .background(Theme.accentColor)
-                .foregroundColor(Theme.primaryColor)
+                .background(Theme.primaryColor)
+                .foregroundColor(Theme.secondaryColor)
                 .cornerRadius(25)
                 .font(.system(size: 15, weight: .bold))
             
@@ -252,8 +261,8 @@ struct RequestCard: View {
                 Text("Urgent: \(urgency)")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
+                    .background(Theme.primaryColor)
+                    .foregroundColor(Theme.secondaryColor)
                     .cornerRadius(25)
                     .font(.system(size: 15, weight: .bold))
             }
@@ -263,8 +272,8 @@ struct RequestCard: View {
                 Text("Negotiable: \(isNegotiable)")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
+                    .background(Theme.primaryColor)
+                    .foregroundColor(Theme.secondaryColor)
                     .cornerRadius(25)
                     .font(.system(size: 15, weight: .bold))
             }
@@ -274,8 +283,8 @@ struct RequestCard: View {
                 Text("In-Person: \(inPerson)")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
+                    .background(Theme.primaryColor)
+                    .foregroundColor(Theme.secondaryColor)
                     .cornerRadius(25)
                     .font(.system(size: 15, weight: .bold))
             }
@@ -285,8 +294,8 @@ struct RequestCard: View {
                 Text("Online: \(online)")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
+                    .background(Theme.primaryColor)
+                    .foregroundColor(Theme.secondaryColor)
                     .cornerRadius(25)
                     .font(.system(size: 15, weight: .bold))
             }
@@ -296,15 +305,20 @@ struct RequestCard: View {
                 Text("Expertise: \(expertise.joined(separator: ", "))") // Display as a comma-separated string
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
+                    .background(Theme.primaryColor)
+                    .foregroundColor(Theme.secondaryColor)
                     .cornerRadius(25)
                     .font(.system(size: 15, weight: .bold))
             }
         }
         .padding()
-        .background(Theme.primaryColor.opacity(0.5))
-        .cornerRadius(25)
+        .background(.ultraThinMaterial)
+        .cornerRadius(30)
+        .shadow(radius: 5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 30)
+                .stroke(Theme.primaryColor, lineWidth: 2)
+        )
         .padding(.horizontal)
     }
 }

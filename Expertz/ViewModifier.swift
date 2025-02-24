@@ -51,7 +51,7 @@ struct AlternativeDesignButton: ViewModifier {
             .shadow(radius: 5)
             .overlay(
                 RoundedRectangle(cornerRadius: 100)
-                    .stroke(Theme.accentColor, lineWidth: 2)
+                    .stroke(Theme.primaryColor, lineWidth: 2)
             )
             .padding(.horizontal, Theme.buttonPadding)
 
@@ -67,6 +67,7 @@ struct FormInputField: ViewModifier {
             .cornerRadius(Theme.cornerRadius)
             .font(Theme.inputFont)
             .foregroundColor(Theme.primaryColor)
+            .shadow(radius: 5)
             .overlay(
                 RoundedRectangle(cornerRadius: 100)
                     .stroke(Theme.primaryColor, lineWidth: 2)
