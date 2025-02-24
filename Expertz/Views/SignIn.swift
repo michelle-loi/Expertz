@@ -33,71 +33,86 @@ struct SignIn: View {
     @State private var email = ""
     
     var body: some View {
-        VStack {
-            Text("Welcome Back!")
-                .font(Theme.titleFont)
-                .foregroundStyle(Theme.primaryColor)
-            Text("Sign in to your account")
-                .font(Theme.inputFont)
-                .foregroundStyle(Theme.primaryColor)
-                .padding(.bottom, 100)
-            
-            TextField("Username/Email", text: $username_email)
-                .customFormInputField()
-                .autocapitalization(.none)
-            
-            SecureField("Password", text: $password)
-                .customFormInputField()
-                .autocapitalization(.none)
-            
-            if let errorMessage = errorMessage {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding(.bottom, 10)
-            }
-            
-            Text("Forgot Password?")
-                .underline()
-                .foregroundStyle(Theme.primaryColor)
-                .padding(.bottom, 50)
-            
-            Button(action: {
-                authenticateUser()
-            }) {
-                Text("Sign In")
-            }
-            .customCTADesignButton()
-            
-            Text("Or")
-                .padding(10)
-            
-            Button(action: {
-                signInWithGoogle()
-            }) {
-                Text("Sign in with Google")
-            }
-            .customAlternativeDesignButton()
-            
-            HStack{
-                Text("Don't have an account?")
+        ZStack(alignment: .top){
+            Color.clear
+                .background(.ultraThinMaterial)
+                .overlay(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.00, green: 0.90, blue: 0.90),
+                            Color(red: 0.00, green: 0.90, blue: 0.90)
+                        ]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .opacity(0.3)
+                )
+                .ignoresSafeArea()
+            VStack {
+                Text("Welcome Back!")
+                    .font(Theme.titleFont)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Theme.primaryColor)
+                    .padding(.top, 100)
+                Text("Sign in to your account")
                     .font(Theme.inputFont)
                     .foregroundStyle(Theme.primaryColor)
+                    .padding(.bottom, 100)
                 
-                NavigationLink(destination: SignUp()){
-                    Text("Sign Up")
-                        .underline()
+                TextField("Username/Email", text: $username_email)
+                    .customFormInputField()
+                    .autocapitalization(.none)
+                
+                SecureField("Password", text: $password)
+                    .customFormInputField()
+                    .autocapitalization(.none)
+                
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding(.bottom, 10)
+                }
+                
+                Text("Forgot Password?")
+                    .underline()
+                    .foregroundStyle(Theme.primaryColor)
+                    .padding(.bottom, 50)
+                
+                Button(action: {
+                    authenticateUser()
+                }) {
+                    Text("Sign In")
+                }
+                .customCTADesignButton()
+               
+                
+                Button(action: {
+                    signInWithGoogle()
+                }) {
+                    Text("Sign in with Google")
+                }
+                .customAlternativeDesignButton()
+                
+                HStack{
+                    Text("Don't have an account?")
+                        .font(Theme.inputFont)
                         .foregroundStyle(Theme.primaryColor)
+                    
+                    NavigationLink(destination: SignUp()){
+                        Text("Sign Up")
+                            .underline()
+                            .foregroundStyle(Theme.primaryColor)
+                    }
                 }
-            }
-            
-            Spacer()
-                .navigationDestination(isPresented: $navigateToSignInPage) {
-                    Homepage()
-                }
-                .navigationDestination(isPresented: $navigateToSignUpGooglePage) {
-                    SignUpGoogle(userID: userID, firstName: firstName, lastName: lastName, email: email)
-                }
-        }
+                
+                Spacer()
+                    .navigationDestination(isPresented: $navigateToSignInPage) {
+                        Homepage()
+                    }
+                    .navigationDestination(isPresented: $navigateToSignUpGooglePage) {
+                        SignUpGoogle(userID: userID, firstName: firstName, lastName: lastName, email: email)
+                    }
+            }}
     }
     
     // Google Sign-In Method

@@ -31,6 +31,21 @@ struct AccountPage: View {
     @State private var isEditing: Bool = false
     var body: some View {
         NavigationStack {
+            ZStack(alignment: .top){
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.00, green: 0.90, blue: 0.90),
+                                Color(red: 0.00, green: 0.90, blue: 0.90)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .opacity(0.3)
+                    )
+                    .ignoresSafeArea()
             if isLoggedOut {
                 ContentView() // Navigate to ContentView after logout
             } else {
@@ -53,10 +68,8 @@ struct AccountPage: View {
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 TextField("No Email Available", text: $userEmail)
-                                    .padding()
-                                    .background(Theme.accentColor.opacity(0.5))
-                                    .foregroundColor(Theme.primaryColor)
-                                    .cornerRadius(30)
+                                    .customFormInputField()
+
                                 Text("Address")
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
@@ -64,10 +77,8 @@ struct AccountPage: View {
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 TextField("No Address", text: $userAddress)
-                                    .padding()
-                                    .background(Theme.accentColor.opacity(0.5))
-                                    .foregroundColor(Theme.primaryColor)
-                                    .cornerRadius(30)
+                                    .customFormInputField()
+
                                 Text("Country")
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
@@ -75,10 +86,8 @@ struct AccountPage: View {
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 TextField("No Country Selected", text: $userCountry)
-                                    .padding()
-                                    .background(Theme.accentColor.opacity(0.5))
-                                    .foregroundColor(Theme.primaryColor)
-                                    .cornerRadius(30)
+                                    .customFormInputField()
+
                                 Text("Gender")
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
@@ -86,10 +95,8 @@ struct AccountPage: View {
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 TextField("No Gender Selected", text: $userGender)
-                                    .padding()
-                                    .background(Theme.accentColor.opacity(0.5))
-                                    .foregroundColor(Theme.primaryColor)
-                                    .cornerRadius(30)
+                                    .customFormInputField()
+
                             } else {
                                 // Display text
                                 Text("Email")
@@ -101,7 +108,7 @@ struct AccountPage: View {
                                 Text("\(userEmail)")
                                     .frame(maxWidth: .infinity,  alignment: .topLeading)
                                     .padding()
-                                    .background(Theme.accentColor)
+                                    .background(.ultraThinMaterial)
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 
@@ -114,7 +121,7 @@ struct AccountPage: View {
                                 Text("\(userAddress)")
                                     .frame(maxWidth: .infinity,  alignment: .topLeading)
                                     .padding()
-                                    .background(Theme.accentColor)
+                                    .background(.ultraThinMaterial)
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 Text("Country")
@@ -126,7 +133,7 @@ struct AccountPage: View {
                                 Text("\(userCountry)")
                                     .frame(maxWidth: .infinity,  alignment: .topLeading)
                                     .padding()
-                                    .background(Theme.accentColor)
+                                    .background(.ultraThinMaterial)
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 Text("Gender")
@@ -138,7 +145,7 @@ struct AccountPage: View {
                                 Text("\(userGender)")
                                     .frame(maxWidth: .infinity,  alignment: .topLeading)
                                     .padding()
-                                    .background(Theme.accentColor)
+                                    .background(.ultraThinMaterial)
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
                                 
@@ -159,21 +166,15 @@ struct AccountPage: View {
                             isEditing.toggle()
                         }) {
                             Text(isEditing ? "Done" : "Edit")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Theme.accentColor)
-                                .foregroundColor(Theme.primaryColor)
-                                .cornerRadius(30)
                         }
+                        .customAlternativeDesignButton()
                         // Logout Button
                         Button(action: logOut) {
                             Text("Sign Out")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Theme.accentColor)
-                                .foregroundColor(Theme.primaryColor)
-                                .cornerRadius(30)
-                        }}
+                        }
+                        .customAlternativeDesignButton()
+                    }
+
                     
                     if showError {
                         Text(errorMessage)
@@ -184,15 +185,10 @@ struct AccountPage: View {
                     Spacer()
                 }
                 .padding()
-                .background(Theme.accentColor.opacity(0.2))
-//                .background(LinearGradient(
-//                    gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-//                    startPoint: .top,
-//                    endPoint: .bottom
-//                ))
+                .navigationTitle("Profile")
                 .onAppear {
                     fetchUserDetails()
-                }
+                }}
             }
         }
     }

@@ -21,7 +21,6 @@
 		4D8D4BF22D65874A0066BFAF /* SignUpCountryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */; };
 		4D8D4BF42D6587770066BFAF /* SignUpExpertise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF32D6587710066BFAF /* SignUpExpertise.swift */; };
 		4D8D4BF62D6588660066BFAF /* GoogleSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */; };
-		4D8D4BF82D658DE80066BFAF /* GlassBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF72D658DE20066BFAF /* GlassBackground.swift */; };
 		D64F9BD92CE7ECB7008D1167 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BD82CE7ECB7008D1167 /* FirebaseAuth */; };
 		D64F9BDB2CE7ECB7008D1167 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BDA2CE7ECB7008D1167 /* FirebaseCore */; };
 		D64F9BDD2CE7ECB7008D1167 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D64F9BDC2CE7ECB7008D1167 /* FirebaseFirestore */; };
@@ -90,7 +89,6 @@
 		4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCountryAddress.swift; sourceTree = "<group>"; };
 		4D8D4BF32D6587710066BFAF /* SignUpExpertise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExpertise.swift; sourceTree = "<group>"; };
 		4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignUp.swift; sourceTree = "<group>"; };
-		4D8D4BF72D658DE20066BFAF /* GlassBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassBackground.swift; sourceTree = "<group>"; };
 		D64F9BDE2CE7EFAE008D1167 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D64F9BE42CEBBDF7008D1167 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		D64F9BE62CF4D822008D1167 /* AccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPage.swift; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 		D66E886A2CBC75A000D714F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4D8D4BF72D658DE20066BFAF /* GlassBackground.swift */,
 				4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */,
 				4D8D4BF32D6587710066BFAF /* SignUpExpertise.swift */,
 				4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */,
@@ -466,7 +463,6 @@
 				D66E88702CBC769900D714F3 /* Homepage.swift in Sources */,
 				D6CFC50D2CFA9C5A001BAB78 /* ClientAnnotation.swift in Sources */,
 				4D8D4BEE2D65868B0066BFAF /* SignUpData.swift in Sources */,
-				4D8D4BF82D658DE80066BFAF /* GlassBackground.swift in Sources */,
 				D66E887C2CBD742F00D714F3 /* Theme.swift in Sources */,
 				D6CFC5032CFA43F0001BAB78 /* BottomNavigationBar.swift in Sources */,
 				D680E9F32CF6DA2400EBEFCB /* Settings.swift in Sources */,

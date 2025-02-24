@@ -25,7 +25,7 @@ struct CTADesignButton: ViewModifier {
             .padding()
             .font(Theme.inputFont.bold())
             .frame(maxWidth: .infinity)
-            .background(Theme.accentColor)
+            .background(Theme.primaryColor)
             .foregroundColor(Theme.secondaryColor)
             .cornerRadius(Theme.cornerRadius)
             .shadow(radius: 5)
@@ -45,7 +45,7 @@ struct AlternativeDesignButton: ViewModifier {
             .padding()
             .font(Theme.inputFont.bold())
             .frame(maxWidth: .infinity)
-            .background(Theme.secondaryColor)
+            .background(.ultraThinMaterial)
             .foregroundColor(Theme.primaryColor)
             .cornerRadius(Theme.cornerRadius)
             .shadow(radius: 5)
@@ -63,10 +63,14 @@ struct FormInputField: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding()
-            .background(Theme.accentColor.opacity(0.2))
+            .background(.ultraThinMaterial)
             .cornerRadius(Theme.cornerRadius)
             .font(Theme.inputFont)
             .foregroundColor(Theme.primaryColor)
+            .overlay(
+                RoundedRectangle(cornerRadius: 100)
+                    .stroke(Theme.primaryColor, lineWidth: 2)
+            )
             .padding(.horizontal, Theme.buttonPadding)
 
     }

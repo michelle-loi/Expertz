@@ -25,7 +25,6 @@ struct BottomNavigationBar: View {
                 VStack {
                     Image(systemName: "bubble.left.and.bubble.right")
                         .foregroundColor(Theme.primaryColor)
-                        .background(Theme.accentColor)
                     Text("Messages")
                         .foregroundStyle(Theme.primaryColor)
                 }
@@ -34,7 +33,6 @@ struct BottomNavigationBar: View {
                 VStack {
                     Image(systemName: "person.crop.circle.badge.exclamationmark")
                         .foregroundColor(Theme.primaryColor)
-                        .background(Theme.accentColor)
                     Text("Requests")
                         .foregroundStyle(Theme.primaryColor)
                 }
@@ -51,7 +49,6 @@ struct BottomNavigationBar: View {
                 VStack {
                     Image(systemName: "gear")
                         .foregroundColor(Theme.primaryColor)
-                        .background(Theme.accentColor)
                     Text("Settings")
                         .foregroundStyle(Theme.primaryColor)
                 }
@@ -60,7 +57,6 @@ struct BottomNavigationBar: View {
                 VStack {
                     Image(systemName: "person")
                         .foregroundColor(Theme.primaryColor)
-                        .background(Theme.accentColor)
                     Text("Profile")
                         .foregroundStyle(Theme.primaryColor)
                 }
@@ -68,8 +64,15 @@ struct BottomNavigationBar: View {
             Spacer()
         }
         .frame(height: 70)
-        .background(Theme.accentColor)
+        .background(.ultraThinMaterial)
         .cornerRadius(30)
+        .overlay(
+            RoundedRectangle(cornerRadius: 100)
+                .stroke(Theme.primaryColor, lineWidth: 2)
+        )
         .padding(.horizontal, 20)
     }
+}
+#Preview {
+    Homepage()
 }

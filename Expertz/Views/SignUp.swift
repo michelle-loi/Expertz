@@ -29,82 +29,103 @@ struct SignUp: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("Let's get started!")
-                    .font(Theme.titleFont)
-                    .foregroundStyle(Theme.primaryColor)
-                    .padding(.top, 100)
+            ZStack(alignment: .top){
                 
-                Text("Create an account")
-                    .font(Theme.inputFont)
-                    .foregroundStyle(Theme.primaryColor)
-                    .padding(.bottom, 150)
-
-                Button(action: {
-                    navigateToSignUpEmailPage = true
-                }) {
-                    Text("Sign Up Using Email")
-                }
-                .customCTADesignButton()
-                
-                Button(action: {
-                    // uses the sign in with google function from GSIL that we imported above from the utilities
-                    GSIL.signInWithGoogle { success in
-                        if success, let currentUser = Auth.auth().currentUser {
-                            // if successfully signed in we will assign user id, first name, last name and email address to variables that
-                            // we will use later for user's account details.
-                            let userID = currentUser.uid
-                            let firstName = currentUser.displayName?.components(separatedBy: " ").first ?? "First Name"
-                            let lastName = currentUser.displayName?.components(separatedBy: " ").last ?? "Last Name"
-                            let email = currentUser.email ?? "Email not available"
-                            
-                            // Save data for navigation to google sign up page
-                            self.userID = userID
-                            self.firstName = firstName
-                            self.lastName = lastName
-                            self.email = email
-                            
-                            // Check if the user already exists in Firestore, if they don't exist then navigate to google sign up page
-                            // if they do exist then just log in, no need to sign up.
-                            checkIfUserExists(userID: userID) { exists in
-                                if exists {
-                                    navigateToExistingAccountPage = true
-                                } else {
-                                    navigateToSignUpGooglePage = true
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.00, green: 0.90, blue: 0.90),
+                                Color(red: 0.00, green: 0.90, blue: 0.90)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .opacity(0.3)
+                    )
+                    .ignoresSafeArea()
+                VStack {
+                    Text("Let's get started!")
+                        .font(Theme.titleFont)
+                        .fontWeight(.bold)
+                        .foregroundStyle(Theme.primaryColor)
+                        .padding(.top, 100)
+                        
+                    
+                    Text("Create an account")
+                        .font(Theme.inputFont)
+                        .fontWeight(.bold)
+                        .foregroundStyle(Theme.primaryColor)
+                        .padding(.bottom, 150)
+                    
+                    
+                    Button(action: {
+                        navigateToSignUpEmailPage = true
+                    }) {
+                        Text("Sign Up Using Email")
+                    }
+                    .customCTADesignButton()
+                    
+                    Button(action: {
+                        // uses the sign in with google function from GSIL that we imported above from the utilities
+                        GSIL.signInWithGoogle { success in
+                            if success, let currentUser = Auth.auth().currentUser {
+                                // if successfully signed in we will assign user id, first name, last name and email address to variables that
+                                // we will use later for user's account details.
+                                let userID = currentUser.uid
+                                let firstName = currentUser.displayName?.components(separatedBy: " ").first ?? "First Name"
+                                let lastName = currentUser.displayName?.components(separatedBy: " ").last ?? "Last Name"
+                                let email = currentUser.email ?? "Email not available"
+                                
+                                // Save data for navigation to google sign up page
+                                self.userID = userID
+                                self.firstName = firstName
+                                self.lastName = lastName
+                                self.email = email
+                                
+                                // Check if the user already exists in Firestore, if they don't exist then navigate to google sign up page
+                                // if they do exist then just log in, no need to sign up.
+                                checkIfUserExists(userID: userID) { exists in
+                                    if exists {
+                                        navigateToExistingAccountPage = true
+                                    } else {
+                                        navigateToSignUpGooglePage = true
+                                    }
                                 }
                             }
                         }
+                    }) {
+                        Text("Sign Up With Google")
                     }
-                }) {
-                    Text("Sign Up With Google")
-                }
-                .customAlternativeDesignButton()
-
-                HStack {
-                    Text("Already have an account?")
-                        .font(Theme.inputFont)
-                        .foregroundStyle(Theme.primaryColor)
-                    NavigationLink(destination: SignIn()) {
-                        Text("Sign In")
-                            .underline()
+                    .customAlternativeDesignButton()
+                    
+                    HStack {
+                        Text("Already have an account?")
+                            .font(Theme.inputFont)
                             .foregroundStyle(Theme.primaryColor)
+                        NavigationLink(destination: SignIn()) {
+                            Text("Sign In")
+                                .underline()
+                                .foregroundStyle(Theme.primaryColor)
+                        }
+                    }
+                    
+                    // Navigation destinations for each button
+                    .navigationDestination(isPresented: $navigateToSignUpEmailPage) {
+                        SignUpEmail()
+                    }
+                    // this navigates to the sign up with google page
+                    .navigationDestination(isPresented: $navigateToSignUpGooglePage) {
+                        SignUpGoogle(userID: userID, firstName: firstName, lastName: lastName, email: email)
+                    }
+                    .navigationDestination(isPresented: $navigateToExistingAccountPage) {
+                        Homepage() // Replace with your actual homepage view
                     }
                 }
-
-                // Navigation destinations for each button
-                .navigationDestination(isPresented: $navigateToSignUpEmailPage) {
-                    SignUpEmail()
-                }
-                // this navigates to the sign up with google page
-                .navigationDestination(isPresented: $navigateToSignUpGooglePage) {
-                    SignUpGoogle(userID: userID, firstName: firstName, lastName: lastName, email: email)
-                }
-                .navigationDestination(isPresented: $navigateToExistingAccountPage) {
-                    Homepage() // Replace with your actual homepage view
-                }
+                .padding()
+                Spacer()
             }
-            .padding()
-            Spacer()
         }
     }
 }

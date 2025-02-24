@@ -39,13 +39,16 @@ struct Introduction: View {
                     Image("Expertz_Logo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 100, height: 100)
                     
                     // "Expertz" text - Bold & White
                     Text("Expertz")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
+                        .shadow(color: Theme.primaryColor, radius: 0.4)
+                        .shadow(color: Theme.primaryColor, radius: 0.4)
+                        .shadow(color: Theme.primaryColor, radius: 0.4)
                 }
                 .frame(maxWidth: .infinity, alignment: .top)
                 .padding(.top, 50)
@@ -61,24 +64,20 @@ struct Introduction: View {
                                         .multilineTextAlignment(.center)
                                         .padding(.horizontal, 200)
                                         .padding(.bottom, 30)
+                                        .shadow(color: Theme.primaryColor, radius: 0.4)
+                                        .shadow(color: Theme.primaryColor, radius: 0.4)
+                                        .shadow(color: Theme.primaryColor, radius: 0.4)
                     // "Get started!" button
                     Button(action: {
                                         navigateToSignUpPage = true
                                     }) {
                                         Text("Get started!")
                                             .font(.headline)
+                                            .fontWeight(.bold)
                                             .padding(20)
+                                            .foregroundColor( Theme.primaryColor)
                                             .frame(maxWidth: .infinity)
-                                            .background(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                        Color(red: 0.00, green: 0.60, blue: 0.65),
-                                                        Color(red: 0.00, green: 0.80, blue: 0.75)
-                                                    ]),
-                                                    startPoint: .leading,
-                                                    endPoint: .trailing
-                                                )
-                                            )
+                                            .background(.ultraThinMaterial)
                                             .foregroundColor(.white)
                                             .cornerRadius(100)
                                             .overlay(

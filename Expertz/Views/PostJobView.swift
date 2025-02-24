@@ -32,166 +32,94 @@ struct PostJobView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text("Request/Availability")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundStyle(Theme.primaryColor)
-
-                    // Conditionally show the request type picker if the user is an expert
-                    if isExpert {
-                        Text("Request Type")
-                            .padding(.horizontal, 40)
-                            .padding(.vertical, 6)
-                            .font(.headline)
+            ZStack(alignment: .top){
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .overlay(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.00, green: 0.90, blue: 0.90),
+                                Color(red: 0.00, green: 0.90, blue: 0.90)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .opacity(0.3)
+                    )
+                    .ignoresSafeArea()
+                ScrollView {
+                    VStack(spacing: 20) {
+                        Text("Request/Availability")
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundStyle(Theme.primaryColor)
+                        
+                        // Conditionally show the request type picker if the user is an expert
+                        if isExpert {
+                            Text("Request Type")
+                                .padding(.horizontal, 40)
+                                .padding(.vertical, 6)
+                                .font(.headline)
                             
-                            .foregroundColor(Theme.primaryColor)
-                            .cornerRadius(30)
-                        Picker("", selection: $requestType) {
-                            Text("Client").tag("Client")
-                            Text("Expert").tag("Expert")
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .padding(.horizontal)
-                    }
-
-                    // Title Field
-                    Text("Title")
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 6)
-                        .font(.headline)
-                        .foregroundColor(Theme.primaryColor)
-                        .cornerRadius(30)
-                    TextField("Enter a title for your request", text: $title)
-                        .padding()
-                        .background(Theme.accentColor)
-                        .cornerRadius(Theme.cornerRadius)
-                        .font(Theme.inputFont)
-                        .foregroundColor(.black)
-                        .padding(.horizontal, Theme.buttonPadding)
-
-                    // Address Field
-                    if requestType == "Client" || isExpert {
-                        Text("Address")
-                            .padding(.horizontal, 40)
-                            .padding(.vertical, 6)
-                            .font(.headline)
-                            .foregroundColor(Theme.primaryColor)
-                            .cornerRadius(30)
-                        TextField("Enter an address", text: $address)
-                            .padding()
-                            .background(Theme.accentColor)
-                            .cornerRadius(Theme.cornerRadius)
-                            .font(Theme.inputFont)
-                            .foregroundColor(.black)
-                            .padding(.horizontal, Theme.buttonPadding)
-                    }
-                    
-                    // Description Field
-                    if requestType == "Client" || isExpert {
-                        Text("Description")
-                            .padding(.horizontal, 40)
-                            .padding(.vertical, 6)
-                            .font(.headline)
-                            .foregroundColor(Theme.primaryColor)
-                            .cornerRadius(30)
-                        TextField("Provide a brief description", text: $description)
-                            .padding()
-                            .background(Theme.accentColor)
-                            .cornerRadius(Theme.cornerRadius)
-                            .font(Theme.inputFont)
-                            .foregroundColor(.black)
-                            .padding(.horizontal, Theme.buttonPadding)
-                    }
-                    
-                    // Price Field
-                    Text("Price")
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 6)
-                        .font(.headline)
-                        .foregroundColor(Theme.primaryColor)
-                        .cornerRadius(30)
-                    TextField("Enter a price", text: $price)
-                        .keyboardType(.decimalPad)
-                        .padding()
-                        .background(Theme.accentColor)
-                        .cornerRadius(Theme.cornerRadius)
-                        .font(Theme.inputFont)
-                        .foregroundColor(.black)
-                        .padding(.horizontal, Theme.buttonPadding)
-                    
-                    HStack{
-                        Text("Price Negotiable?")
-                            .padding(.horizontal, 40)
-                            .padding(.vertical, 6)
-                            .font(.headline)
-                            .foregroundColor(Theme.primaryColor)
-                            .cornerRadius(30)
-                        
-                        Spacer()
-                        
-                        Picker("", selection: $isNegotiable) {
-                            ForEach(dropdownUrgent, id: \.self) { option in
-                                Text(option).tag(option)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
+                            Picker("", selection: $requestType) {
+                                Text("Client").tag("Client")
+                                Text("Expert").tag("Expert")
                             }
+                            .pickerStyle(SegmentedPickerStyle())
+                            .padding(.horizontal)
                         }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.horizontal, 12)
-                        .background(Theme.accentColor)
-                        .foregroundStyle(Theme.primaryColor)
-                        .cornerRadius(30)
                         
-                    }
-                    
-                    // In-person
-                    HStack{
-                        Text("In-Person Availability")
+                        // Title Field
+                        Text("Title")
                             .padding(.horizontal, 40)
-                            .padding(.vertical, 6)
                             .font(.headline)
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
+                        TextField("Enter a title for your request", text: $title)
+                            .customFormInputField()
                         
-                        Spacer()
-                        
-                        Picker("", selection: $inPerson) {
-                            ForEach(dropdownOptions, id: \.self) { option in
-                                Text(option).tag(option)
-                            }
+                        // Address Field
+                        if requestType == "Client" || isExpert {
+                            Text("Address")
+                                .padding(.horizontal, 40)
+                                .padding(.top, 6)
+                                .font(.headline)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
+                            TextField("Enter an address", text: $address)
+                                .customFormInputField()
+                            
                         }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.horizontal, 12)
-                        .background(Theme.accentColor)
-                        .foregroundStyle(Theme.primaryColor)
-                        .cornerRadius(30)
-                    }
-                    
-                    // Online
-                    HStack{
-                        Text("Online Availability")
+                        
+                        // Description Field
+                        if requestType == "Client" || isExpert {
+                            Text("Description")
+                                .padding(.horizontal, 40)
+                                .padding(.top, 6)
+                                .font(.headline)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
+                            TextField("Provide a brief description", text: $description)
+                                .customFormInputField()
+                            
+                        }
+                        
+                        // Price Field
+                        Text("Price")
                             .padding(.horizontal, 40)
-                            .padding(.vertical, 6)
+                            .padding(.top, 6)
                             .font(.headline)
                             .foregroundColor(Theme.primaryColor)
                             .cornerRadius(30)
+                        TextField("Enter a price", text: $price)
+                            .keyboardType(.decimalPad)
+                            .customFormInputField()
                         
-                        Spacer()
                         
-                        Picker("", selection: $online) {
-                            ForEach(dropdownOptions, id: \.self) { option in
-                                Text(option).tag(option)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.horizontal, 12)
-                        .background(Theme.accentColor)
-                        .foregroundStyle(Theme.primaryColor)
-                        .cornerRadius(30)
-                    }
-                    if (requestType != "Expert"){
                         HStack{
-                            Text("Is it urgent?")
+                            Text("Price Negotiable?")
                                 .padding(.horizontal, 40)
                                 .padding(.vertical, 6)
                                 .font(.headline)
@@ -200,59 +128,124 @@ struct PostJobView: View {
                             
                             Spacer()
                             
-                            Picker("", selection: $isUrgent) {
+                            Picker("", selection: $isNegotiable) {
                                 ForEach(dropdownUrgent, id: \.self) { option in
                                     Text(option).tag(option)
                                 }
                             }
                             .pickerStyle(MenuPickerStyle())
                             .padding(.horizontal, 12)
-                            .background(Theme.accentColor)
-                            .foregroundStyle(Theme.primaryColor)
+                            .background(.ultraThinMaterial)
                             .cornerRadius(30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Theme.primaryColor, lineWidth: 2)
+                            )
+                            
                         }
-                    }
-                    if showError {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .multilineTextAlignment(.center)
-                    }
-                    Spacer()
-                    // Post Job Button
-                    Button(action: postJob) {
-                        Text("Post")
-                            .frame(maxWidth: .infinity)
-                            .font(.headline)
-                            .padding()
-                            .background(Theme.accentColor)
-                            .foregroundColor(Theme.primaryColor)
+                        
+                        // In-person
+                        HStack{
+                            Text("In-Person Availability")
+                                .padding(.horizontal, 40)
+                                .padding(.vertical, 6)
+                                .font(.headline)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
+                            
+                            Spacer()
+                            
+                            Picker("", selection: $inPerson) {
+                                ForEach(dropdownOptions, id: \.self) { option in
+                                    Text(option).tag(option)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .padding(.horizontal, 12)
+                            .background(.ultraThinMaterial)
                             .cornerRadius(30)
-                    }
-
-                    // Cancel Button
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("Cancel")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Theme.accentColor)
-                            .foregroundColor(Theme.primaryColor)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Theme.primaryColor, lineWidth: 2)
+                            )
+                        }
+                        
+                        // Online
+                        HStack{
+                            Text("Online Availability")
+                                .padding(.horizontal, 40)
+                                .padding(.vertical, 6)
+                                .font(.headline)
+                                .foregroundColor(Theme.primaryColor)
+                                .cornerRadius(30)
+                            
+                            Spacer()
+                            
+                            Picker("", selection: $online) {
+                                ForEach(dropdownOptions, id: \.self) { option in
+                                    Text(option).tag(option)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .padding(.horizontal, 12)
+                            .background(.ultraThinMaterial)
                             .cornerRadius(30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Theme.primaryColor, lineWidth: 2)
+                            )
+                        }
+                        if (requestType != "Expert"){
+                            HStack{
+                                Text("Is it urgent?")
+                                    .padding(.horizontal, 40)
+                                    .padding(.vertical, 6)
+                                    .font(.headline)
+                                    .foregroundColor(Theme.primaryColor)
+                                    .cornerRadius(30)
+                                
+                                Spacer()
+                                
+                                Picker("", selection: $isUrgent) {
+                                    ForEach(dropdownUrgent, id: \.self) { option in
+                                        Text(option).tag(option)
+                                    }
+                                }
+                                .pickerStyle(MenuPickerStyle())
+                                .padding(.horizontal, 12)
+                                .background(.ultraThinMaterial)
+                                .cornerRadius(30)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Theme.primaryColor, lineWidth: 2)
+                                )
+                            }
+                        }
+                        if showError {
+                            Text(errorMessage)
+                                .foregroundColor(.red)
+                                .multilineTextAlignment(.center)
+                        }
+                        Spacer()
+                        // Post Job Button
+                        Button(action: postJob) {
+                            Text("Post")
+                        }.customCTADesignButton()
+                        
+                        // Cancel Button
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Text("Cancel")
+                            
+                        }.customAlternativeDesignButton()
                     }
-                }
-                .padding()
-            }
+                    .padding()
+                }}
             .navigationTitle("Post Job")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
-            .background(Theme.accentColor.opacity(0.2))
-//            .background(LinearGradient(
-//                gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-//                startPoint: .top,
-//                endPoint: .bottom
-//            ))
+            
             .onAppear(perform: fetchUserProfile) // Fetch the user's profile
         }
         .navigationBarHidden(true)

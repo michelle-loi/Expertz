@@ -11,58 +11,72 @@ struct SignUpEmail: View {
     @State private var backPage = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Let's get started!")
-                .font(Theme.titleFont)
-                .foregroundStyle(Theme.primaryColor)
-                .padding(.top, 10)
-            
-            Text("Create an account")
-                .font(Theme.inputFont)
-                .foregroundStyle(Theme.primaryColor)
-                .padding(.bottom, 10)
-            
-            TextField("Email Address", text: $signUpData.emailAddress)
-                .customFormInputField()
-            
-            SecureField("Password", text: $signUpData.password)
-                .customFormInputField()
-            
-            SecureField("Re Enter Password", text: $signUpData.rePassword)
-                .customFormInputField()
-            
-            Spacer()
-            
-            // Next & Back Buttons
-            HStack {
-                Button(action: {
-                    // If you want to go back to an Intro view in a NavigationStack,
-                    // set backPage = true. Otherwise, you can remove this button or dismiss().
-                    backPage = true
-                }) {
-                    Text("Back")
-                }
-                .customAlternativeDesignButton()
+        ZStack(alignment: .top){
+            Color.clear
+                .background(.ultraThinMaterial)
+                .overlay(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.00, green: 0.90, blue: 0.90),
+                            Color(red: 0.00, green: 0.90, blue: 0.90)
+                        ]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .opacity(0.3)
+                )
+                .ignoresSafeArea()
+            VStack(spacing: 16) {
+                Text("Create an account")
+                    .font(Theme.titleFont)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Theme.primaryColor)
+                    .padding(.bottom, 100)
+                    .padding(.top, 100)
                 
-                Button(action: {
-                    goToNextPage = true
-                }) {
-                    Text("Next")
+                
+                
+                TextField("Email Address", text: $signUpData.emailAddress)
+                    .customFormInputField()
+                
+                SecureField("Password", text: $signUpData.password)
+                    .customFormInputField()
+                
+                SecureField("Re Enter Password", text: $signUpData.rePassword)
+                    .customFormInputField()
+                
+                Spacer()
+                
+                // Next & Back Buttons
+                VStack {
+                    Button(action: {
+                        // If you want to go back to an Intro view in a NavigationStack,
+                        // set backPage = true. Otherwise, you can remove this button or dismiss().
+                        backPage = true
+                    }) {
+                        Text("Back")
+                    }
+                    .customAlternativeDesignButton()
+                    
+                    Button(action: {
+                        goToNextPage = true
+                    }) {
+                        Text("Next")
+                    }
+                    .customCTADesignButton()
                 }
-                .customCTADesignButton()
             }
+            .padding()}
+            // Navigation to next page
+            .navigationDestination(isPresented: $goToNextPage) {
+                SignUpNameGender(signUpData: signUpData)
+            }
+            // Navigation if you want to go back to some Introduction
+            .navigationDestination(isPresented: $backPage) {
+                SignUp()
+            }
+            .navigationBarBackButtonHidden(true)
         }
-        .padding()
-        // Navigation to next page
-        .navigationDestination(isPresented: $goToNextPage) {
-            SignUpNameGender(signUpData: signUpData)
-        }
-        // Navigation if you want to go back to some Introduction
-        .navigationDestination(isPresented: $backPage) {
-            Introduction()
-        }
-        .navigationBarBackButtonHidden(true)
-    }
 }
 #Preview {
     SignUpEmail()

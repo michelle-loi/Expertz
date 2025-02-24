@@ -16,49 +16,57 @@ struct Settings: View {
     @State private var navigateToRequests = false
     
     var body: some View {
-        VStack(spacing: 20) {
-            
-            Button(action: {}) {
-                Text("Security and Privacy")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
-                    .cornerRadius(30)
-            }
-            
-            Button(action: {
-            }) {
-                Text("Help")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Theme.accentColor)
-                    .foregroundColor(Theme.primaryColor)
-                    .cornerRadius(30)
-            }
-            
-            HStack {
-                Text("Dark Mode")
-                    .font(.headline)
-                    .foregroundColor(Theme.primaryColor)
+        ZStack(alignment: .top){
+            Color.clear
+                .background(.ultraThinMaterial)
+                .overlay(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.00, green: 0.90, blue: 0.90),
+                            Color(red: 0.00, green: 0.90, blue: 0.90)
+                        ]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .opacity(0.3)
+                )
+                .ignoresSafeArea()
+            VStack(spacing: 20) {
+                
+                Button(action: {}) {
+                    Text("Security and Privacy")
+                }
+                .customAlternativeDesignButton()
+                
+                
+                Button(action: {
+                }) {
+                    Text("Help")
+                }
+                .customAlternativeDesignButton()
+                
+                
+                HStack {
+                    Text("Dark Mode")
+                        .font(.headline)
+                        .foregroundColor(Theme.primaryColor)
+                    Spacer()
+                    Toggle("", isOn: $isDarkMode)
+                        .toggleStyle(SwitchToggleStyle(tint: Theme.primaryColor))
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+                .cornerRadius(30)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Theme.primaryColor, lineWidth: 2)
+                )
+                
                 Spacer()
-                Toggle("", isOn: $isDarkMode)
-                    .toggleStyle(SwitchToggleStyle(tint: Theme.primaryColor))
             }
-            .padding()
-            .background(Theme.accentColor.opacity(0.2))
-            .cornerRadius(30)
-            
-            Spacer()
-        }
-        .padding()
+            .padding()}
         .navigationTitle("Settings")
-        .background(Theme.accentColor.opacity(0.2))
-//        .background(LinearGradient(
-//            gradient: Gradient(colors: [.cyan.opacity(0.6), Theme.accentColor.opacity(0.6)]),
-//            startPoint: .top,
-//            endPoint: .bottom
-//        ))
+
     }
 }
 

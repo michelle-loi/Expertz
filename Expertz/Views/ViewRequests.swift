@@ -364,3 +364,7 @@ struct Request: Identifiable {
         self.username = data["Username"] as? String
     }
 }
+#Preview {
+    ViewRequests()
+}
+
