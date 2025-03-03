@@ -67,9 +67,14 @@ struct AccountPage: View {
                                     .background(Theme.accentColor.opacity(0.5))
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
-                                TextField("No Email Available", text: $userEmail)
-                                    .customFormInputField()
-
+                                
+                                //  this prevents email editing as we will do it via firebase
+                                Text("\(userEmail)")
+                                    .frame(maxWidth: .infinity,  alignment: .topLeading)
+                                    .padding()
+                                    .background(.ultraThinMaterial)
+                                    .foregroundColor(Theme.primaryColor)
+                                    .cornerRadius(30)
                                 Text("Address")
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
@@ -163,6 +168,9 @@ struct AccountPage: View {
                     Spacer()
                     HStack(){
                         Button(action: {
+                            if isEditing {
+                                    updateUserDetails()
+                                }
                             isEditing.toggle()
                         }) {
                             Text(isEditing ? "Done" : "Edit")
@@ -230,6 +238,38 @@ struct AccountPage: View {
             }
         }
     }
+    
+    
+    // updates the user's info when they edit
+    private func updateUserDetails() {
+        guard let user = Auth.auth().currentUser else {
+            showError = true
+            errorMessage = "User not logged in."
+            return
+        }
+        
+        let db = Firestore.firestore()
+        let userDocRef = db.collection("UserProfiles").document(user.uid)
+        
+        let updatedData: [String: Any] = [
+            "email": userEmail,
+            "physicalAddress": userAddress,
+            "country": userCountry,
+            "gender": userGender
+        ]
+        
+        userDocRef.setData(updatedData, merge: true) { error in
+            if let error = error {
+                showError = true
+                errorMessage = "Failed to update profile: \(error.localizedDescription)"
+            } else {
+                showError = false
+            }
+        }
+    }
+
+    
+    
 }
 #Preview {
     AccountPage()
