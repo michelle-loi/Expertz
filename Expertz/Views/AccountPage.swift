@@ -83,15 +83,27 @@ struct AccountPage: View {
                                     .cornerRadius(30)
                                 TextField("No Address", text: $userAddress)
                                     .customFormInputField()
-
+                                
                                 Text("Country")
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
                                     .background(Theme.accentColor.opacity(0.5))
                                     .foregroundColor(Theme.primaryColor)
                                     .cornerRadius(30)
-                                TextField("No Country Selected", text: $userCountry)
-                                    .customFormInputField()
+                                
+                                ZStack {
+                                    Picker("Select a Country", selection: $userCountry) {
+                                        ForEach(["United States", "Canada", "United Kingdom", "Australia", "Japan"], id: \.self) { country in
+                                            Text(country).tag(country)
+                                        }
+                                    }
+                                    .pickerStyle(MenuPickerStyle())
+                                    .frame(maxWidth: .infinity, maxHeight: 21)
+                                    .padding(.horizontal)
+                                }
+                                .customFormInputField()
+                                .padding(.vertical, 0)
+                                 
 
                                 Text("Gender")
                                     .padding(.horizontal, 12)
