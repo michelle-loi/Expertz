@@ -204,16 +204,28 @@ struct ExpertAnnotation: View {
                                 selectedAnnotation = nil
                                 print("\(annotation.id)")
                                 print("Expert Request: \(expertRequest)")
-                                chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: expertRequest) { chatId in
-                                    if let chatId = chatId {
-                                        DispatchQueue.main.async {
-                                            print("\(chatId)")
-                                            navigateToChatroom = true
-                                            outerChatId = chatId
-                                            outerRecipientName = annotation.name
-                                        }
-                                    }
-                                }
+                                
+                                userManager.getCurrentUserName { senderName in
+                                     if let senderName = senderName {
+                                         chatManager.createOrFetchChat(
+                                             senderId: userManager.currentUserId ?? "",
+                                             senderName: senderName,
+                                             recipientId: annotation.id,
+                                             recipientName: annotation.name,
+                                             message: expertRequest
+                                         ) { chatId in
+                                             if let chatId = chatId {
+                                                 DispatchQueue.main.async {
+                                                     navigateToChatroom = true
+                                                     outerChatId = chatId
+                                                     outerRecipientName = annotation.name
+                                                 }
+                                             }
+                                         }
+                                     } else {
+                                         print("Error: Could not fetch user name")
+                                     }
+                                 }
                             }
                         }) {
                             Text("Send a request")

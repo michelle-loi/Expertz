@@ -19,7 +19,8 @@ class ChatManager: ObservableObject {
     /// - Parameter userId: The user's id to fetch chats for
     func getChats(for userId: String) {
         db.collection("chats")
-            .whereField("participants", arrayContains: userId)
+//            .whereField("participants", arrayContains: userId)
+            .whereField("participants.\(userId)", isGreaterThan: "")
             .order(by: "lastMessageTimestamp", descending: true) // order by newest chat first
             .addSnapshotListener { querySnapshot, error in
                 
@@ -46,58 +47,33 @@ class ChatManager: ObservableObject {
                 }
         }
     }
-    
-    
-//    /// Creates a new chat between the sender and recipient
-//    /// - Parameters:
-//    ///   - chatId: The id to create the chat with
-//    ///   - senderId: The id of the sender of the chat
-//    ///   - recipientId: The id of the recipient of the chat
-//    ///   - recipientName: The name of the recipient  (for the all messages view)
-//    ///   - message: The message that was sent to create the chat
-//    private func createChat(chatId: String, senderId: String, recipientId: String, recipientName: String, message: String) {
-//        do {
-//            let newChat = Chat(
-//                id: chatId,
-//                participants: [senderId, recipientId],
-//                recipientName: recipientName,
-//                lastMessage: message,
-//                lastMessageTimestamp: Date()
-//            )
-//
-//            let chatDoc = db.collection("chats").document(newChat.id)
-//            try chatDoc.setData(from: newChat)
-//
-//            let firstMessage = Message(
-//                id: "\(UUID())",
-//                text: message,
-//                senderId: senderId,
-//                timestamp: Date()
-//            )
-//
-//            // Create the messages subcollection
-//            try chatDoc.collection("messages").document(firstMessage.id).setData(from: firstMessage)
-//
-//        } catch {
-//            print("Error adding a chat to Firestore: \(error)")
-//        }
-//    }
-    
+
     
     /// Creates a new chat between the sender and recipient
     /// - Parameters:
     ///   - chatId: The id to create the chat with
     ///   - senderId: The id of the sender of the chat
+    ///   - senderName: The name of the sender
     ///   - recipientId: The id of the recipient of the chat
     ///   - recipientName: The name of the recipient  (for the all messages view)
     ///   - message: The message that was sent to create the chat
     ///   - completion: The closure to run once the function is finished creating a chat and making the messages
-    private func createChat(chatId: String, senderId: String, recipientId: String, recipientName: String, message: String, completion: @escaping (Bool) -> Void) {
+    private func createChat(
+        chatId: String,
+        senderId: String,
+        senderName: String,
+        recipientId: String,
+        recipientName: String,
+        message: String,
+        completion: @escaping (Bool) -> Void
+    ) {
         do {
             let newChat = Chat(
                 id: chatId,
-                participants: [senderId, recipientId],
-                recipientName: recipientName,
+                participants: [
+                    senderId: senderName,
+                    recipientId: recipientName
+                ],
                 lastMessage: message,
                 lastMessageTimestamp: Date()
             )
@@ -123,36 +99,6 @@ class ChatManager: ObservableObject {
         }
     }
 
-
-//    /// Tries to create a new chat, but if one already exists for the two participants then it will not create a new chat
-//    /// - Parameters:
-//    ///   - senderId: The id of the sender
-//    ///   - recipientId: The id of the recipient
-//    ///   - recipientName: The recipient name
-//    ///   - message: The message to send
-//    ///   - completion: The closure to pass
-//    func createOrFetchChat(senderId: String, recipientId: String, recipientName: String, message: String, completion: @escaping (String) -> Void) {
-//
-//        // Create the chat id, the chat id puts the id that is smaller first
-//        // This prevents having two chats with the same people in different order
-//        // A_B and B_A for example
-//        let chatId = senderId < recipientId ? "\(senderId)_\(recipientId)" : "\(recipientId)_\(senderId)"
-//
-//        let chatDoc = db.collection("chats").document(chatId)
-//
-//        chatDoc.getDocument { (document, error) in
-//
-//            guard let document = document, document.exists else {
-//                // If we don't have a chat we can create one
-//                self.createChat(chatId: chatId, senderId: senderId, recipientId: recipientId, recipientName: recipientName, message: message)
-//                completion(chatId)
-//                return
-//            }
-//
-//            completion(chatId)
-//        }
-//    }
-
     
     /// Returns if a chat exists or not
     /// - Parameters:
@@ -169,7 +115,7 @@ class ChatManager: ObservableObject {
         print("\(chatId)")
         
         chatDoc.getDocument { (document, error) in
-            if let error = error {
+            if error != nil {
                 completion(false)
                 return
             }
@@ -188,11 +134,19 @@ class ChatManager: ObservableObject {
     /// Tries to create a new chat, but if one already exists for the two participants then it will not create a new chat
     /// - Parameters:
     ///   - senderId: The id of the sender
+    ///   - senderName: The name of the sender
     ///   - recipientId: The id of the recipient
     ///   - recipientName: The recipient name
     ///   - message: The message to send
     ///   - completion: The closure to pass and run after the function finishes execution
-    func createOrFetchChat(senderId: String, recipientId: String, recipientName: String, message: String, completion: @escaping (String?) -> Void) {
+    func createOrFetchChat(
+        senderId: String,
+        senderName: String,
+        recipientId: String,
+        recipientName: String,
+        message: String,
+        completion: @escaping (String?) -> Void
+    ) {
         
         // Create the chat id, the chat id puts the id that is smaller first
         // This prevents having two chats with the same people in different order
@@ -204,7 +158,14 @@ class ChatManager: ObservableObject {
         chatDoc.getDocument { (document, error) in
             guard let document = document, document.exists else {
                 // If we don't have a chat we can create one
-                self.createChat(chatId: chatId, senderId: senderId, recipientId: recipientId, recipientName: recipientName, message: message) { success in
+                self.createChat(
+                    chatId: chatId,
+                    senderId: senderId,
+                    senderName: senderName,
+                    recipientId: recipientId,
+                    recipientName: recipientName,
+                    message: message
+                ) { success in
                     if success {
                         // only return the id if we manage to create a chat
                         completion(chatId)

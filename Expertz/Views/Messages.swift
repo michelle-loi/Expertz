@@ -35,20 +35,22 @@ struct Messages: View {
                     .ignoresSafeArea()
                 VStack(spacing: 10) {
                     ForEach(chatManager.chats) { chat in
-                        // Use the ChatBubble view here inside the Messages view
-                        ChatBubble(
-                            chatId: chat.id,
-                            recipientName: chat.recipientName,
-                            messagePreview: chat.lastMessage,
-                            timestamp: chat.lastMessageTimestamp
-                        )
+                        if let currentUserId = userManager.currentUserId {
+                            ChatBubble(
+                                chatId: chat.id,
+                                recipientName: chat.getRecipientName(for: currentUserId) ?? "",
+                                messagePreview: chat.lastMessage,
+                                timestamp: chat.lastMessageTimestamp
+                            )
+                        } else {
+                        }
                     }
                     Spacer()
                 }
                 .navigationTitle("Chats")
                 .onAppear {
                     // Fetch chats for the user right now it is a dummy string
-                    chatManager.getChats(for: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")
+                    chatManager.getChats(for: userManager.currentUserId ?? "")
                 }
             }
         }

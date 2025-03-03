@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 
 class UserManager: ObservableObject {
     @Published private(set) var currentUserId: String?
@@ -24,4 +25,31 @@ class UserManager: ObservableObject {
         guard let currentUser = Auth.auth().currentUser else { return nil }
         return currentUser.uid
     }
+    
+    
+    /// Gets the current users name
+    /// - Parameter completion: the current users name
+    func getCurrentUserName(completion: @escaping (String?) -> Void) {
+        guard let currentUser = Auth.auth().currentUser else {
+            completion(nil)
+            return
+        }
+
+        let db = Firestore.firestore()
+        let userDocRef = db.collection("UserProfiles").document(currentUser.uid)
+        
+        userDocRef.getDocument { document, error in
+            if let document = document, document.exists {
+                let data = document.data()
+                let firstName = data?["firstName"] as? String ?? ""
+                let lastName = data?["lastName"] as? String ?? ""
+                
+                let fullName = [firstName, lastName].filter { !$0.isEmpty }.joined(separator: " ")
+                completion(fullName.isEmpty ? "Unknown" : fullName)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
 }

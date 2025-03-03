@@ -183,15 +183,28 @@ struct ClientAnnotation: View {
                                 selectedAnnotation = nil
                                 print("\(annotation.id)")
                                 print("Client Request: \(clientRequest)")
-                                chatManager.createOrFetchChat(senderId: userManager.currentUserId ?? "", recipientId: annotation.id, recipientName: annotation.name, message: clientRequest) { chatId in
-                                    if let chatId = chatId {
-                                        DispatchQueue.main.async {
-                                            navigateToChatroom = true
-                                            outerChatId = chatId
-                                            outerRecipientName = annotation.name
-                                        }
-                                    }
-                                }
+                                
+                                userManager.getCurrentUserName { senderName in
+                                     if let senderName = senderName {
+                                         chatManager.createOrFetchChat(
+                                             senderId: userManager.currentUserId ?? "",
+                                             senderName: senderName,
+                                             recipientId: annotation.id,
+                                             recipientName: annotation.name,
+                                             message: clientRequest
+                                         ) { chatId in
+                                             if let chatId = chatId {
+                                                 DispatchQueue.main.async {
+                                                     navigateToChatroom = true
+                                                     outerChatId = chatId
+                                                     outerRecipientName = annotation.name
+                                                 }
+                                             }
+                                         }
+                                     } else {
+                                         print("Error: Could not fetch user name")
+                                     }
+                                 }                                
                             }
                         }) {
                             Text("Notify the client")
