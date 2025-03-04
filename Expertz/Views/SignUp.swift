@@ -14,14 +14,17 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import GoogleSignInSwift
+import _AuthenticationServices_SwiftUI
 
 struct SignUp: View {
     @State private var navigateToSignUpEmailPage = false
     @State private var navigateToExistingAccountPage = false
     @State private var navigateToSignUpGooglePage = false
+    @State private var navigateToAppleSignUpPage = false
     @State private var GSIL = GoogleSignInLogic() // this utilizes the utility google sign in logic
+    @State private var ASIL = AppleSignInLogic() // Apple sign-in logic
     
-    // Store the sign-in data when using Google for sign-up
+    // Store the sign-in data when using Google or Apple for sign-up
     @State private var userID = ""
     @State private var firstName = ""
     @State private var lastName = ""
@@ -99,6 +102,24 @@ struct SignUp: View {
                         Text("Sign Up With Google")
                     }
                     .customAlternativeDesignButton()
+                    
+                    // Apple Sign Up button
+                    Button(action: {
+                        // Use AppleSignInLogic to sign in
+                        ASIL.signInWithApple { success in
+                            if success {
+                                // Handle successful sign-in, navigate or update UI
+                                navigateToAppleSignUpPage = true
+                            } else {
+                                // Handle failure, show error or retry
+                                print("Apple Sign-In failed.")
+                            }
+                        }
+                    }) {
+                        Text("Sign Up With Apple")
+                    }
+                   .customAlternativeDesignButton()
+                    
                     
                     HStack {
                         Text("Already have an account?")

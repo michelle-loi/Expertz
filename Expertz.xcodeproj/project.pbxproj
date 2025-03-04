@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		3A3D45542CF93BB10041F38F /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D45532CF93BB10041F38F /* Application.swift */; };
 		3A3D45562CF93D6E0041F38F /* GoogleSignInLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D45552CF93D6E0041F38F /* GoogleSignInLogic.swift */; };
 		3A3D45592CF99A090041F38F /* DBUserSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D45582CF99A090041F38F /* DBUserSearch.swift */; };
+		3ABA7E592D767670005FE594 /* SignUpApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA7E582D767668005FE594 /* SignUpApple.swift */; };
 		3AF9B8812CF887A1003312C7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8802CF887A1003312C7 /* FirebaseAuth */; };
 		3AF9B8832CF887A1003312C7 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8822CF887A1003312C7 /* FirebaseCore */; };
 		3AF9B8852CF887A1003312C7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8842CF887A1003312C7 /* FirebaseFirestore */; };
@@ -83,6 +84,8 @@
 		3A3D45532CF93BB10041F38F /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		3A3D45552CF93D6E0041F38F /* GoogleSignInLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInLogic.swift; sourceTree = "<group>"; };
 		3A3D45582CF99A090041F38F /* DBUserSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUserSearch.swift; sourceTree = "<group>"; };
+		3ABA7E582D767668005FE594 /* SignUpApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpApple.swift; sourceTree = "<group>"; };
+		3ABA7E5A2D76788B005FE594 /* Expertz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Expertz.entitlements; sourceTree = "<group>"; };
 		3AF9B8892CF88C22003312C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D8D4BED2D6586850066BFAF /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
 		4D8D4BEF2D6587100066BFAF /* SignUpNameGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNameGender.swift; sourceTree = "<group>"; };
@@ -130,6 +133,10 @@
 		D89B23972CFC503A001C2E13 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3ABA7E542D7675BC005FE594 /* Apple Sign In */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Apple Sign In"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		D66E88362CBAEE9A00D714F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -166,6 +173,7 @@
 		3A3D45572CF999D40041F38F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				3ABA7E542D7675BC005FE594 /* Apple Sign In */,
 				3A3D455B2CF99AED0041F38F /* Google Sign In */,
 				3A3D455A2CF99AA30041F38F /* DataBase */,
 			);
@@ -213,6 +221,7 @@
 		D66E883B2CBAEE9A00D714F3 /* Expertz */ = {
 			isa = PBXGroup;
 			children = (
+				3ABA7E5A2D76788B005FE594 /* Expertz.entitlements */,
 				3A3D45572CF999D40041F38F /* Utilities */,
 				3A3D45522CF936B30041F38F /* Info.plist */,
 				3AF9B8892CF88C22003312C7 /* AppDelegate.swift */,
@@ -259,6 +268,7 @@
 		D66E886A2CBC75A000D714F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3ABA7E582D767668005FE594 /* SignUpApple.swift */,
 				4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */,
 				4D8D4BF32D6587710066BFAF /* SignUpExpertise.swift */,
 				4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */,
@@ -320,6 +330,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3ABA7E542D7675BC005FE594 /* Apple Sign In */,
 			);
 			name = Expertz;
 			packageProductDependencies = (
@@ -476,6 +489,7 @@
 				D66E88802CBEEE0E00D714F3 /* SignUpGoogle.swift in Sources */,
 				D66E886E2CBC765100D714F3 /* Introduction.swift in Sources */,
 				D66E887E2CBD874300D714F3 /* ViewModifier.swift in Sources */,
+				3ABA7E592D767670005FE594 /* SignUpApple.swift in Sources */,
 				D6CFC5092CFA558B001BAB78 /* AnnotationDetails.swift in Sources */,
 				D6CFC5052CFA463E001BAB78 /* SearchBar.swift in Sources */,
 				D6CFC5072CFA5058001BAB78 /* CustomMap.swift in Sources */,
@@ -646,6 +660,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Expertz/Expertz.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Expertz/Preview Content\"";
@@ -675,6 +690,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Expertz/Expertz.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Expertz/Preview Content\"";
