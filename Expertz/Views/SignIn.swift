@@ -15,18 +15,23 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import GoogleSignInSwift
+import AuthenticationServices
 
 struct SignIn: View {
     @State private var username_email: String = ""
     @State private var password: String = ""
     @State private var navigateToSignInPage = false
     @State private var navigateToSignUpGooglePage = false
+    @State private var navigateToSignUpApplePage = false
     @State private var errorMessage: String?
     
     // For Google Sign-In, this calls the utility google sign in logic
     @State private var googleSignInLogic = GoogleSignInLogic()
     
-    // Store the sign-in data when using Google for sign-up
+    // For Apple Sign-In, this calls the utility apple sign in logic
+    @State private var appleSignInLogic = AppleSignInLogic()
+    
+    // Store the sign-in data when using Google for sign-in or apple sign in
     @State private var userID = ""
     @State private var firstName = ""
     @State private var lastName = ""
@@ -93,6 +98,14 @@ struct SignIn: View {
                 }
                 .customAlternativeDesignButton()
                 
+                // Sign in with Apple Button
+                Button(action: {
+                        signInWithApple()
+                    }) {
+                        Text("Sign in with Apple")
+                    }
+                    .customAlternativeDesignButton()
+                
                 HStack{
                     Text("Don't have an account?")
                         .font(Theme.inputFont)
@@ -147,6 +160,30 @@ struct SignIn: View {
         }
     }
     
+    // Apple Sign-In Method 
+        private func signInWithApple() {
+            appleSignInLogic.signInWithApple { success in
+                if success, let currentUser = Auth.auth().currentUser {
+                    let userID = currentUser.uid
+                    let firstName = currentUser.displayName?.components(separatedBy: " ").first ?? "First Name"
+                    let lastName = currentUser.displayName?.components(separatedBy: " ").last ?? "Last Name"
+                    let email = currentUser.email ?? "Email not available"
+
+                    self.userID = userID
+                    self.firstName = firstName
+                    self.lastName = lastName
+                    self.email = email
+
+                    checkIfUserExists(userID: userID) { exists in
+                        if exists {
+                            navigateToSignInPage = true
+                        } else {
+                            navigateToSignUpApplePage = true
+                        }
+                    }
+                }
+            }
+        }
     
     // Email/Password Authentication Method
     private func authenticateUser() {
@@ -160,6 +197,8 @@ struct SignIn: View {
         }
     }
 }
+
+
 
 #Preview {
     SignIn()
