@@ -13,6 +13,7 @@ import Foundation
  */
 struct Chat: Identifiable, Codable {
     var id: String
+    var participantIDs: [String]
     var participants: [String: String] // key is the id of type string, and value is the participants name of type string
     var lastMessage: String // Last message to show in the all messages view
     var lastMessageTimestamp: Date // Date to show the time the last message was sent

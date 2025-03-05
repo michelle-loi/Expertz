@@ -19,8 +19,8 @@ class ChatManager: ObservableObject {
     /// - Parameter userId: The user's id to fetch chats for
     func getChats(for userId: String) {
         db.collection("chats")
-//            .whereField("participants", arrayContains: userId)
-            .whereField("participants.\(userId)", isGreaterThan: "")
+            .whereField("participantIDs", arrayContains: userId)
+            //.whereField("participants.\(userId)", isGreaterThan: "")
             .order(by: "lastMessageTimestamp", descending: true) // order by newest chat first
             .addSnapshotListener { querySnapshot, error in
                 
@@ -70,6 +70,7 @@ class ChatManager: ObservableObject {
         do {
             let newChat = Chat(
                 id: chatId,
+                participantIDs: [senderId, recipientId],
                 participants: [
                     senderId: senderName,
                     recipientId: recipientName
