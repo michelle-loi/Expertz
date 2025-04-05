@@ -60,6 +60,7 @@
 		D81AAD6C2CF88A610040FC7A /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */; };
 		D84873512CF9534A00AED225 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84873502CF9534A00AED225 /* Extensions.swift */; };
 		D89B23982CFC503A001C2E13 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B23972CFC503A001C2E13 /* UserManager.swift */; };
+		D8C926242DA0FBCA00019B7E /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C926232DA0FBCA00019B7E /* Dashboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		D84873502CF9534A00AED225 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D89B23972CFC503A001C2E13 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		D8C926232DA0FBCA00019B7E /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -293,6 +295,7 @@
 				D66E887F2CBEEE0E00D714F3 /* SignUpGoogle.swift */,
 				D66E88792CBC77A100D714F3 /* SignUpEmail.swift */,
 				D81AAD6B2CF88A610040FC7A /* ChatRoom.swift */,
+				D8C926232DA0FBCA00019B7E /* Dashboard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				D64F9BE72CF4D82C008D1167 /* AccountPage.swift in Sources */,
 				D66E883D2CBAEE9A00D714F3 /* ExpertzApp.swift in Sources */,
 				D66E88742CBC76EB00D714F3 /* SignIn.swift in Sources */,
+				D8C926242DA0FBCA00019B7E /* Dashboard.swift in Sources */,
 				D89B23982CFC503A001C2E13 /* UserManager.swift in Sources */,
 				D64F9BE52CEBBE01008D1167 /* Messages.swift in Sources */,
 				D66E88702CBC769900D714F3 /* Homepage.swift in Sources */,

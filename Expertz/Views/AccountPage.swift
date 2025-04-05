@@ -50,6 +50,8 @@ struct AccountPage: View {
                 ContentView() // Navigate to ContentView after logout
             } else {
                 VStack(spacing: 20) {
+                    NavigationLink("Go to Dashboard", destination: Dashboard())
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     Text("\(userFirstName) \(userLastName)")
                         .font(.largeTitle)
                         .bold()
