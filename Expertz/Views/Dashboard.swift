@@ -256,11 +256,22 @@ struct EarningsView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                
-                // Card title
-                Text(title)
-                    .font(.title2.bold())
-                    .padding([.top, .leading])
+                HStack {
+                    // Card title
+                    Text(title)
+                        .font(.title2.bold())
+                        .padding([.top, .leading])
+
+                    Spacer()
+                    
+                    // Could link to a page that lists all the users payments
+                    NavigationLink(destination: DashboardPayments()) {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .font(.title)
+                            .padding([.top, .trailing])
+                            .foregroundColor(Theme.primaryColor)
+                    }
+                }
                 
                 // Subtitle
                 Text(subtitle)
@@ -310,9 +321,22 @@ struct JobStatusView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
-                .font(.title2.bold())
-                .padding([.top, .leading])
+            
+            HStack {
+                Text(title)
+                    .font(.title2.bold())
+                    .padding([.top, .leading])
+                Spacer()
+                
+                // Could link to a page that lists all the users completed and current jobs
+                NavigationLink(destination: DashboardJobs()) {
+                    Image(systemName: "arrow.right.circle.fill")
+                        .font(.title)
+                        .padding([.top, .trailing])
+                        .foregroundColor(Theme.primaryColor)
+                }
+            }
+
             
             HStack(alignment: .center, spacing: 10) {
                 Chart(statuses) { item in
