@@ -3,7 +3,7 @@ import FirebaseAuth
 
 struct Introduction: View {
     // Navigation flags
-    @State private var navigateToSignUpPage = false
+    @State private var navigateToIntro2Page = false
     @State private var navigateToHomepage = false
 
     var body: some View {
@@ -69,7 +69,7 @@ struct Introduction: View {
                                         .shadow(color: Theme.primaryColor, radius: 0.4)
                     // "Get started!" button
                     Button(action: {
-                                        navigateToSignUpPage = true
+                                        navigateToIntro2Page = true
                                     }) {
                                         Text("Get started!")
                                             .font(.headline)
@@ -99,8 +99,8 @@ struct Introduction: View {
         .navigationDestination(isPresented: $navigateToHomepage) {
             Homepage()
         }
-        .navigationDestination(isPresented: $navigateToSignUpPage) {
-            SignUp()
+        .navigationDestination(isPresented: $navigateToIntro2Page) {
+            Introduction2()
         }
         .navigationBarBackButtonHidden(true)
     }
