@@ -19,6 +19,8 @@
 		3AF9B8852CF887A1003312C7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8842CF887A1003312C7 /* FirebaseFirestore */; };
 		3AF9B8882CF88B87003312C7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8872CF88B87003312C7 /* GoogleSignIn */; };
 		3AF9B88A2CF88C22003312C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9B8892CF88C22003312C7 /* AppDelegate.swift */; };
+		4D07122B2DA63979005B246E /* Payments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07122A2DA63975005B246E /* Payments.swift */; };
+		4D07122F2DA65A31005B246E /* Ratings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07122E2DA65A2D005B246E /* Ratings.swift */; };
 		4D8D4BEE2D65868B0066BFAF /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BED2D6586850066BFAF /* SignUpData.swift */; };
 		4D8D4BF02D6587170066BFAF /* SignUpNameGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BEF2D6587100066BFAF /* SignUpNameGender.swift */; };
 		4D8D4BF22D65874A0066BFAF /* SignUpCountryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */; };
@@ -94,6 +96,8 @@
 		3ABA7E582D767668005FE594 /* SignUpApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpApple.swift; sourceTree = "<group>"; };
 		3ABA7E5A2D76788B005FE594 /* Expertz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Expertz.entitlements; sourceTree = "<group>"; };
 		3AF9B8892CF88C22003312C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4D07122A2DA63975005B246E /* Payments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payments.swift; sourceTree = "<group>"; };
+		4D07122E2DA65A2D005B246E /* Ratings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ratings.swift; sourceTree = "<group>"; };
 		4D8D4BED2D6586850066BFAF /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
 		4D8D4BEF2D6587100066BFAF /* SignUpNameGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNameGender.swift; sourceTree = "<group>"; };
 		4D8D4BF12D6587430066BFAF /* SignUpCountryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCountryAddress.swift; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 		D66E886A2CBC75A000D714F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4D07122E2DA65A2D005B246E /* Ratings.swift */,
+				4D07122A2DA63975005B246E /* Payments.swift */,
 				3A4204AF2DA23797007CA4EA /* OnboardingDemo.swift */,
 				3A3938DA2DA132A00092BEE4 /* Introduction2.swift */,
 				3ABA7E582D767668005FE594 /* SignUpApple.swift */,
@@ -498,6 +504,7 @@
 				D66E887C2CBD742F00D714F3 /* Theme.swift in Sources */,
 				D6CFC5032CFA43F0001BAB78 /* BottomNavigationBar.swift in Sources */,
 				D680E9F32CF6DA2400EBEFCB /* Settings.swift in Sources */,
+				4D07122B2DA63979005B246E /* Payments.swift in Sources */,
 				D680E9F52CF6E7B600EBEFCB /* PostJobView.swift in Sources */,
 				3A3D45562CF93D6E0041F38F /* GoogleSignInLogic.swift in Sources */,
 				D680E9F12CF6D69E00EBEFCB /* Bubbles.swift in Sources */,
@@ -512,6 +519,7 @@
 				D6CFC5092CFA558B001BAB78 /* AnnotationDetails.swift in Sources */,
 				D6CFC5052CFA463E001BAB78 /* SearchBar.swift in Sources */,
 				D6CFC5072CFA5058001BAB78 /* CustomMap.swift in Sources */,
+				4D07122F2DA65A31005B246E /* Ratings.swift in Sources */,
 				D81AAD652CF86AD80040FC7A /* Message.swift in Sources */,
 				D84873512CF9534A00AED225 /* Extensions.swift in Sources */,
 				4D8D4BF02D6587170066BFAF /* SignUpNameGender.swift in Sources */,
