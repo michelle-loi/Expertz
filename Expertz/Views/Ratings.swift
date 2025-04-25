@@ -1,20 +1,13 @@
-//
-//  Ratings.swift
-//  Expertz
-//
-//  Created by Mark on 2025-04-09.
-//
-
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
 
 struct RatingView: View {
-    var recipientName: String      // Use recipient name instead of ID
+    var recipientName: String
     var fromUserId: String
     var onRatingSubmitted: (() -> Void)? = nil
     
-    @State private var rating: Double = 3.0  // Default rating (1 to 5)
+    @State private var rating: Double = 3.0
     @State private var review: String = ""
     
     var body: some View {
@@ -59,7 +52,7 @@ struct RatingView: View {
     private func submitRating() {
         let db = Firestore.firestore()
         let data: [String: Any] = [
-            "toUserName": recipientName, // Save the recipient name
+            "toUserName": recipientName,
             "fromUserId": fromUserId,
             "rating": rating,
             "review": review,
@@ -73,11 +66,5 @@ struct RatingView: View {
             }
         }
     }
-}
-
-#Preview {
-    RatingView(recipientName: "John Doe", fromUserId: "sampleUserId", onRatingSubmitted: {
-        print("Rating submitted")
-    })
 }
 

@@ -12,7 +12,6 @@
 		3A3D45542CF93BB10041F38F /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D45532CF93BB10041F38F /* Application.swift */; };
 		3A3D45562CF93D6E0041F38F /* GoogleSignInLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D45552CF93D6E0041F38F /* GoogleSignInLogic.swift */; };
 		3A3D45592CF99A090041F38F /* DBUserSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D45582CF99A090041F38F /* DBUserSearch.swift */; };
-		3A4204B02DA237A6007CA4EA /* OnboardingDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4204AF2DA23797007CA4EA /* OnboardingDemo.swift */; };
 		3ABA7E592D767670005FE594 /* SignUpApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA7E582D767668005FE594 /* SignUpApple.swift */; };
 		3AF9B8812CF887A1003312C7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8802CF887A1003312C7 /* FirebaseAuth */; };
 		3AF9B8832CF887A1003312C7 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF9B8822CF887A1003312C7 /* FirebaseCore */; };
@@ -92,7 +91,6 @@
 		3A3D45532CF93BB10041F38F /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		3A3D45552CF93D6E0041F38F /* GoogleSignInLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInLogic.swift; sourceTree = "<group>"; };
 		3A3D45582CF99A090041F38F /* DBUserSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUserSearch.swift; sourceTree = "<group>"; };
-		3A4204AF2DA23797007CA4EA /* OnboardingDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDemo.swift; sourceTree = "<group>"; };
 		3ABA7E582D767668005FE594 /* SignUpApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpApple.swift; sourceTree = "<group>"; };
 		3ABA7E5A2D76788B005FE594 /* Expertz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Expertz.entitlements; sourceTree = "<group>"; };
 		3AF9B8892CF88C22003312C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 			children = (
 				4D07122E2DA65A2D005B246E /* Ratings.swift */,
 				4D07122A2DA63975005B246E /* Payments.swift */,
-				3A4204AF2DA23797007CA4EA /* OnboardingDemo.swift */,
 				3A3938DA2DA132A00092BEE4 /* Introduction2.swift */,
 				3ABA7E582D767668005FE594 /* SignUpApple.swift */,
 				4D8D4BF52D65885F0066BFAF /* GoogleSignUp.swift */,
@@ -487,7 +484,6 @@
 				D66E883F2CBAEE9A00D714F3 /* ContentView.swift in Sources */,
 				3A3938DB2DA132A40092BEE4 /* Introduction2.swift in Sources */,
 				3AF9B88A2CF88C22003312C7 /* AppDelegate.swift in Sources */,
-				3A4204B02DA237A6007CA4EA /* OnboardingDemo.swift in Sources */,
 				D81AAD632CF86ACD0040FC7A /* Chat.swift in Sources */,
 				D6CFC50B2CFA9C38001BAB78 /* ExpertAnnotation.swift in Sources */,
 				4D8D4BF62D6588660066BFAF /* GoogleSignUp.swift in Sources */,

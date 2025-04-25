@@ -1,9 +1,3 @@
-//
-//  SignUpCountryAddress.swift
-//  Expertz
-//
-//  Created by Mark on 2025-02-18.
-//
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -56,7 +50,6 @@ struct SignUpCountryAddress: View {
                 
                 Spacer()
                 
-                // Next & Back
                 VStack {
                     Button(action: {
                         dismiss()

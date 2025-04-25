@@ -1,10 +1,3 @@
-//
-//  ViewModifier.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-10-14.
-//
-
 import SwiftUI
 // ViewModifier is used to apply multiple modifications on a single object.
 // Create a struct similar to the ones below and add them to the extension view

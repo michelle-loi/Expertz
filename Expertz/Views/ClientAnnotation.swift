@@ -1,10 +1,3 @@
-//
-//  ClientAnnotation.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-29.
-//  Edited  by Michelle
-//
 //  - Nested View Component for AnnotationDetails View
 //  - Pulling parameters from AnnotationDetails to populate view body
 //  - Client Annotation of Client Bubbles on Map

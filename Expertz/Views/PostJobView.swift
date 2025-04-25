@@ -1,9 +1,4 @@
-//
-//  PostJobView.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-27.
-//
+
 //  - Functionality: View page used to allow users to create Client or Expert Request
 //
 

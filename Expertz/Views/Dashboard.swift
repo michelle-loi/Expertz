@@ -1,10 +1,3 @@
-//
-//  Dashboard.swift
-//  Expertz
-//
-//  Created by Michelle Loi on 2025-04-04.
-//
-
 import SwiftUI
 import Charts
 
@@ -304,7 +297,6 @@ struct EarningsView: View {
 }
 
 
-// This displays the users job statuses e.g., how many they completed, how many they are doing currently and the total number of jobs they have done
 struct JobStatus: Identifiable {
     let id = UUID()
     let status: String

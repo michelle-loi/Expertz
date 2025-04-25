@@ -1,10 +1,3 @@
-//
-//  UserManager.swift
-//  Expertz
-//
-//  Created by Michelle Loi on 2024-11-29.
-//
-
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore

@@ -1,9 +1,3 @@
-//
-//  SignUpExpertise.swift
-//  Expertz
-//
-//  Created by Mark on 2025-02-18.
-//
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -14,7 +8,6 @@ struct SignUpExpertise: View {
     @State private var nextPage = false
     @Environment(\.dismiss) private var dismiss
     
-    // For demonstration, reusing the “bubbles” approach:
     @State private var searchExpertise: String = ""
     
     var body: some View {
@@ -89,7 +82,6 @@ struct SignUpExpertise: View {
                         }
                     }
                     
-                    // Show error message if any
                     if let error = signUpData.errorMessage {
                         Text(error)
                             .foregroundColor(.red)
@@ -97,7 +89,6 @@ struct SignUpExpertise: View {
                     
                     Spacer()
                     
-                    // Next & Back
                     VStack {
                         Button(action: {
                             dismiss()
@@ -117,13 +108,11 @@ struct SignUpExpertise: View {
                 .padding()}
         }
         .navigationDestination(isPresented: $nextPage) {
-            // For example, go to a SignIn screen or a Home screen after successful sign-up
             Homepage()
         }
         .navigationBarBackButtonHidden(true)
     }
     
-    /// Adds custom expertise to the user’s list.
     private func addCustomExpertise() {
         let trimmed = searchExpertise.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
@@ -133,9 +122,7 @@ struct SignUpExpertise: View {
         searchExpertise = ""
     }
     
-    /// Creates the user account and Firestore profile.
     private func signUpUser() {
-        // Check that passwords match
         guard signUpData.password == signUpData.rePassword else {
             signUpData.errorMessage = "Passwords do not match."
             return
@@ -151,7 +138,6 @@ struct SignUpExpertise: View {
         }
     }
     
-    /// Stores additional user info in Firestore.
     private func createFirestoreProfile(for uid: String) {
         let db = Firestore.firestore()
         db.collection("UserProfiles").document(uid).setData([
@@ -169,7 +155,6 @@ struct SignUpExpertise: View {
             if let error = error {
                 signUpData.errorMessage = "Firestore error: \(error.localizedDescription)"
             } else {
-                // If successful, navigate onward
                 nextPage = true
             }
         }

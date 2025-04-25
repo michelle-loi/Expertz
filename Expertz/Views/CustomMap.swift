@@ -1,11 +1,5 @@
-//
-//  CustomMap.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-29.
-//
 //  - Nested View Component for Homepage View
-//  - Pulling parameters from Homepage to 
+//  - Pulling parameters from Homepage to
 //  - View used convert address string from DB to coordinates
 //  - View also used to distinguish between client and expert request
 //  - to create clickable coordinate bubbles on Map
@@ -91,7 +85,7 @@ struct CustomMapView: View {
                             coordinate: coordinate,
                             type: "Client",
                             help: title,
-                            rating: "0.0", // Initialize to 0 until implement: fetch from your ratings system
+                            rating: "0.0",
                             description: description,
                             expertise: nil, // Expertise is hidden for Client requests
                             bio: nil, // Not applicable for client requests
@@ -148,7 +142,7 @@ struct CustomMapView: View {
                             coordinate: coordinate,
                             type: "Expert",
                             help: title,
-                            rating: "0.0", // Initialize to 0 until implement: fetch from your ratings system
+                            rating: "0.0",
                             description: description,
                             expertise: expertiseString,
                             bio: nil, // nil until implemented later

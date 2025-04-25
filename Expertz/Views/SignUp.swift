@@ -1,9 +1,3 @@
-//
-//  SignUp.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-10-13.
-//
 //  - Functionality: User Sign Up Page Navigation fork
 //  - Allows users to sign up and create an account with either email or Google
 //  - Future Implementation: allow creation of accounts by other methods

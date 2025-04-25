@@ -1,10 +1,3 @@
-//
-//  DashboardPayments.swift
-//  Expertz
-//
-//  Created by Michelle Loi on 2025-04-05.
-//
-
 import SwiftUI
 
 struct JobEntry: Identifiable {

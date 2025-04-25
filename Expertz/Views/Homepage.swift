@@ -1,9 +1,3 @@
-//
-//  Homepage.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-10-13.
-//
 //  - Functionality: APPLICATION MAIN PAGE
 //      - Primary orgin for most nested view pages created
 //      - logic from nested view pages stem from here

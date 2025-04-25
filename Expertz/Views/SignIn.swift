@@ -1,9 +1,3 @@
-//
-//  SignIn.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-10-13.
-//
 //  - Functionality: User Sign in page
 //  - Currently, users can sign in via email w/ firebase Auth
 //  - and with Google Sign in

@@ -1,10 +1,3 @@
-//
-//  ChatManager.swift
-//  Expertz
-//
-//  Created by Michelle Loi on 2024-11-26.
-//
-
 import Foundation
 import FirebaseFirestore
 

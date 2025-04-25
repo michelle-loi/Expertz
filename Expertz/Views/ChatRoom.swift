@@ -1,7 +1,3 @@
-//
-//  ChatRoom.swift
-//  Expertz
-//
 //  Created by Michelle Loi on 2024-11-28.
 //  Code is based off of this tutorial and modified:
 //  https://www.youtube.com/watch?v=Zz9XQy8PRpQ&t=1412s
@@ -18,24 +14,20 @@ struct ChatRoom: View {
     @StateObject private var messageManager = MessageManager()
     @StateObject private var userManager = UserManager()
     
-    // Negotiation state (price proposal & payment)
     @State private var negotiatedPrice: Double? = nil
-    @State private var confirmed: Bool = false    // Payment confirmation flag (set by client)
-    @State private var paid: Bool = false           // Payment completed flag
+    @State private var confirmed: Bool = false    
+    @State private var paid: Bool = false
     @State private var priceInput: String = ""
     @State private var showPaymentSheet: Bool = false
     
-    // Job completion state (each party confirms separately)
     @State private var clientJobCompleted: Bool = false
     @State private var expertJobCompleted: Bool = false
     @State private var showRatingSheet: Bool = false
     
-    // Firestore listener for negotiation & job completion fields in the chat document
     @State private var negotiationListener: ListenerRegistration? = nil
     
     var body: some View {
         VStack {
-            // --- Chat Messages Section ---
             VStack {
                 TitleRow(recipientName: recipientName)
                     .background(Color(Theme.accentColor))
@@ -75,7 +67,6 @@ struct ChatRoom: View {
                 negotiationListener?.remove()
             }
             
-            // --- Negotiation UI Area (Price Proposal & Payment) ---
             VStack {
                 if userManager.isExpert {
                     // Expert’s UI: Initially show the price input field until a price is proposed.
@@ -115,10 +106,10 @@ struct ChatRoom: View {
                                 .padding()
                             Button("Confirm") {
                                 updateNegotiation(price: price, confirmed: true, paid: false)
-                                showPaymentSheet = true  // Trigger payment pop-up.
+                                showPaymentSheet = true
                             }
                             .padding()
-                            .background(Theme.primaryColor) // Your defined CTA color.
+                            .background(Theme.primaryColor)
                             .foregroundColor(.white)
                             .cornerRadius(30)
                         }
@@ -130,7 +121,6 @@ struct ChatRoom: View {
                 }
             }
             
-            // --- Job Completion UI Area (After Payment Confirmed) ---
             if paid {
                 // Show job completion confirmation buttons if the job isn't fully confirmed by both parties.
                 if !((userManager.isExpert && expertJobCompleted) || (!userManager.isExpert && clientJobCompleted)) {
@@ -161,14 +151,11 @@ struct ChatRoom: View {
                 }
             }
             
-            // --- Message Input Field (ChatText) ---
             MessageField(chatId: chatId, currentUserId: userManager.currentUserId ?? "53Ex9GirPTtrZFv2BzeE")
                 .environmentObject(messageManager)
         }
-        // Payment sheet for client payment simulation.
         .sheet(isPresented: $showPaymentSheet) {
             PaymentView(negotiatedPrice: negotiatedPrice ?? 0.0, onPaymentSuccess: {
-                // After payment success, update the negotiation to mark payment as complete.
                 if let price = negotiatedPrice {
                     updateNegotiation(price: price, confirmed: true, paid: true)
                 }
@@ -184,7 +171,6 @@ struct ChatRoom: View {
 
     }
     
-    // --- Firestore Listener for Negotiation and Job Completion ---
     private func startNegotiationListener() {
         let chatDocRef = Firestore.firestore().collection("chats").document(chatId)
         negotiationListener = chatDocRef.addSnapshotListener { snapshot, error in
@@ -197,7 +183,6 @@ struct ChatRoom: View {
         }
     }
     
-    // --- Update Negotiation Fields (Price, Payment Confirmation) ---
     private func updateNegotiation(price: Double?, confirmed: Bool, paid: Bool) {
         let chatDocRef = Firestore.firestore().collection("chats").document(chatId)
         var updates: [String: Any] = [
@@ -217,7 +202,6 @@ struct ChatRoom: View {
         }
     }
     
-    // --- Update Job Completion Flags ---
     private func updateJobCompletion() {
         let chatDocRef = Firestore.firestore().collection("chats").document(chatId)
         var updates: [String: Any] = [

@@ -1,9 +1,3 @@
-//
-//  ViewRequests.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-27.
-//
 //  - Functionality: View page used to allow users to view
 //  -   and delete the client or expert request they have made
 //  - Future Implementation: Allow user to edit request from this page

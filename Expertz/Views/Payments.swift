@@ -36,8 +36,6 @@ struct PaymentView: View {
             }
             
             Button("Send Payment") {
-                // Simulate payment processing and validation.
-                // In a production app, integrate with Apple Pay, Stripe, etc.
                 onPaymentSuccess?()
                 presentationMode.wrappedValue.dismiss()
             }
@@ -51,10 +49,3 @@ struct PaymentView: View {
         .padding()
     }
 }
-
-#Preview {
-    PaymentView(negotiatedPrice: 100.0, onPaymentSuccess: {
-        print("Payment Successful")
-    })
-}
-

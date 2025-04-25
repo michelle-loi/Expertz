@@ -1,15 +1,7 @@
-//
-//  SignUpData.swift
-//  Expertz
-//
-//  Created by Mark on 2025-02-18.
-//
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
-/// An observable model that stores all sign-up data across multiple pages.
 class SignUpData: ObservableObject {
     @Published var emailAddress: String = ""
     @Published var password: String = ""
@@ -26,7 +18,6 @@ class SignUpData: ObservableObject {
     @Published var isExpert: Bool = false
     @Published var selectedExpertCategories: [String] = []
     
-    // Holds any error message if sign-up fails
     @Published var errorMessage: String?
 }
 

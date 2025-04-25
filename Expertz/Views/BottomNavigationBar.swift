@@ -1,9 +1,3 @@
-//
-//  BottomNavBar.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-29.
-//
 //  - Nested View Component for Homepage View
 //  - Bottom Navigation View Component
 //  - Functionality is to navigate to other view pages

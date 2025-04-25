@@ -17,14 +17,12 @@ struct Introduction2: View {
 
     var body: some View {
         ZStack {
-            // Background Earth image
             Image("Earth_Background")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 700, height: 700)
                 .offset(y: 100)
 
-            // Glass blur + teal gradient overlay
             Color.clear
                 .background(.ultraThinMaterial)
                 .overlay(
@@ -71,7 +69,6 @@ struct Introduction2: View {
                 .animation(.easeInOut, value: currentPage)
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 
-                // Pagination dots
                 HStack(spacing: 8) {
                     ForEach(0..<images.count, id: \.self) { index in
                         Circle()
@@ -84,7 +81,6 @@ struct Introduction2: View {
 
                 Spacer()
 
-                // Next button
                 Button(action: {
                     if currentPage < images.count - 1 {
                         withAnimation {

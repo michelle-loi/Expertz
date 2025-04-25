@@ -1,9 +1,3 @@
-//
-//  GoogleSignUp.swift
-//  Expertz
-//
-//  Created by Mark on 2025-02-18.
-//
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -32,13 +26,8 @@ struct GoogleSignUp: View {
     @State private var selectedGender: String = "Select Gender"
     @State private var isClient: Bool = true
     @State private var isExpert: Bool = false
-    
-    // Selected expertise entries (rendered as bubbles)
     @State private var selectedExpertCategories: [String] = []
-    
-    // Text the user types for custom expertise
     @State private var searchExpertise: String = ""
-    
     @State private var password: String = ""
     @State private var rePassword: String = ""
     @State private var errorMessage: String?

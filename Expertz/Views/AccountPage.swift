@@ -1,9 +1,3 @@
-//
-//  AccountPage.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-25.
-//
 //  - Functionality: Account page for user to view and edit
 //      their account information.
 //  - Currently, data is pulled but cannot be edited and updated to DB

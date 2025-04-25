@@ -1,10 +1,3 @@
-//
-//  ExpertAnnotation.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-29.
-//  Edited  by Michelle
-//
 //  - Nested View Component for AnnotationDetails View
 //  - Pulling parameters from AnnotationDetails to populate view body
 //  - Expert Annotation of Client Bubbles on Map
@@ -59,23 +52,6 @@ struct ExpertAnnotation: View {
                             .frame(width: 20, height: 20)
                     }
                 }
-
-//                // Bio Section - To be implement later on
-//                Text("\(annotation.bio ?? "Bio not available")")
-//                    .font(.body)
-//                    .foregroundColor(Theme.primaryColor)
-//                    .multilineTextAlignment(.leading)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                HStack(spacing: 10) {
-//                    ForEach(["Realism", "3D Design", "Unity"], id: \.self) { tag in
-//                        Text(tag)
-//                            .padding(.horizontal, 12)
-//                            .padding(.vertical, 6)
-//                            .background(Theme.accentColor.opacity(0.2))
-//                            .foregroundColor(Theme.primaryColor)
-//                            .cornerRadius(30)
-//                    }
-//                }
                 
                 // Description Section
                 VStack(alignment: .leading, spacing: 10){

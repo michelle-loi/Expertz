@@ -1,10 +1,3 @@
-//
-//  Bubbles.swift
-//  Expertz
-//
-//  Created by Amir on 2024-11-26.
-//
-
 import SwiftUI
 
 struct Bubbles: View {

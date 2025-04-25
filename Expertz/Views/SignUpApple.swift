@@ -1,8 +1,3 @@
-// SignUpApple.swift
-// Expertz
-//
-// Created by Ryan Loi on 2024-03-03.
-
 import SwiftUI
 import Firebase
 
@@ -121,7 +116,6 @@ struct SignUpApple: View {
                 Spacer()
                 
                 Button(action: {
-                    // Save user data to Firebase
                     saveUserData()
                 }) {
                     Text("Finish Setup")
@@ -140,7 +134,6 @@ struct SignUpApple: View {
     }
     
     func saveUserData() {
-        // Save the user data to Firestore
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userID)
         
@@ -159,7 +152,6 @@ struct SignUpApple: View {
                 self.errorMessage = "Failed to save data: \(error.localizedDescription)"
             } else {
                 print("User data saved successfully!")
-                // Navigate to the main page after successful sign-up
             }
         }
     }

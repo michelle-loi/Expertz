@@ -1,9 +1,3 @@
-//
-//  Settings.swift
-//  Expertz
-//
-//  Created by Amir on 2024-11-24.
-//
 //  - Functionality: Hardcoded | Allow user to view and change settings
 //  - Future implementation: Add functionality
 //

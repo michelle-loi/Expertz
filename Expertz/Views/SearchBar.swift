@@ -1,9 +1,3 @@
-//
-//  SearchBar.swift
-//  Expertz
-//
-//  Created by Alan Huynh on 2024-11-29.
-//
 //  - Nested View Component for Homepage View
 //  - Search Bar View Component, currently hardcoded
 //
@@ -15,7 +9,7 @@ struct SearchBarView: View {
     @State private var isSelected = true
     @State private var isSelected2 = false
 
-    @State private var showPopup = false // State variable to control popup visibility
+    @State private var showPopup = false
 
     var body: some View {
         ZStack {
@@ -35,7 +29,7 @@ struct SearchBarView: View {
                                 .stroke(Theme.primaryColor, lineWidth: 2)
                         )
                         Button(action: {
-                        showPopup = true // Show popup when button is clicked
+                        showPopup = true
                     }) {
                         Image(systemName: "slider.horizontal.3")
                             .foregroundColor(Theme.primaryColor)
@@ -53,7 +47,7 @@ struct SearchBarView: View {
                 .padding(.horizontal, 10)
                 HStack(alignment: .firstTextBaseline, spacing: 1){
                     Button(action: {
-                        selectedPickerOption = "Client" // Show popup when button is clicked
+                        selectedPickerOption = "Client"
                         isSelected.toggle()
                         isSelected2.toggle()
                     }) {
@@ -66,7 +60,7 @@ struct SearchBarView: View {
                         }
                     }
                     Button(action: {
-                        selectedPickerOption = "Expert" // Show popup when button is clicked
+                        selectedPickerOption = "Expert"
                         isSelected2.toggle()
                         isSelected.toggle()
                     }) {
@@ -90,7 +84,7 @@ struct SearchBarView: View {
                     .fill(Color.black.opacity(0.01))
                     .ignoresSafeArea()
                     .onTapGesture {
-                        showPopup = false // Close popup
+                        showPopup = false
                     }
                     .zIndex(0)
                 VStack{
@@ -170,7 +164,7 @@ struct SearchBarView: View {
                                 .foregroundColor(.white)
                             Circle()
                                 .fill(Color.yellow)
-                                .frame(width: 20, height: 20) // Star icon placeholder
+                                .frame(width: 20, height: 20)
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
@@ -188,7 +182,7 @@ struct SearchBarView: View {
                                 .foregroundColor(.white)
                             Circle()
                                 .fill(Color.yellow)
-                                .frame(width: 20, height: 20) // Star icon placeholder
+                                .frame(width: 20, height: 20)
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
@@ -206,7 +200,7 @@ struct SearchBarView: View {
                                 .foregroundColor(.white)
                             Circle()
                                 .fill(Color.yellow)
-                                .frame(width: 20, height: 20) // Star icon placeholder
+                                .frame(width: 20, height: 20)
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
