@@ -7,7 +7,7 @@
 *.xcworkspace
 *.xccheckout
 *.xcodeproj/project.xcworkspace/
-*.xcassets
+# *.xcassets
 
 # Ignore only GoogleService-Info.plist
 Expertz/GoogleService-Info.plist
